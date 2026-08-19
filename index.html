@@ -253,6 +253,7 @@
   ::-webkit-scrollbar{width:8px; height:8px;}
   ::-webkit-scrollbar-thumb{background:var(--surface-3); border-radius:4px;}
 </style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
 <div class="shell">
@@ -260,7 +261,8 @@
     <div class="roster-head">
       <div class="eyebrow">외식BG · RO실</div>
       <h1>가맹점 운영 리스크 카드</h1>
-      <div class="roster-count" id="rosterCount" style="font-size:11px; color:var(--text-3); margin-bottom:8px;"></div>
+      <div class="roster-count" id="rosterCount" style="font-size:11px; color:var(--text-3); margin-bottom:4px;"></div>
+      <div id="dbStatus" style="font-size:10.5px; margin-bottom:8px; display:flex; align-items:center; gap:5px;"></div>
       <div class="search-box">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#9aa7ba" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
         <input id="searchInput" placeholder="매장명 또는 코드 검색">
@@ -2588,6 +2590,60 @@ let stores = [
     etc:{memo:'고객 민원 1건 접수, 처리 완료.', author:'박현우', date:'2026-08-16'}
   }
 ];
+/* =================== SUPABASE CONNECTION =================== */
+// Supabase 프로젝트 Settings → API 에서 두 값을 확인해 아래에 채워넣으세요.
+const SUPABASE_URL = 'https://rcytuzdqotbdgedhxete.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJjeXR1emRxb3RiZGdlZGh4ZXRlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODcxMTU0MjAsImV4cCI6MjEwMjY5MTQyMH0.6QMwUVTU3dntguxGvd6NrCLsoi_arVVX1-Exv--x2t4';
+const DB_CONFIGURED = !SUPABASE_URL.includes('YOUR-PROJECT-REF');
+
+let supabaseClient = null;
+if (DB_CONFIGURED && window.supabase) {
+  supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+}
+
+function rowToStore(r){
+  return {
+    id: r.id, name: r.name, brand: r.brand, code: r.code, address: r.address, manager: r.manager,
+    territory: r.territory, revenueMethod: r.revenue_method, revenueAchievement: r.revenue_achievement,
+    contractDefect: r.contract_defect, unpaidStatus: r.unpaid_status, hygiene: r.hygiene, etc: r.etc
+  };
+}
+function storeToRow(s){
+  return {
+    name: s.name, brand: s.brand, code: s.code, address: s.address, manager: s.manager,
+    territory: s.territory, revenue_method: s.revenueMethod, revenue_achievement: s.revenueAchievement,
+    contract_defect: s.contractDefect, unpaid_status: s.unpaidStatus, hygiene: s.hygiene, etc: s.etc,
+    updated_at: new Date().toISOString()
+  };
+}
+function setDbStatus(text, ok){
+  const el = document.getElementById('dbStatus');
+  if(!el) return;
+  el.innerHTML = `<span style="width:6px;height:6px;border-radius:50%;background:${ok?'var(--safe)':'var(--text-3)'};display:inline-block;"></span><span style="color:var(--text-3);">${text}</span>`;
+}
+
+// 매장 항목 저장 시 Supabase에도 반영 (연동 안 된 경우 로컬 상태만 갱신됨)
+async function persistStore(s){
+  if(!supabaseClient) return;
+  const { error } = await supabaseClient.from('stores').update(storeToRow(s)).eq('id', s.id);
+  if(error){ console.error('Supabase 저장 실패:', error.message); setDbStatus('저장 실패 — 콘솔 확인', false); }
+}
+
+async function loadFromSupabase(){
+  if(!supabaseClient){ setDbStatus('로컬 모드 (DB 미연결)', false); return; }
+  setDbStatus('DB에서 불러오는 중…', false);
+  const { data, error } = await supabaseClient.from('stores').select('*').order('id');
+  if(error || !data || data.length===0){
+    console.error('Supabase 로드 실패, 로컬 데이터 사용:', error && error.message);
+    setDbStatus('DB 로드 실패 — 로컬 데이터 표시 중', false);
+    return;
+  }
+  stores = data.map(rowToStore);
+  currentId = stores[0].id;
+  renderBrandFilter(); renderRoster(); renderMain();
+  setDbStatus(`DB 연결됨 · ${stores.length}개 매장`, true);
+}
+
 let currentId = stores[0].id;
 let activeBrand = '전체';
 
@@ -2847,43 +2903,50 @@ function renderMain(){
 function currentStore(){ return stores.find(x=>x.id===currentId); }
 function today(){ return new Date().toISOString().slice(0,10); }
 
-function saveTerritory(){
+async function saveTerritory(){
   const s=currentStore();
   s.territory = {status:document.getElementById('e1-status').value, radius:document.getElementById('e1-radius').value, setDate:document.getElementById('e1-date').value, note:document.getElementById('e1-note').value};
+  persistStore(s);
   renderRoster(); renderMain();
 }
-function saveMethod(){
+async function saveMethod(){
   const s=currentStore();
   s.revenueMethod = {method:document.getElementById('e2-method').value, status:document.getElementById('e2-status').value, estimatedAmount:document.getElementById('e2-amount').value, calcDate:document.getElementById('e2-date').value};
+  persistStore(s);
   renderRoster(); renderMain();
 }
-function saveAchievement(){
+async function saveAchievement(){
   const s=currentStore();
   const raw = document.getElementById('e3-ratio').value;
   const ratio = raw===''?null:parseInt(raw);
   const prevTrend = s.revenueAchievement.ratio===null ? [0,0,0,0,0] : s.revenueAchievement.trend.slice(1);
   const trend = ratio===null ? s.revenueAchievement.trend : [...prevTrend, ratio];
   s.revenueAchievement = {actualAmount:document.getElementById('e3-actual').value, targetAmount:document.getElementById('e3-target').value, ratio, trend};
+  persistStore(s);
   renderRoster(); renderMain();
 }
-function saveContract(){
+async function saveContract(){
   const s=currentStore();
   s.contractDefect = {hasDefect:document.getElementById('e4-has').value==='true', detail:document.getElementById('e4-detail').value, status:document.getElementById('e4-status').value};
+  persistStore(s);
   renderRoster(); renderMain();
 }
-function saveUnpaid(){
+async function saveUnpaid(){
   const s=currentStore();
   s.unpaidStatus = {hasUnpaid:document.getElementById('e5-has').value==='true', amount:document.getElementById('e5-amount').value, overdueDays:parseInt(document.getElementById('e5-days').value)||0, note:document.getElementById('e5-note').value};
+  persistStore(s);
   renderRoster(); renderMain();
 }
-function saveHygiene(){
+async function saveHygiene(){
   const s=currentStore();
   s.hygiene = {result:document.getElementById('e6-result').value, lastCheckDate:document.getElementById('e6-last').value, nextCheckDate:document.getElementById('e6-next').value};
+  persistStore(s);
   renderRoster(); renderMain();
 }
-function saveEtc(){
+async function saveEtc(){
   const s=currentStore();
   s.etc = {memo:document.getElementById('e7-memo').value, author:document.getElementById('e7-author').value, date:today()};
+  persistStore(s);
   renderMain();
 }
 
@@ -2891,6 +2954,7 @@ function saveEtc(){
 renderBrandFilter();
 renderRoster();
 renderMain();
+loadFromSupabase();
 </script>
 </body>
 </html>
