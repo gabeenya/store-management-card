@@ -1,3 +1,18 @@
+/* =================== THEME =================== */
+function applyThemeIcon(){
+  const btn = document.getElementById('themeToggle');
+  if(!btn) return;
+  const t = document.documentElement.getAttribute('data-theme');
+  btn.textContent = t==='light' ? '🌙' : '☀️';
+}
+function toggleTheme(){
+  const cur = document.documentElement.getAttribute('data-theme');
+  const next = cur==='light' ? 'dark' : 'light';
+  document.documentElement.setAttribute('data-theme', next);
+  localStorage.setItem('theme', next);
+  applyThemeIcon();
+}
+
 /* =================== SUPABASE CONNECTION =================== */
 // Supabase 프로젝트 Settings → API 에서 두 값을 확인해 아래에 채워넣으세요.
 const SUPABASE_URL = 'https://rcytuzdqotbdgedhxete.supabase.co';
@@ -47,13 +62,14 @@ async function loadFromSupabase(){
     return;
   }
   stores = data.map(rowToStore);
-  currentId = stores[0].id;
   renderBrandFilter(); renderRoster(); renderMain();
   setDbStatus(`DB 연결됨 · ${stores.length}개 매장`, true);
 }
 
 let currentId = null;
 let activeBrand = '전체';
+let issueFeedPage = 1;
+const ISSUES_PER_PAGE = 10;
 
 /* =================== HELPERS =================== */
 function daysBetween(a, b){ return Math.round((new Date(b) - new Date(a)) / 86400000); }
@@ -89,13 +105,92 @@ function computeOVR(s){
 function grade(score){
   if(score===null) return {g:'–', ring:['var(--neutral)','var(--neutral-dim)']};
   if(score>=90) return {g:'S', ring:['var(--gold-1)','var(--gold-2)']};
-  if(score>=78) return {g:'A', ring:['var(--silver-1)','var(--silver-2)']};
-  if(score>=60) return {g:'B', ring:['var(--steel-1)','var(--steel-2)']};
-  if(score>=40) return {g:'C', ring:['var(--warn)','var(--gold-2)']};
+  if(score>=78) return {g:'A', ring:['var(--green-1)','var(--green-2)']};
+  if(score>=60) return {g:'B', ring:['var(--blue-1)','var(--blue-2)']};
+  if(score>=40) return {g:'C', ring:['var(--orange-1)','var(--orange-2)']};
   return {g:'D', ring:['var(--danger)','#7a2530']};
 }
 function overallLevel(score){ if(score===null) return 'neutral'; return score>=78?'safe':score>=50?'warn':'danger'; }
 function statusLabel(l){ return l==='safe'?'양호':l==='warn'?'주의':l==='danger'?'위험':'미입력'; }
+
+/* =================== ISSUE AGGREGATION =================== */
+const ISSUE_CATS = ['territory','method','achieve','contract','unpaid','hygiene'];
+function categoryLabel(cat){
+  return {territory:'영업지역', method:'매출산정', achieve:'매출달성', contract:'계약하자', unpaid:'미입금', hygiene:'위생점검'}[cat];
+}
+function issueDetail(cat, s, level){
+  const numCls = `risk-num ${level}`;
+  switch(cat){
+    case 'territory': return s.territory.noteType==='직접입력' ? (s.territory.noteText||s.territory.status) : (s.territory.noteType||s.territory.status);
+    case 'method': return s.revenueMethod.status;
+    case 'achieve': return s.revenueAchievement.ratio===null ? '데이터 없음' : `달성률 <span class="${numCls}">${s.revenueAchievement.ratio}%</span>`;
+    case 'contract': return (s.contractDefect.detailType==='기타' ? s.contractDefect.detailText : s.contractDefect.detailType) + ' · ' + s.contractDefect.status;
+    case 'unpaid': return s.unpaidStatus.hasUnpaid ? (s.unpaidStatus.note || '미입금 발생') : '';
+    case 'hygiene': return s.hygiene.specialNote || s.hygiene.result;
+  }
+}
+function issueMetric(cat, s){
+  switch(cat){
+    case 'territory': return { dateVal:s.territory.setDate, dateLabel:'설정일', amount:null };
+    case 'method': return { dateVal:s.revenueMethod.calcDate, dateLabel:'산정일', amount:s.revenueMethod.estimatedAmount };
+    case 'achieve': return { dateVal:s.revenueAchievement.periodEnd, dateLabel:'기간종료', amount:s.revenueAchievement.targetAmount };
+    case 'contract': return { dateVal:null, dateLabel:null, amount:null };
+    case 'unpaid': return { dateVal: s.unpaidStatus.hasUnpaid ? s.unpaidStatus.occurredDate : null, dateLabel:'발생일자', amount: s.unpaidStatus.hasUnpaid ? s.unpaidStatus.amount : null };
+    case 'hygiene': return { dateVal:s.hygiene.lastCheckDate, dateLabel:'최근점검일', amount:null };
+  }
+}
+function collectIssues(list){
+  const issues = [];
+  list.forEach(s=>{
+    ISSUE_CATS.forEach(cat=>{
+      const level = statusLevel(cat, s);
+      if(level==='danger' || level==='warn'){
+        const metric = issueMetric(cat, s);
+        const rawDays = (metric.dateVal && metric.dateVal!=='-') ? daysBetween(metric.dateVal, today()) : null;
+        const days = (rawDays!==null && rawDays>=0) ? rawDays : null;
+        const amount = (metric.amount && metric.amount!=='0') ? metric.amount : null;
+        issues.push({ store:s, cat, level, label:categoryLabel(cat), detail:issueDetail(cat,s,level), days, amount, dateLabel:metric.dateLabel });
+      }
+    });
+  });
+
+  // 카테고리별로 라운드로빈 인터리브 — 특정 항목(예: 미입금)이 피드 상위를 독점하지 않도록 다양성 확보
+  function interleaveByCategory(arr){
+    const byCat = {};
+    ISSUE_CATS.forEach(c=>{ byCat[c] = []; });
+    arr.forEach(iss=>byCat[iss.cat].push(iss));
+    ISSUE_CATS.forEach(c=>{ byCat[c].sort((a,b)=>(b.days??-1)-(a.days??-1)); });
+    const result = [];
+    let added = true;
+    while(added){
+      added = false;
+      ISSUE_CATS.forEach(c=>{
+        if(byCat[c].length){ result.push(byCat[c].shift()); added = true; }
+      });
+    }
+    return result;
+  }
+
+  const dangerIssues = interleaveByCategory(issues.filter(i=>i.level==='danger'));
+  const warnIssues = interleaveByCategory(issues.filter(i=>i.level==='warn'));
+  return [...dangerIssues, ...warnIssues];
+}
+function hexToRgba(hex, alpha){
+  const h = hex.replace('#','');
+  const r = parseInt(h.substring(0,2),16), g = parseInt(h.substring(2,4),16), b = parseInt(h.substring(4,6),16);
+  return `rgba(${r},${g},${b},${alpha})`;
+}
+function buildHeatmap(list, brands){
+  return ISSUE_CATS.map(cat=>{
+    const cells = brands.map(b=>{
+      const inBrand = list.filter(s=>s.brand===b);
+      const dangerCount = inBrand.filter(s=>statusLevel(cat,s)==='danger').length;
+      const warnCount = inBrand.filter(s=>statusLevel(cat,s)==='warn').length;
+      return { brand:b, dangerCount, warnCount, total:inBrand.length };
+    });
+    return { cat, cells };
+  });
+}
 
 /* =================== ROSTER =================== */
 function renderBrandFilter(){
@@ -124,12 +219,13 @@ function renderRoster(){
         <div class="r-name">${s.name}</div>
         <div class="r-brand">${s.brand} · ${s.code}</div>
       </div>
-      <div class="r-ovr num" style="color:${gr.ring[0]}; border:1px solid ${gr.ring[0]}44; background:${gr.ring[0]}14;">${score===null?'–':score}</div>
+      <div class="r-ovr num" style="color:${gr.ring[0]}; border:1px solid color-mix(in srgb, ${gr.ring[0]} 32%, transparent); background:color-mix(in srgb, ${gr.ring[0]} 13%, transparent);">${score===null?'–':score}</div>
     </div>`;
   }).join('') || `<div style="padding:20px; color:var(--text-3); font-size:12.5px; text-align:center;">검색 결과가 없습니다</div>`;
 }
 function selectStore(id){ currentId=id; renderRoster(); renderMain(); }
-function goDashboard(){ currentId=null; renderRoster(); renderMain(); }
+function goDashboard(){ currentId=null; issueFeedPage=1; renderRoster(); renderMain(); }
+function goIssuePage(p){ issueFeedPage=p; renderDashboard(); }
 document.getElementById('searchInput').addEventListener('input', renderRoster);
 
 /* =================== MAIN CARD =================== */
@@ -152,7 +248,7 @@ function statCard({num, title, level, statusText, rows, extra, formId}){
         </button>
       </div>
     </div>
-    <div class="sc-body">${rows.map(r=>`<div class="row"><span class="k">${r.k}</span><span class="v">${r.v}</span></div>`).join('')}</div>
+    <div class="sc-body">${rows.map(r=>`<div class="row"><span class="k">${r.k}</span><span class="v${r.risk?(' risk-'+r.risk):''}">${r.v}</span></div>`).join('')}</div>
     ${extra||''}
   </div>`;
 }
@@ -163,12 +259,33 @@ function toggleEdit(id){
 }
 function condStyle(val, match){ return val===match ? '' : 'display:none;'; }
 
+function renderPager(current, total){
+  if(total<=1) return '';
+  const pages = [];
+  const add = p=>{ if(p>=1 && p<=total && !pages.includes(p)) pages.push(p); };
+  add(1); add(total);
+  for(let p=current-1; p<=current+1; p++) add(p);
+  pages.sort((a,b)=>a-b);
+  let html = '<div class="pager">';
+  html += `<button class="pg-btn" ${current<=1?'disabled':''} onclick="goIssuePage(${current-1})">‹</button>`;
+  let prev = 0;
+  pages.forEach(p=>{
+    if(prev && p-prev>1) html += `<span class="pg-ellipsis">…</span>`;
+    html += `<button class="pg-btn ${p===current?'active':''}" onclick="goIssuePage(${p})">${p}</button>`;
+    prev = p;
+  });
+  html += `<button class="pg-btn" ${current>=total?'disabled':''} onclick="goIssuePage(${current+1})">›</button>`;
+  html += '</div>';
+  return html;
+}
+
 /* =================== DASHBOARD =================== */
 function renderDashboard(){
   const graded = stores.map(s=>({s, score:computeOVR(s)}));
   const buckets = {S:0, A:0, B:0, C:0, D:0};
   graded.forEach(({score})=>{ const g=grade(score).g; if(buckets[g]!==undefined) buckets[g]++; });
-  const dangerList = graded.filter(({s,score})=>grade(score).g==='D').sort((a,b)=>(a.score??0)-(b.score??0)).slice(0,10);
+  const dangerGraded = graded.filter(({score})=>grade(score).g==='D').sort((a,b)=>(a.score??0)-(b.score??0));
+  const dangerList = dangerGraded.slice(0,10);
   const brands = [...new Set(stores.map(s=>s.brand))];
   const brandStats = brands.map(b=>{
     const inBrand = graded.filter(({s})=>s.brand===b);
@@ -177,11 +294,21 @@ function renderDashboard(){
     return {brand:b, count:inBrand.length, avg};
   }).sort((a,b)=>b.count-a.count);
 
+  const dangerIssueCount = collectIssues(stores).filter(i=>i.level==='danger').length;
+  // 전체 위험/주의 항목 피드는 위험(D등급) 매장의 이슈만 표시
+  const feedIssuesAll = collectIssues(dangerGraded.map(x=>x.s));
+  const totalIssuePages = Math.max(1, Math.ceil(feedIssuesAll.length / ISSUES_PER_PAGE));
+  if(issueFeedPage > totalIssuePages) issueFeedPage = totalIssuePages;
+  if(issueFeedPage < 1) issueFeedPage = 1;
+  const pageStart = (issueFeedPage-1) * ISSUES_PER_PAGE;
+  const feedIssues = feedIssuesAll.slice(pageStart, pageStart + ISSUES_PER_PAGE);
+  const heatmap = buildHeatmap(stores, brands);
+
   document.getElementById('main').innerHTML = `
     <div class="dash-head">
       <div class="eyebrow" style="font-size:10.5px; letter-spacing:.14em; color:var(--text-3); text-transform:uppercase; font-weight:600;">외식BG · RO실 · 전체 현황</div>
       <h2>전체 매장 현황</h2>
-      <div class="sub">${stores.length}개 매장 · ${brands.length}개 브랜드</div>
+      <div class="sub">${stores.length}개 매장 · ${brands.length}개 브랜드 · 위험 항목 ${dangerIssueCount}건</div>
     </div>
 
     <div class="grade-pills">
@@ -191,13 +318,63 @@ function renderDashboard(){
       }).join('')}
     </div>
 
-    <div class="dash-panel">
+    <div class="dash-panel dash-panel--danger">
       <div class="dash-panel-title">⚠ 위험(D등급) 매장 <span class="cnt">${dangerList.length}</span>개</div>
-      ${dangerList.length ? dangerList.map(({s,score})=>`
-        <div class="danger-row" onclick="selectStore('${s.id}')">
-          <div><div class="dn-name">${s.name}</div><div class="dn-brand">${s.brand} · ${s.code}</div></div>
-          <div class="dn-score">${score}점</div>
-        </div>`).join('') : `<div class="empty-note">위험 등급 매장이 없습니다.</div>`}
+      ${dangerList.length ? dangerList.map(({s,score})=>{
+        const tags = ISSUE_CATS.map(cat=>({cat, level:statusLevel(cat,s)})).filter(x=>x.level==='danger'||x.level==='warn');
+        return `
+        <div class="danger-row expanded" onclick="selectStore('${s.id}')">
+          <div class="dn-top">
+            <div><div class="dn-name">${s.name}</div><div class="dn-brand">${s.brand} · ${s.code}</div></div>
+            <div class="dn-score">${score}점</div>
+          </div>
+          ${tags.length ? `<div class="dn-tags">${tags.map(t=>`<span class="issue-tag ${t.level}">${categoryLabel(t.cat)}</span>`).join('')}</div>` : ''}
+          ${s.etc.memo ? `<div class="dn-memo">${s.etc.memo}</div>` : ''}
+        </div>`;
+      }).join('') : `<div class="empty-note">위험 등급 매장이 없습니다.</div>`}
+    </div>
+
+    <div class="dash-panel dash-panel--danger">
+      <div class="dash-panel-title">⚠ 전체 위험/주의 항목 피드 <span class="cnt">${feedIssuesAll.length}</span>건</div>
+      ${feedIssues.length ? `
+      <div class="issue-feed-wrap">
+        <div class="issue-feed-table">
+          <div class="issue-feed-head">
+            <div>이슈유형</div><div>매장</div><div>상세내용</div><div class="ir-col-num">경과일자</div><div class="ir-col-num">금액</div>
+          </div>
+          ${feedIssues.map(iss=>`
+          <div class="issue-row" onclick="selectStore('${iss.store.id}')">
+            <span class="issue-tag ${iss.level}">${iss.label}</span>
+            <div class="ir-store">${iss.store.name}<span class="ir-brand">${iss.store.brand}</span></div>
+            <div class="ir-detail">${iss.detail}</div>
+            <div class="ir-days ${iss.level}">${iss.days!==null ? `${iss.days}일` : '<span class="ir-dash">–</span>'}</div>
+            <div class="ir-amount">${iss.amount ? iss.amount : '<span class="ir-dash">–</span>'}</div>
+          </div>`).join('')}
+        </div>
+      </div>` : `<div class="empty-note">현재 주의/위험 항목이 없습니다.</div>`}
+      ${renderPager(issueFeedPage, totalIssuePages)}
+    </div>
+
+    <div class="dash-panel">
+      <div class="dash-panel-title">브랜드 × 항목 리스크 히트맵</div>
+      <div class="heatmap-wrap">
+        <table class="heatmap-table">
+          <thead><tr><th></th>${brands.map(b=>`<th>${b}</th>`).join('')}</tr></thead>
+          <tbody>
+            ${heatmap.map(row=>`
+              <tr>
+                <th class="hm-row-label">${categoryLabel(row.cat)}</th>
+                ${row.cells.map(c=>{
+                  const ratio = c.total ? c.dangerCount/c.total : 0;
+                  const bg = c.dangerCount ? hexToRgba('#f2596a', Math.min(0.38+ratio*0.5, 0.92)) : (c.warnCount ? hexToRgba('#f0b73f',0.3) : 'transparent');
+                  const cls = c.dangerCount ? 'hm-cell hm-cell--danger' : (c.warnCount ? 'hm-cell hm-cell--warn' : 'hm-cell');
+                  const label = c.dangerCount ? c.dangerCount : (c.warnCount ? '·' : '');
+                  return `<td class="${cls}" style="background:${bg};" title="${c.brand} · ${categoryLabel(row.cat)}: 위험 ${c.dangerCount} / 주의 ${c.warnCount} / 총 ${c.total}개">${label}</td>`;
+                }).join('')}
+              </tr>`).join('')}
+          </tbody>
+        </table>
+      </div>
     </div>
 
     <div class="dash-panel">
@@ -349,7 +526,7 @@ function renderMain(){
       ${statCard({
         num:'05', title:'미입금 발생여부', level:unpaidLvl, statusText: s.unpaidStatus.hasUnpaid?'미입금 발생':'정상', formId:'f5',
         rows:[
-          {k:'미입금액', v:s.unpaidStatus.hasUnpaid?s.unpaidStatus.amount:'-'},
+          {k:'미입금액', v:s.unpaidStatus.hasUnpaid?s.unpaidStatus.amount:'-', risk: s.unpaidStatus.hasUnpaid?unpaidLvl:null},
           {k:'발생일자', v:s.unpaidStatus.hasUnpaid?s.unpaidStatus.occurredDate:'-'},
           {k:'비고', v:s.unpaidStatus.note},
         ],
@@ -475,6 +652,7 @@ async function saveEtc(){
 }
 
 /* =================== INIT =================== */
+applyThemeIcon();
 renderBrandFilter();
 renderRoster();
 renderMain();

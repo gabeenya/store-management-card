@@ -2588,56 +2588,56 @@ let stores = [
     "address": "-",
     "manager": "-",
     "territory": {
-      "status": "미입력",
-      "scopeType": "반경지정",
+      "status": "미설정",
+      "scopeType": "직접입력",
       "scopeText": "",
-      "noteType": "영업지역 중복 있음",
-      "noteText": "",
-      "setDate": "2023-07-30"
+      "noteType": "영업지역 침해 있음",
+      "noteText": "인근 동일상권 가맹점과 구역 미확정 상태로 6개월째 방치",
+      "setDate": "-"
     },
     "revenueMethod": {
-      "method": "-",
+      "method": "예외산정(임의)",
       "status": "미산정",
       "calcDate": "-",
       "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": null,
-      "actualAmount": "-",
-      "targetAmount": "-",
+      "ratio": 48,
+      "actualAmount": "2,940만",
+      "targetAmount": "6,120만",
       "trend": [
-        0,
-        0,
-        0,
-        0,
-        0,
-        0
+        71,
+        64,
+        58,
+        52,
+        50,
+        48
       ],
-      "periodStart": "-",
-      "periodEnd": "-"
+      "periodStart": "2025-09-01",
+      "periodEnd": "2026-08-31"
     },
     "contractDefect": {
       "hasDefect": true,
-      "detailType": "숙고기간 위반",
+      "detailType": "서류 미교부",
       "detailText": "",
-      "status": "처리중"
+      "status": "미해결"
     },
     "unpaidStatus": {
       "hasUnpaid": true,
-      "amount": "608만원",
-      "occurredDate": "2026-06-09",
-      "note": "카드 매출 정산 지연으로 인한 일시 미입금"
+      "amount": "1,860만원",
+      "occurredDate": "2026-05-19",
+      "note": "매출 급감에 따른 임차료·로열티 3개월 연속 미입금"
     },
     "hygiene": {
-      "lastCheckDate": "2025-01-07",
-      "result": "적합",
-      "nextCheckDate": "2025-07-08",
-      "specialNote": ""
+      "lastCheckDate": "2026-05-14",
+      "result": "부적합",
+      "nextCheckDate": "2026-08-30",
+      "specialNote": "조리구역 방충망 파손, 식자재 보관온도 기준 위반 적발"
     },
     "etc": {
-      "memo": "고객 민원 1건 접수, 처리 완료.",
-      "author": "박현우",
-      "date": "2026-05-05"
+      "memo": "경영 악화로 폐점 검토 중. RO실 긴급 미팅 요청함.",
+      "author": "박도윤",
+      "date": "2026-08-24"
     }
   },
   {
@@ -2889,55 +2889,55 @@ let stores = [
     "manager": "-",
     "territory": {
       "status": "미설정",
-      "scopeType": "-",
+      "scopeType": "직접입력",
       "scopeText": "",
-      "noteType": "-",
+      "noteType": "영업지역 중복 있음",
       "noteText": "",
       "setDate": "-"
     },
     "revenueMethod": {
-      "method": "-",
+      "method": "예외산정(임의)",
       "status": "미산정",
       "calcDate": "-",
       "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": null,
-      "actualAmount": "-",
-      "targetAmount": "-",
+      "ratio": 68,
+      "actualAmount": "3,880만",
+      "targetAmount": "5,700만",
       "trend": [
-        0,
-        0,
-        0,
-        0,
-        0,
-        0
+        84,
+        79,
+        73,
+        70,
+        69,
+        68
       ],
-      "periodStart": "-",
-      "periodEnd": "-"
+      "periodStart": "2025-08-01",
+      "periodEnd": "2026-07-31"
     },
     "contractDefect": {
-      "hasDefect": false,
-      "detailType": "-",
+      "hasDefect": true,
+      "detailType": "숙고기간 위반",
       "detailText": "",
-      "status": "해당없음"
+      "status": "처리중"
     },
     "unpaidStatus": {
-      "hasUnpaid": false,
-      "amount": "0",
-      "occurredDate": "-",
-      "note": "최근 12개월 연체 없음"
+      "hasUnpaid": true,
+      "amount": "760만원",
+      "occurredDate": "2026-07-14",
+      "note": "매출 부진에 따른 로열티 미입금"
     },
     "hygiene": {
-      "lastCheckDate": "2025-10-14",
-      "result": "점검예정",
-      "nextCheckDate": "2026-04-14",
-      "specialNote": ""
+      "lastCheckDate": "2026-05-19",
+      "result": "부적합",
+      "nextCheckDate": "2026-08-25",
+      "specialNote": "식자재 유통기한 표시 누락 다수 적발"
     },
     "etc": {
-      "memo": "",
-      "author": "-",
-      "date": "-"
+      "memo": "매출산정 재검토 및 위생 재점검 동시 진행 필요.",
+      "author": "김하린",
+      "date": "2026-08-24"
     }
   },
   {
@@ -3188,56 +3188,56 @@ let stores = [
     "address": "-",
     "manager": "-",
     "territory": {
-      "status": "미입력",
-      "scopeType": "반경지정",
+      "status": "미설정",
+      "scopeType": "직접입력",
       "scopeText": "",
-      "noteType": "자사유통입점",
-      "noteText": "",
-      "setDate": "2022-09-02"
+      "noteType": "영업지역 침해 있음",
+      "noteText": "전대차 매장과 구역 경계 미확정",
+      "setDate": "-"
     },
     "revenueMethod": {
-      "method": "-",
-      "status": "미산정",
-      "calcDate": "-",
-      "estimatedAmount": "-"
+      "method": "예외산정(임의)",
+      "status": "재검토필요",
+      "calcDate": "2025-10-19",
+      "estimatedAmount": "월 4,050만"
     },
     "revenueAchievement": {
-      "ratio": null,
-      "actualAmount": "-",
-      "targetAmount": "-",
+      "ratio": 52,
+      "actualAmount": "2,760만",
+      "targetAmount": "5,310만",
       "trend": [
-        0,
-        0,
-        0,
-        0,
-        0,
-        0
+        73,
+        66,
+        58,
+        55,
+        53,
+        52
       ],
-      "periodStart": "-",
-      "periodEnd": "-"
+      "periodStart": "2025-06-01",
+      "periodEnd": "2026-05-31"
     },
     "contractDefect": {
       "hasDefect": true,
-      "detailType": "숙고기간 위반",
-      "detailText": "",
-      "status": "처리중"
+      "detailType": "기타",
+      "detailText": "전대차 계약 특약사항 미이행",
+      "status": "미해결"
     },
     "unpaidStatus": {
-      "hasUnpaid": false,
-      "amount": "0",
-      "occurredDate": "-",
-      "note": "최근 12개월 연체 없음"
+      "hasUnpaid": true,
+      "amount": "1,150만원",
+      "occurredDate": "2026-07-03",
+      "note": "전대차 정산 분쟁으로 로열티 미입금 지속"
     },
     "hygiene": {
-      "lastCheckDate": "2025-03-22",
-      "result": "적합",
-      "nextCheckDate": "2025-09-20",
-      "specialNote": ""
+      "lastCheckDate": "2026-06-11",
+      "result": "시정요구",
+      "nextCheckDate": "2026-09-05",
+      "specialNote": "냉장 보관 온도 기록 누락"
     },
     "etc": {
-      "memo": "",
-      "author": "-",
-      "date": "-"
+      "memo": "전대차 계약 분쟁이 영업지역·매출·미입금 전반에 영향.",
+      "author": "윤태경",
+      "date": "2026-08-24"
     }
   },
   {
@@ -3668,56 +3668,56 @@ let stores = [
     "address": "-",
     "manager": "-",
     "territory": {
-      "status": "정상설정",
+      "status": "미설정",
       "scopeType": "직접입력",
-      "scopeText": "1층 매장 전용면적 기준 별도 협의",
-      "noteType": "자사유통입점",
-      "noteText": "",
-      "setDate": "2023-06-09"
+      "scopeText": "",
+      "noteType": "영업지역 중복 있음",
+      "noteText": "인근 동일브랜드 매장과 반경 500m 이내 중복 출점",
+      "setDate": "-"
     },
     "revenueMethod": {
-      "method": "인근가맹점 5곳",
-      "status": "재검토필요",
-      "calcDate": "2022-04-28",
-      "estimatedAmount": "월 9,926만"
+      "method": "예외산정(임의)",
+      "status": "미산정",
+      "calcDate": "-",
+      "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 48,
-      "actualAmount": "9,227만",
-      "targetAmount": "1.92억",
+      "ratio": 74,
+      "actualAmount": "5,120만",
+      "targetAmount": "6,920만",
       "trend": [
-        41,
-        41,
-        56,
-        43,
-        49,
-        48
+        91,
+        85,
+        79,
+        76,
+        75,
+        74
       ],
-      "periodStart": "2025-01-26",
-      "periodEnd": "2025-05-06"
+      "periodStart": "2025-09-01",
+      "periodEnd": "2026-08-31"
     },
     "contractDefect": {
-      "hasDefect": false,
-      "detailType": "-",
+      "hasDefect": true,
+      "detailType": "서류 미교부",
       "detailText": "",
-      "status": "해당없음"
+      "status": "미해결"
     },
     "unpaidStatus": {
-      "hasUnpaid": false,
-      "amount": "0",
-      "occurredDate": "-",
-      "note": "최근 12개월 연체 없음"
+      "hasUnpaid": true,
+      "amount": "310만원",
+      "occurredDate": "2026-08-12",
+      "note": "정산 시스템 오류로 인한 일시 미입금, 처리 중"
     },
     "hygiene": {
-      "lastCheckDate": "2025-08-04",
+      "lastCheckDate": "2026-05-30",
       "result": "부적합",
-      "nextCheckDate": "2026-02-02",
-      "specialNote": ""
+      "nextCheckDate": "2026-08-28",
+      "specialNote": "주방 배수구 위생 불량 재발, 즉시 시정 필요"
     },
     "etc": {
-      "memo": "",
-      "author": "-",
-      "date": "-"
+      "memo": "가맹계약 서류 하자와 위생 재적발이 겹쳐 집중 관리 대상 지정.",
+      "author": "한소율",
+      "date": "2026-08-24"
     }
   },
   {
@@ -7389,55 +7389,55 @@ let stores = [
     "manager": "-",
     "territory": {
       "status": "미설정",
-      "scopeType": "-",
+      "scopeType": "직접입력",
       "scopeText": "",
-      "noteType": "-",
-      "noteText": "",
+      "noteType": "영업지역 중복 있음",
+      "noteText": "인근 신규 입점 매장과 상권 중복 협의 지연",
       "setDate": "-"
     },
     "revenueMethod": {
-      "method": "예외산정(의사결정o)",
+      "method": "예외산정(임의)",
       "status": "재검토필요",
-      "calcDate": "2024-03-02",
-      "estimatedAmount": "월 1.05억"
+      "calcDate": "2025-11-02",
+      "estimatedAmount": "월 3,210만"
     },
     "revenueAchievement": {
-      "ratio": 60,
-      "actualAmount": "1.12억",
-      "targetAmount": "1.87억",
+      "ratio": 61,
+      "actualAmount": "1,980만",
+      "targetAmount": "3,250만",
       "trend": [
-        58,
-        58,
-        68,
-        59,
-        59,
-        60
+        78,
+        72,
+        66,
+        63,
+        62,
+        61
       ],
-      "periodStart": "2024-11-05",
-      "periodEnd": "2025-11-02"
+      "periodStart": "2025-08-01",
+      "periodEnd": "2026-07-31"
     },
     "contractDefect": {
-      "hasDefect": false,
-      "detailType": "-",
+      "hasDefect": true,
+      "detailType": "숙고기간 위반",
       "detailText": "",
-      "status": "해당없음"
+      "status": "미해결"
     },
     "unpaidStatus": {
       "hasUnpaid": true,
-      "amount": "719만원",
-      "occurredDate": "2026-06-03",
-      "note": "로열티 분할 협의 중"
+      "amount": "420만원",
+      "occurredDate": "2026-08-06",
+      "note": "카드사 정산 지연으로 인한 일시 미입금"
     },
     "hygiene": {
-      "lastCheckDate": "2026-07-18",
-      "result": "적합",
-      "nextCheckDate": "2027-01-16",
-      "specialNote": ""
+      "lastCheckDate": "2026-06-02",
+      "result": "부적합",
+      "nextCheckDate": "2026-09-01",
+      "specialNote": "해충 방제 미실시, 유통기한 경과 식자재 발견"
     },
     "etc": {
-      "memo": "",
-      "author": "-",
-      "date": "-"
+      "memo": "영업지역 분쟁 장기화로 본사-가맹점 갈등 심화.",
+      "author": "이서준",
+      "date": "2026-08-24"
     }
   },
   {
@@ -12188,56 +12188,56 @@ let stores = [
     "address": "-",
     "manager": "-",
     "territory": {
-      "status": "미설정",
-      "scopeType": "-",
+      "status": "분쟁중",
+      "scopeType": "반경지정",
       "scopeText": "",
-      "noteType": "-",
+      "noteType": "영업지역 침해 있음",
       "noteText": "",
-      "setDate": "-"
+      "setDate": "2024-05-11"
     },
     "revenueMethod": {
-      "method": "인근가맹점 5곳",
-      "status": "정합성확인됨",
-      "calcDate": "2023-06-03",
-      "estimatedAmount": "월 1.85억"
+      "method": "예외산정(임의)",
+      "status": "미산정",
+      "calcDate": "-",
+      "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 64,
-      "actualAmount": "3,776만",
-      "targetAmount": "5,899만",
+      "ratio": 44,
+      "actualAmount": "2,510만",
+      "targetAmount": "5,700만",
       "trend": [
-        64,
-        57,
-        66,
-        62,
+        68,
         60,
-        64
+        52,
+        47,
+        45,
+        44
       ],
-      "periodStart": "2025-06-22",
-      "periodEnd": "2025-12-09"
+      "periodStart": "2025-07-01",
+      "periodEnd": "2026-06-30"
     },
     "contractDefect": {
       "hasDefect": true,
-      "detailType": "숙고기간 위반",
-      "detailText": "",
-      "status": "미해결"
+      "detailType": "기타",
+      "detailText": "상권보호 조항 관련 이견으로 재계약 협의 중단",
+      "status": "처리중"
     },
     "unpaidStatus": {
-      "hasUnpaid": false,
-      "amount": "0",
-      "occurredDate": "-",
-      "note": "최근 12개월 연체 없음"
+      "hasUnpaid": true,
+      "amount": "980만원",
+      "occurredDate": "2026-06-22",
+      "note": "매출 부진 지속으로 로열티 2개월 연속 미입금"
     },
     "hygiene": {
-      "lastCheckDate": "2026-02-12",
-      "result": "적합",
-      "nextCheckDate": "2026-08-13",
-      "specialNote": "냉장 보관 온도 기록 미흡, 시정 안내함"
+      "lastCheckDate": "2026-04-22",
+      "result": "부적합",
+      "nextCheckDate": "2026-08-20",
+      "specialNote": "조리기구 위생 상태 불량, 재점검 대상"
     },
     "etc": {
-      "memo": "리뉴얼 공사 예정, 임시 휴업 협의 중.",
-      "author": "김도윤",
-      "date": "2026-05-11"
+      "memo": "매출 회복 계획서 제출 요청, 미이행 시 계약해지 검토.",
+      "author": "최지안",
+      "date": "2026-08-24"
     }
   },
   {
