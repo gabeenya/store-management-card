@@ -15,16 +15,17 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 </head>
 <body>
+<button id="themeToggle" class="theme-toggle" onclick="toggleTheme()" title="다크/라이트 모드 전환">🌙</button>
 <div class="shell">
   <aside class="roster">
     <div class="roster-head">
       <div class="brand-logo-row">
         <div class="brand-logo-wrap" onclick="goDashboard()" title="전체 현황으로 이동">
-          <img src="assets/img/elandeats-wordmark.png" alt="이랜드이츠" class="brand-logo-img">
+          <img src="assets/img/elandeats-fulllogo.png" alt="이랜드이츠" class="brand-logo-img">
         </div>
-        <button id="themeToggle" class="theme-toggle" onclick="toggleTheme()" title="다크/라이트 모드 전환">🌙</button>
       </div>
       <div class="eyebrow">외식BG · RO실</div>
       <h1 onclick="goDashboard()" style="cursor:pointer;" title="전체 현황으로 이동">가맹점 운영 리스크 카드</h1>
@@ -34,6 +35,10 @@
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#9aa7ba" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
         <input id="searchInput" placeholder="매장명 또는 코드 검색">
       </div>
+      <button class="upload-nav-btn" onclick="goUpload()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        엑셀 데이터 업로드
+      </button>
     </div>
     <div class="brand-filter" id="brandFilter"></div>
     <div class="roster-list" id="rosterList"></div>

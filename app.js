@@ -70,6 +70,13 @@ let currentId = null;
 let activeBrand = '전체';
 let issueFeedPage = 1;
 const ISSUES_PER_PAGE = 10;
+let dangerPage = 1;
+const DANGER_PER_PAGE = 5;
+let gradeView = null;
+let gradeViewPage = 1;
+const GRADE_VIEW_PER_PAGE = 10;
+let showUpload = false;
+let uploadState = { fileName: null, parsed: null, applying: false, result: null };
 
 /* =================== HELPERS =================== */
 function daysBetween(a, b){ return Math.round((new Date(b) - new Date(a)) / 86400000); }
@@ -104,13 +111,13 @@ function computeOVR(s){
 }
 function grade(score){
   if(score===null) return {g:'–', ring:['var(--neutral)','var(--neutral-dim)']};
-  if(score>=90) return {g:'S', ring:['var(--gold-1)','var(--gold-2)']};
-  if(score>=78) return {g:'A', ring:['var(--green-1)','var(--green-2)']};
-  if(score>=60) return {g:'B', ring:['var(--blue-1)','var(--blue-2)']};
-  if(score>=40) return {g:'C', ring:['var(--orange-1)','var(--orange-2)']};
-  return {g:'D', ring:['var(--danger)','#7a2530']};
+  if(score>73) return {g:'A', ring:['var(--green-1)','var(--green-2)']};
+  if(score>53) return {g:'B', ring:['var(--blue-1)','var(--blue-2)']};
+  if(score>40) return {g:'C', ring:['var(--orange-1)','var(--orange-2)']};
+  if(score>20) return {g:'D', ring:['var(--danger)','#7a2530']};
+  return {g:'F', ring:['var(--f-1)','var(--f-2)']};
 }
-function overallLevel(score){ if(score===null) return 'neutral'; return score>=78?'safe':score>=50?'warn':'danger'; }
+function overallLevel(score){ if(score===null) return 'neutral'; return score>73?'safe':score>40?'warn':'danger'; }
 function statusLabel(l){ return l==='safe'?'양호':l==='warn'?'주의':l==='danger'?'위험':'미입력'; }
 
 /* =================== ISSUE AGGREGATION =================== */
@@ -211,10 +218,11 @@ function renderRoster(){
   document.getElementById('rosterCount').textContent = `총 ${stores.length}개 매장 · ${list.length}개 표시 중`;
   document.getElementById('rosterList').innerHTML = list.map(s=>{
     const score = computeOVR(s);
-    const lvl = overallLevel(score);
     const gr = grade(score);
-    return `<div class="roster-item ${s.id===currentId?'active':''}" onclick="selectStore('${s.id}')">
-      <div class="r-dot ${lvl}"></div>
+    const isActive = s.id===currentId;
+    const activeStyle = isActive ? ` style="border-left-color:${gr.ring[0]}; box-shadow:inset 0 0 0 1px color-mix(in srgb, ${gr.ring[0]} 22%, transparent);"` : '';
+    return `<div class="roster-item ${isActive?'active':''}"${activeStyle} onclick="selectStore('${s.id}')">
+      <div class="r-dot" style="background:${gr.ring[0]}; box-shadow:0 0 6px ${gr.ring[0]};"></div>
       <div class="r-info">
         <div class="r-name">${s.name}</div>
         <div class="r-brand">${s.brand} · ${s.code}</div>
@@ -223,9 +231,17 @@ function renderRoster(){
     </div>`;
   }).join('') || `<div style="padding:20px; color:var(--text-3); font-size:12.5px; text-align:center;">검색 결과가 없습니다</div>`;
 }
-function selectStore(id){ currentId=id; renderRoster(); renderMain(); }
-function goDashboard(){ currentId=null; issueFeedPage=1; renderRoster(); renderMain(); }
+function selectStore(id){ currentId=id; showUpload=false; renderRoster(); renderMain(); }
+function goDashboard(){ currentId=null; gradeView=null; showUpload=false; issueFeedPage=1; dangerPage=1; renderRoster(); renderMain(); }
 function goIssuePage(p){ issueFeedPage=p; renderDashboard(); }
+function goDangerPage(p){ dangerPage=p; renderDashboard(); }
+function goGradeView(g){ gradeView=g; gradeViewPage=1; currentId=null; showUpload=false; renderRoster(); renderMain(); }
+function goGradeViewPage(p){ gradeViewPage=p; renderMain(); }
+function goUpload(){
+  showUpload=true; currentId=null; gradeView=null;
+  uploadState = { fileName: null, parsed: null, applying: false, result: null };
+  renderRoster(); renderMain();
+}
 document.getElementById('searchInput').addEventListener('input', renderRoster);
 
 /* =================== MAIN CARD =================== */
@@ -259,22 +275,23 @@ function toggleEdit(id){
 }
 function condStyle(val, match){ return val===match ? '' : 'display:none;'; }
 
-function renderPager(current, total){
+function renderPager(current, total, fnName){
   if(total<=1) return '';
+  fnName = fnName || 'goIssuePage';
   const pages = [];
   const add = p=>{ if(p>=1 && p<=total && !pages.includes(p)) pages.push(p); };
   add(1); add(total);
   for(let p=current-1; p<=current+1; p++) add(p);
   pages.sort((a,b)=>a-b);
   let html = '<div class="pager">';
-  html += `<button class="pg-btn" ${current<=1?'disabled':''} onclick="goIssuePage(${current-1})">‹</button>`;
+  html += `<button class="pg-btn" ${current<=1?'disabled':''} onclick="${fnName}(${current-1})">‹</button>`;
   let prev = 0;
   pages.forEach(p=>{
     if(prev && p-prev>1) html += `<span class="pg-ellipsis">…</span>`;
-    html += `<button class="pg-btn ${p===current?'active':''}" onclick="goIssuePage(${p})">${p}</button>`;
+    html += `<button class="pg-btn ${p===current?'active':''}" onclick="${fnName}(${p})">${p}</button>`;
     prev = p;
   });
-  html += `<button class="pg-btn" ${current>=total?'disabled':''} onclick="goIssuePage(${current+1})">›</button>`;
+  html += `<button class="pg-btn" ${current>=total?'disabled':''} onclick="${fnName}(${current+1})">›</button>`;
   html += '</div>';
   return html;
 }
@@ -282,10 +299,14 @@ function renderPager(current, total){
 /* =================== DASHBOARD =================== */
 function renderDashboard(){
   const graded = stores.map(s=>({s, score:computeOVR(s)}));
-  const buckets = {S:0, A:0, B:0, C:0, D:0};
+  const buckets = {A:0, B:0, C:0, D:0, F:0};
   graded.forEach(({score})=>{ const g=grade(score).g; if(buckets[g]!==undefined) buckets[g]++; });
-  const dangerGraded = graded.filter(({score})=>grade(score).g==='D').sort((a,b)=>(a.score??0)-(b.score??0));
-  const dangerList = dangerGraded.slice(0,10);
+  const dangerGraded = graded.filter(({score})=>{ const g=grade(score).g; return g==='D' || g==='F'; }).sort((a,b)=>(a.score??0)-(b.score??0));
+  const totalDangerPages = Math.max(1, Math.ceil(dangerGraded.length / DANGER_PER_PAGE));
+  if(dangerPage > totalDangerPages) dangerPage = totalDangerPages;
+  if(dangerPage < 1) dangerPage = 1;
+  const dangerPageStart = (dangerPage-1) * DANGER_PER_PAGE;
+  const dangerList = dangerGraded.slice(dangerPageStart, dangerPageStart + DANGER_PER_PAGE);
   const brands = [...new Set(stores.map(s=>s.brand))];
   const brandStats = brands.map(b=>{
     const inBrand = graded.filter(({s})=>s.brand===b);
@@ -312,30 +333,14 @@ function renderDashboard(){
     </div>
 
     <div class="grade-pills">
-      ${['S','A','B','C','D'].map(g=>{
-        const ring = grade(g==='S'?95:g==='A'?85:g==='B'?70:g==='C'?50:20).ring;
-        return `<div class="grade-pill"><div class="g num" style="color:${ring[0]};">${g}</div><div class="c">${buckets[g]}개</div></div>`;
+      ${['A','B','C','D','F'].map(g=>{
+        const ring = grade(g==='A'?85:g==='B'?65:g==='C'?47:g==='D'?30:10).ring;
+        return `<div class="grade-pill" onclick="goGradeView('${g}')" style="cursor:pointer;"><div class="g num" style="color:${ring[0]};">${g}</div><div class="c">${buckets[g]}개</div></div>`;
       }).join('')}
     </div>
 
     <div class="dash-panel dash-panel--danger">
-      <div class="dash-panel-title">⚠ 위험(D등급) 매장 <span class="cnt">${dangerList.length}</span>개</div>
-      ${dangerList.length ? dangerList.map(({s,score})=>{
-        const tags = ISSUE_CATS.map(cat=>({cat, level:statusLevel(cat,s)})).filter(x=>x.level==='danger'||x.level==='warn');
-        return `
-        <div class="danger-row expanded" onclick="selectStore('${s.id}')">
-          <div class="dn-top">
-            <div><div class="dn-name">${s.name}</div><div class="dn-brand">${s.brand} · ${s.code}</div></div>
-            <div class="dn-score">${score}점</div>
-          </div>
-          ${tags.length ? `<div class="dn-tags">${tags.map(t=>`<span class="issue-tag ${t.level}">${categoryLabel(t.cat)}</span>`).join('')}</div>` : ''}
-          ${s.etc.memo ? `<div class="dn-memo">${s.etc.memo}</div>` : ''}
-        </div>`;
-      }).join('') : `<div class="empty-note">위험 등급 매장이 없습니다.</div>`}
-    </div>
-
-    <div class="dash-panel dash-panel--danger">
-      <div class="dash-panel-title">⚠ 전체 위험/주의 항목 피드 <span class="cnt">${feedIssuesAll.length}</span>건</div>
+      <div class="dash-panel-title">⚠ 전체 위험/주의항목 <span class="cnt">${feedIssuesAll.length}</span>건</div>
       ${feedIssues.length ? `
       <div class="issue-feed-wrap">
         <div class="issue-feed-table">
@@ -355,8 +360,28 @@ function renderDashboard(){
       ${renderPager(issueFeedPage, totalIssuePages)}
     </div>
 
+    <div class="dash-panel dash-panel--danger">
+      <div class="dash-panel-title">⚠ 위험(D·F) 매장 <span class="cnt">${dangerGraded.length}</span>개</div>
+      ${dangerList.length ? dangerList.map(({s,score})=>{
+        const tags = ISSUE_CATS.map(cat=>({cat, level:statusLevel(cat,s)})).filter(x=>x.level==='danger'||x.level==='warn');
+        const gr = grade(score);
+        return `
+        <div class="danger-row expanded" onclick="selectStore('${s.id}')">
+          <div class="dn-top">
+            <div class="dn-title">
+              <div class="dn-name">${s.name}${s.etc.memo ? ` <span class="dn-memo-inline">· ${s.etc.memo}</span>` : ''}</div>
+              <div class="dn-brand">${s.brand} · ${s.code}</div>
+            </div>
+            <div class="dn-score" style="color:${gr.ring[0]};">${score}점</div>
+          </div>
+          ${tags.length ? `<div class="dn-tags">${tags.map(t=>`<span class="issue-tag ${t.level}">${categoryLabel(t.cat)}</span>`).join('')}</div>` : ''}
+        </div>`;
+      }).join('') : `<div class="empty-note">위험 등급 매장이 없습니다.</div>`}
+      ${renderPager(dangerPage, totalDangerPages, 'goDangerPage')}
+    </div>
+
     <div class="dash-panel">
-      <div class="dash-panel-title">브랜드 × 항목 리스크 히트맵</div>
+      <div class="dash-panel-title">브랜드별 리스크 히트맵</div>
       <div class="heatmap-wrap">
         <table class="heatmap-table">
           <thead><tr><th></th>${brands.map(b=>`<th>${b}</th>`).join('')}</tr></thead>
@@ -393,8 +418,47 @@ function renderDashboard(){
   `;
 }
 
+function renderGradeView(){
+  const graded = stores.map(s=>({s, score:computeOVR(s)})).filter(({score})=>grade(score).g===gradeView);
+  graded.sort((a,b)=>(b.score??0)-(a.score??0));
+  const totalPages = Math.max(1, Math.ceil(graded.length / GRADE_VIEW_PER_PAGE));
+  if(gradeViewPage > totalPages) gradeViewPage = totalPages;
+  if(gradeViewPage < 1) gradeViewPage = 1;
+  const pageStart = (gradeViewPage-1) * GRADE_VIEW_PER_PAGE;
+  const pageList = graded.slice(pageStart, pageStart + GRADE_VIEW_PER_PAGE);
+  const ring = grade(gradeView==='A'?85:gradeView==='B'?65:gradeView==='C'?47:gradeView==='D'?30:10).ring;
+
+  document.getElementById('main').innerHTML = `
+    <div class="dash-head">
+      <div class="eyebrow" style="font-size:10.5px; letter-spacing:.14em; color:var(--text-3); text-transform:uppercase; font-weight:600; cursor:pointer;" onclick="goDashboard()">‹ 전체 현황으로</div>
+      <h2><span class="num" style="color:${ring[0]};">${gradeView}</span>등급 매장</h2>
+      <div class="sub">${graded.length}개 매장</div>
+    </div>
+
+    <div class="dash-panel">
+      <div class="dash-panel-title">${gradeView}등급 매장 목록 <span class="cnt" style="color:${ring[0]};">${graded.length}</span>개</div>
+      ${pageList.length ? pageList.map(({s,score})=>{
+        const tags = ISSUE_CATS.map(cat=>({cat, level:statusLevel(cat,s)})).filter(x=>x.level==='danger'||x.level==='warn');
+        return `
+        <div class="danger-row expanded" onclick="selectStore('${s.id}')">
+          <div class="dn-top">
+            <div class="dn-title">
+              <div class="dn-name">${s.name}${s.etc.memo ? ` <span class="dn-memo-inline">· ${s.etc.memo}</span>` : ''}</div>
+              <div class="dn-brand">${s.brand} · ${s.code}</div>
+            </div>
+            <div class="dn-score" style="color:${ring[0]};">${score===null?'–':score}점</div>
+          </div>
+          ${tags.length ? `<div class="dn-tags">${tags.map(t=>`<span class="issue-tag ${t.level}">${categoryLabel(t.cat)}</span>`).join('')}</div>` : ''}
+        </div>`;
+      }).join('') : `<div class="empty-note">해당 등급 매장이 없습니다.</div>`}
+      ${renderPager(gradeViewPage, totalPages, 'goGradeViewPage')}
+    </div>
+  `;
+}
+
 function renderMain(){
-  if(!currentId){ renderDashboard(); return; }
+  if(showUpload){ renderUploadPage(); return; }
+  if(!currentId){ if(gradeView){ renderGradeView(); } else { renderDashboard(); } return; }
   const s = stores.find(x=>x.id===currentId);
   const score = computeOVR(s);
   const gr = grade(score);
@@ -649,6 +713,259 @@ async function saveEtc(){
   s.etc = {memo:document.getElementById('e7-memo').value, author:document.getElementById('e7-author').value, date:today()};
   persistStore(s);
   renderMain();
+}
+
+/* =================== EXCEL 일괄 업로드 =================== */
+const EXCEL_HEADERS = [
+  '매장코드','매장명','브랜드','주소','담당자',
+  '영업지역_상태','영업지역_설정범위유형','영업지역_설정범위상세','영업지역_비고유형','영업지역_비고상세','영업지역_설정일',
+  '매출산정_방식','매출산정_상태','매출산정_금액','매출산정_산정일',
+  '매출달성_실매출','매출달성_목표매출','매출달성_달성률','매출달성_시작일','매출달성_종료일',
+  '계약하자_유무','계약하자_유형','계약하자_상세','계약하자_상태',
+  '미입금_여부','미입금_금액','미입금_발생일','미입금_비고',
+  '위생점검_결과','위생점검_최근점검일','위생점검_다음점검예정','위생점검_특이사항',
+  '기타_메모','기타_작성자',
+];
+
+function downloadExcelTemplate(){
+  const example = [
+    'CAFE-999','더카페 샘플점','더카페','서울시 강남구 테헤란로 1','홍길동',
+    '정상설정','반경지정','','자사유통입점','','2025-01-15',
+    '인근가맹점 5곳','정합성확인됨','월 5,000만','2025-01-10',
+    '5,200만','5,000만','104','2025-01-01','2025-12-31',
+    '없음','-','','해당없음',
+    '없음','0','-','최근 12개월 연체 없음',
+    '적합','2025-06-01','2025-12-01','',
+    '','담당자명',
+  ];
+  const ws = XLSX.utils.aoa_to_sheet([EXCEL_HEADERS, example]);
+  const wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, '매장데이터');
+  XLSX.writeFile(wb, '가맹점_데이터_업로드_템플릿.xlsx');
+}
+
+function onExcelFileSelected(evt){
+  const file = evt.target.files && evt.target.files[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = e=>{
+    try{
+      const data = new Uint8Array(e.target.result);
+      const wb = XLSX.read(data, {type:'array'});
+      const sheet = wb.Sheets[wb.SheetNames[0]];
+      const rows = XLSX.utils.sheet_to_json(sheet, {defval:''});
+      uploadState.fileName = file.name;
+      uploadState.parsed = validateExcelRows(rows);
+      uploadState.result = null;
+      renderMain();
+    }catch(err){
+      alert('엑셀 파일을 읽는 중 오류가 발생했습니다: ' + err.message);
+    }
+  };
+  reader.readAsArrayBuffer(file);
+  evt.target.value = '';
+}
+
+function validateExcelRows(rows){
+  const cs = v => (v===undefined||v===null) ? '' : String(v).trim();
+  const entries = rows
+    .filter(row => Object.keys(row).some(k=>cs(row[k])!==''))
+    .map((row, i)=>{
+      const code = cs(row['매장코드']);
+      const name = cs(row['매장명']);
+      const brand = cs(row['브랜드']);
+      const errors = [];
+      if(!code) errors.push('매장코드 누락');
+      if(!name) errors.push('매장명 누락');
+      if(!brand) errors.push('브랜드 누락');
+      const existing = code ? stores.find(s=>s.code===code) : null;
+      return { excelRowNum:i+2, code, name, brand, isNew: !!code && !existing, errors, row, duplicate:false };
+    });
+  const lastIdxByCode = new Map();
+  entries.forEach((e,idx)=>{ if(e.code) lastIdxByCode.set(e.code, idx); });
+  entries.forEach((e,idx)=>{ if(e.code && lastIdxByCode.get(e.code)!==idx) e.duplicate = true; });
+  return entries;
+}
+
+function buildStoreFromExcelRow(row, code, name, brand, existing){
+  const cs = v => (v===undefined||v===null) ? '' : String(v).trim();
+  const pick = (v, allowed, fallback) => allowed.includes(cs(v)) ? cs(v) : fallback;
+  const boolish = v => ['Y','y','예','있음','TRUE','true','1'].includes(cs(v));
+  const id = existing ? existing.id : code.replace(/[^A-Za-z0-9]/g,'').toUpperCase();
+
+  const ratioRaw = cs(row['매출달성_달성률']);
+  const ratio = ratioRaw==='' ? null : parseInt(ratioRaw,10);
+  let trend = existing ? existing.revenueAchievement.trend : [0,0,0,0,0,0];
+  if(ratio!==null){
+    trend = (existing && existing.revenueAchievement.ratio!==null)
+      ? [...existing.revenueAchievement.trend.slice(1), ratio]
+      : [ratio,ratio,ratio,ratio,ratio,ratio];
+  }
+
+  return {
+    id, name, brand, code,
+    address: cs(row['주소']) || (existing ? existing.address : '-'),
+    manager: cs(row['담당자']) || (existing ? existing.manager : '-'),
+    territory: {
+      status: pick(row['영업지역_상태'], ['정상설정','분쟁중','미설정','미입력'], '미입력'),
+      scopeType: cs(row['영업지역_설정범위유형']) || '-',
+      scopeText: cs(row['영업지역_설정범위상세']),
+      noteType: cs(row['영업지역_비고유형']) || '-',
+      noteText: cs(row['영업지역_비고상세']),
+      setDate: cs(row['영업지역_설정일']) || '-',
+    },
+    revenueMethod: {
+      method: cs(row['매출산정_방식']) || '-',
+      status: pick(row['매출산정_상태'], ['정합성확인됨','재검토필요','미산정','미입력'], '미입력'),
+      calcDate: cs(row['매출산정_산정일']) || '-',
+      estimatedAmount: cs(row['매출산정_금액']) || '-',
+    },
+    revenueAchievement: {
+      ratio,
+      actualAmount: cs(row['매출달성_실매출']) || '-',
+      targetAmount: cs(row['매출달성_목표매출']) || '-',
+      trend,
+      periodStart: cs(row['매출달성_시작일']) || '-',
+      periodEnd: cs(row['매출달성_종료일']) || '-',
+    },
+    contractDefect: {
+      hasDefect: boolish(row['계약하자_유무']),
+      detailType: cs(row['계약하자_유형']) || '-',
+      detailText: cs(row['계약하자_상세']),
+      status: pick(row['계약하자_상태'], ['해당없음','처리중','해결완료','미해결','미입력'], '미입력'),
+    },
+    unpaidStatus: {
+      hasUnpaid: boolish(row['미입금_여부']),
+      amount: cs(row['미입금_금액']) || '0',
+      occurredDate: cs(row['미입금_발생일']) || '-',
+      note: cs(row['미입금_비고']),
+    },
+    hygiene: {
+      result: pick(row['위생점검_결과'], ['적합','시정요구','부적합','점검예정','미입력'], '미입력'),
+      lastCheckDate: cs(row['위생점검_최근점검일']) || '-',
+      nextCheckDate: cs(row['위생점검_다음점검예정']) || '-',
+      specialNote: cs(row['위생점검_특이사항']),
+    },
+    etc: {
+      memo: cs(row['기타_메모']) || (existing ? existing.etc.memo : ''),
+      author: cs(row['기타_작성자']) || (existing ? existing.etc.author : '-'),
+      date: today(),
+    },
+  };
+}
+
+async function applyExcelUpload(){
+  const entries = uploadState.parsed || [];
+  const applicable = entries.filter(e=>e.errors.length===0 && !e.duplicate);
+  if(!applicable.length){ alert('반영할 유효한 데이터가 없습니다.'); return; }
+  uploadState.applying = true; renderMain();
+
+  let okCount=0, failCount=0; const failDetails=[];
+  for(const e of applicable){
+    const existing = stores.find(s=>s.code===e.code);
+    const storeObj = buildStoreFromExcelRow(e.row, e.code, e.name, e.brand, existing);
+    try{
+      if(supabaseClient){
+        if(existing){
+          const { error } = await supabaseClient.from('stores').update(storeToRow(storeObj)).eq('id', storeObj.id);
+          if(error) throw error;
+        }else{
+          const { error } = await supabaseClient.from('stores').insert({ id: storeObj.id, ...storeToRow(storeObj) });
+          if(error) throw error;
+        }
+      }
+      if(existing) Object.assign(existing, storeObj);
+      else stores.push(storeObj);
+      okCount++;
+    }catch(err){
+      failCount++; failDetails.push(`${e.code}: ${err.message||err}`);
+    }
+  }
+
+  uploadState.applying = false;
+  uploadState.result = { okCount, failCount, failDetails, total: applicable.length };
+  renderBrandFilter(); renderRoster();
+  renderMain();
+}
+
+function renderUploadPage(){
+  const parsed = uploadState.parsed;
+  const result = uploadState.result;
+  const newCount = parsed ? parsed.filter(e=>e.isNew && e.errors.length===0 && !e.duplicate).length : 0;
+  const updateCount = parsed ? parsed.filter(e=>!e.isNew && e.errors.length===0 && !e.duplicate).length : 0;
+  const errorCount = parsed ? parsed.filter(e=>e.errors.length>0).length : 0;
+  const dupCount = parsed ? parsed.filter(e=>e.duplicate && e.errors.length===0).length : 0;
+
+  document.getElementById('main').innerHTML = `
+    <div class="dash-head">
+      <div class="eyebrow" style="font-size:10.5px; letter-spacing:.14em; color:var(--text-3); text-transform:uppercase; font-weight:600; cursor:pointer;" onclick="goDashboard()">‹ 전체 현황으로</div>
+      <h2>엑셀 데이터 일괄 업로드</h2>
+      <div class="sub">엑셀 파일로 매장 데이터를 한 번에 등록하거나 수정합니다 (매장코드 기준 자동 업서트)</div>
+    </div>
+
+    <div class="dash-panel">
+      <div class="dash-panel-title">1. 템플릿 준비</div>
+      <div style="font-size:12.5px; color:var(--text-2); line-height:1.6; margin-bottom:12px;">
+        아래 템플릿을 내려받아 형식에 맞게 데이터를 채운 뒤 업로드해주세요. <b>매장코드</b>가 기존 매장과 일치하면 해당 매장 정보가 업데이트되고, 일치하는 매장이 없으면 신규 매장으로 추가됩니다.
+      </div>
+      <button class="btn-save" style="width:auto; padding:9px 16px;" onclick="downloadExcelTemplate()">템플릿 다운로드 (.xlsx)</button>
+    </div>
+
+    <div class="dash-panel">
+      <div class="dash-panel-title">2. 파일 업로드</div>
+      <label class="upload-dropzone">
+        <input type="file" accept=".xlsx,.xls,.csv" onchange="onExcelFileSelected(event)" style="display:none;">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        <div class="upload-dropzone-text">${uploadState.fileName ? `선택된 파일: <b>${uploadState.fileName}</b> (다시 클릭해서 변경)` : '클릭해서 엑셀 파일 선택 (.xlsx, .xls, .csv)'}</div>
+      </label>
+    </div>
+
+    ${result ? `
+    <div class="dash-panel ${result.failCount ? 'dash-panel--danger' : ''}">
+      <div class="dash-panel-title">반영 결과</div>
+      <div style="font-size:13px; line-height:1.8;">
+        <div>✅ 정상 반영 <b class="num" style="color:var(--safe);">${result.okCount}</b>건 / 전체 대상 ${result.total}건</div>
+        ${result.failCount ? `<div>⚠ 반영 실패 <b class="num" style="color:var(--danger);">${result.failCount}</b>건</div>` : ''}
+      </div>
+      ${result.failDetails.length ? `<div style="margin-top:8px; font-size:11.5px; color:var(--text-3); line-height:1.6;">${result.failDetails.map(f=>`<div>· ${f}</div>`).join('')}</div>` : ''}
+    </div>` : ''}
+
+    ${parsed ? `
+    <div class="dash-panel">
+      <div class="dash-panel-title">3. 미리보기 및 검증 <span class="cnt">${parsed.length}</span>행</div>
+      <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:14px;">
+        <span class="issue-tag safe-tag">신규 ${newCount}</span>
+        <span class="issue-tag warn">업데이트 ${updateCount}</span>
+        ${dupCount ? `<span class="issue-tag warn">중복(마지막 값 사용 외 무시) ${dupCount}</span>` : ''}
+        ${errorCount ? `<span class="issue-tag danger">오류 ${errorCount}</span>` : ''}
+      </div>
+      <div class="upload-table-wrap">
+        <table class="upload-table">
+          <thead><tr><th>#</th><th>상태</th><th>매장코드</th><th>매장명</th><th>브랜드</th><th>비고</th></tr></thead>
+          <tbody>
+            ${parsed.map(e=>{
+              let statusHtml, note='';
+              if(e.errors.length){ statusHtml = `<span class="issue-tag danger">오류</span>`; note = e.errors.join(', '); }
+              else if(e.duplicate){ statusHtml = `<span class="issue-tag warn">중복(무시)</span>`; note = '동일 매장코드가 이후 행에 다시 존재하여 이 행은 반영되지 않습니다.'; }
+              else if(e.isNew){ statusHtml = `<span class="issue-tag safe-tag">신규</span>`; }
+              else{ statusHtml = `<span class="issue-tag warn">업데이트</span>`; }
+              return `<tr>
+                <td>${e.excelRowNum}</td>
+                <td>${statusHtml}</td>
+                <td>${e.code||'-'}</td>
+                <td>${e.name||'-'}</td>
+                <td>${e.brand||'-'}</td>
+                <td class="upload-table-note">${note}</td>
+              </tr>`;
+            }).join('')}
+          </tbody>
+        </table>
+      </div>
+      <div style="margin-top:16px; max-width:280px;">
+        <button class="btn-save" style="width:100%; padding:10px;" ${uploadState.applying || (newCount+updateCount)===0 ? 'disabled' : ''} onclick="applyExcelUpload()">${uploadState.applying ? '반영 중…' : `반영하기 (${newCount+updateCount}건)`}</button>
+      </div>
+    </div>` : ''}
+  `;
 }
 
 /* =================== INIT =================== */
