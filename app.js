@@ -716,32 +716,128 @@ async function saveEtc(){
 }
 
 /* =================== EXCEL 일괄 업로드 =================== */
-const EXCEL_HEADERS = [
-  '매장코드','매장명','브랜드','주소','담당자',
-  '영업지역_상태','영업지역_설정범위유형','영업지역_설정범위상세','영업지역_비고유형','영업지역_비고상세','영업지역_설정일',
-  '매출산정_방식','매출산정_상태','매출산정_금액','매출산정_산정일',
-  '매출달성_실매출','매출달성_목표매출','매출달성_달성률','매출달성_시작일','매출달성_종료일',
-  '계약하자_유무','계약하자_유형','계약하자_상세','계약하자_상태',
-  '미입금_여부','미입금_금액','미입금_발생일','미입금_비고',
-  '위생점검_결과','위생점검_최근점검일','위생점검_다음점검예정','위생점검_특이사항',
-  '기타_메모','기타_작성자',
-];
+// 컬럼 정의: 실제 UI(수정 폼)에서 쓰는 값과 동일한 선택지를 드롭다운으로 제공한다.
+const EXCEL_COLS = [
+  {key:'매장코드', group:'기본정보', required:true, example:'CAFE-101', note:'기존 매장코드와 같으면 정보가 수정되고, 다르면 신규 매장으로 추가됩니다.'},
+  {key:'매장명', group:'기본정보', required:true, example:'더카페 강남점'},
+  {key:'브랜드', group:'기본정보', required:true, example:'더카페', note:'기존 브랜드명과 동일한 표기로 입력해주세요.'},
+  {key:'주소', group:'기본정보', example:'서울시 강남구 테헤란로 1'},
+  {key:'담당자', group:'기본정보', example:'홍길동'},
 
-function downloadExcelTemplate(){
-  const example = [
-    'CAFE-999','더카페 샘플점','더카페','서울시 강남구 테헤란로 1','홍길동',
-    '정상설정','반경지정','','자사유통입점','','2025-01-15',
-    '인근가맹점 5곳','정합성확인됨','월 5,000만','2025-01-10',
-    '5,200만','5,000만','104','2025-01-01','2025-12-31',
-    '없음','-','','해당없음',
-    '없음','0','-','최근 12개월 연체 없음',
-    '적합','2025-06-01','2025-12-01','',
-    '','담당자명',
+  {key:'영업지역_상태', group:'영업지역', kind:'select', options:['정상설정','분쟁중','미설정','미입력'], example:'정상설정'},
+  {key:'영업지역_설정범위유형', group:'영업지역', kind:'select', options:['구획지정','반경지정','직접입력'], example:'반경지정', note:'"직접입력" 선택 시 오른쪽 상세 칸에 내용을 적어주세요.'},
+  {key:'영업지역_설정범위상세', group:'영업지역', example:'', note:'설정범위유형이 "직접입력"일 때만 작성'},
+  {key:'영업지역_비고유형', group:'영업지역', kind:'select', options:['자사유통입점','전대차','영업지역 중복 있음','영업지역 침해 있음','직접입력'], example:'자사유통입점', note:'"직접입력" 선택 시 오른쪽 상세 칸에 내용을 적어주세요.'},
+  {key:'영업지역_비고상세', group:'영업지역', example:'', note:'비고유형이 "직접입력"일 때만 작성'},
+  {key:'영업지역_설정일', group:'영업지역', kind:'date', example:'2025-01-15'},
+
+  {key:'매출산정_방식', group:'매출산정', kind:'select', options:['인근가맹점 5곳','예외산정(의사결정o)','예외산정(임의)'], example:'인근가맹점 5곳'},
+  {key:'매출산정_상태', group:'매출산정', kind:'select', options:['정합성확인됨','재검토필요','미산정','미입력'], example:'정합성확인됨'},
+  {key:'매출산정_금액', group:'매출산정', example:'월 5,000만'},
+  {key:'매출산정_산정일', group:'매출산정', kind:'date', example:'2025-01-10'},
+
+  {key:'매출달성_실매출', group:'매출달성', example:'5,200만'},
+  {key:'매출달성_목표매출', group:'매출달성', example:'5,000만', note:'최소매출 기준'},
+  {key:'매출달성_달성률', group:'매출달성', kind:'number', example:104, note:'% 단위 숫자만 입력 (예: 104)'},
+  {key:'매출달성_시작일', group:'매출달성', kind:'date', example:'2025-01-01'},
+  {key:'매출달성_종료일', group:'매출달성', kind:'date', example:'2025-12-31', note:'시작일로부터 최대 365일 이내'},
+
+  {key:'계약하자_유무', group:'계약하자', kind:'select', options:['있음','없음'], example:'없음'},
+  {key:'계약하자_유형', group:'계약하자', kind:'select', options:['숙고기간 위반','서류 미교부','기타'], example:'', note:'계약하자_유무가 "있음"일 때만 의미가 있습니다.'},
+  {key:'계약하자_상세', group:'계약하자', example:'', note:'유형이 "기타"일 때만 작성'},
+  {key:'계약하자_상태', group:'계약하자', kind:'select', options:['해당없음','처리중','해결완료','미해결','미입력'], example:'해당없음'},
+
+  {key:'미입금_여부', group:'미입금', kind:'select', options:['있음','없음'], example:'없음'},
+  {key:'미입금_금액', group:'미입금', example:'0'},
+  {key:'미입금_발생일', group:'미입금', kind:'date', example:'', note:'미입금_여부가 "있음"일 때만 작성'},
+  {key:'미입금_비고', group:'미입금', example:'최근 12개월 연체 없음'},
+
+  {key:'위생점검_결과', group:'위생점검', kind:'select', options:['적합','시정요구','부적합','점검예정','미입력'], example:'적합'},
+  {key:'위생점검_최근점검일', group:'위생점검', kind:'date', example:'2025-06-01'},
+  {key:'위생점검_다음점검예정', group:'위생점검', kind:'date', example:'2025-12-01'},
+  {key:'위생점검_특이사항', group:'위생점검', example:''},
+
+  {key:'기타_메모', group:'기타', example:''},
+  {key:'기타_작성자', group:'기타', example:'담당자명'},
+];
+const EXCEL_HEADERS = EXCEL_COLS.map(c=>c.key);
+const EXCEL_GROUP_COLORS = {
+  '기본정보':'FFE2E8F0', '영업지역':'FFDCEAFB', '매출산정':'FFE0F2E9', '매출달성':'FFE0F2E9',
+  '계약하자':'FFFCE4E4', '미입금':'FFFCE4E4', '위생점검':'FFFDEFD3', '기타':'FFE9E5F7',
+};
+
+async function downloadExcelTemplate(){
+  const wb = new ExcelJS.Workbook();
+
+  // --- 안내 시트: 각 컬럼의 필수여부·입력형식·허용값을 한눈에 정리 ---
+  const guide = wb.addWorksheet('작성가이드');
+  guide.columns = [
+    {header:'구분', key:'group', width:12},
+    {header:'컬럼명', key:'key', width:22},
+    {header:'필수', key:'required', width:8},
+    {header:'입력 형식 / 허용값', key:'format', width:46},
+    {header:'예시', key:'example', width:20},
   ];
-  const ws = XLSX.utils.aoa_to_sheet([EXCEL_HEADERS, example]);
-  const wb = XLSX.utils.book_new();
-  XLSX.utils.book_append_sheet(wb, ws, '매장데이터');
-  XLSX.writeFile(wb, '가맹점_데이터_업로드_템플릿.xlsx');
+  guide.getRow(1).font = {bold:true, color:{argb:'FFFFFFFF'}};
+  guide.getRow(1).fill = {type:'pattern', pattern:'solid', fgColor:{argb:'FF3A4A63'}};
+  guide.views = [{state:'frozen', ySplit:1}];
+  EXCEL_COLS.forEach(c=>{
+    const format = c.kind==='select' ? `드롭다운 선택: ${c.options.join(' / ')}${c.note ? ' · '+c.note : ''}`
+      : c.kind==='date' ? `날짜 (YYYY-MM-DD)${c.note ? ' · '+c.note : ''}`
+      : c.kind==='number' ? `숫자${c.note ? ' · '+c.note : ''}`
+      : (c.note || '자유 기재');
+    const row = guide.addRow({group:c.group, key:c.key, required:c.required?'필수':'', format, example: typeof c.example==='number' ? c.example : (c.example||'')});
+    if(c.required) row.getCell('required').font = {bold:true, color:{argb:'FFC0392B'}};
+    row.getCell('format').alignment = {wrapText:true, vertical:'top'};
+  });
+  guide.getColumn('group').eachCell({includeEmpty:false}, cell=>{ cell.alignment = {vertical:'top'}; });
+
+  // --- 데이터 시트: 헤더는 카테고리별 색상 구분, 드롭다운/날짜 형식 검증 포함 ---
+  const ws = wb.addWorksheet('매장데이터');
+  ws.columns = EXCEL_COLS.map(c=>({header:c.key, key:c.key, width: Math.max(14, c.key.length*1.3)}));
+  const headerRow = ws.getRow(1);
+  headerRow.font = {bold:true};
+  headerRow.height = 22;
+  headerRow.eachCell((cell, colNum)=>{
+    const col = EXCEL_COLS[colNum-1];
+    cell.fill = {type:'pattern', pattern:'solid', fgColor:{argb: EXCEL_GROUP_COLORS[col.group] || 'FFE2E8F0'}};
+    cell.alignment = {vertical:'middle', wrapText:true};
+    if(col.required){ cell.font = {bold:true, color:{argb:'FFC0392B'}}; }
+    const commentParts = [];
+    if(col.required) commentParts.push('[필수 입력 항목]');
+    if(col.kind==='select') commentParts.push(`드롭다운에서 선택: ${col.options.join(', ')}`);
+    if(col.kind==='date') commentParts.push('날짜 형식: YYYY-MM-DD');
+    if(col.note) commentParts.push(col.note);
+    if(commentParts.length) cell.note = commentParts.join('\n');
+  });
+  ws.views = [{state:'frozen', xSplit:2, ySplit:1}];
+
+  const example = {};
+  EXCEL_COLS.forEach(c=>{ example[c.key] = c.example; });
+  ws.addRow(example);
+  ws.getRow(2).eachCell(cell=>{ cell.font = {italic:true, color:{argb:'FF8A94A6'}}; });
+
+  const VALIDATION_ROWS = 300;
+  EXCEL_COLS.forEach((col, idx)=>{
+    if(col.kind!=='select') return;
+    const colLetter = ws.getColumn(idx+1).letter;
+    const formula = `"${col.options.join(',')}"`;
+    for(let r=2; r<=VALIDATION_ROWS; r++){
+      ws.getCell(`${colLetter}${r}`).dataValidation = {
+        type:'list', allowBlank:true, formulae:[formula],
+        showErrorMessage:true, errorStyle:'warning',
+        errorTitle:'허용되지 않는 값', error:'목록에 없는 값입니다. 그대로 두려면 "예"를 눌러 계속 입력할 수 있습니다.',
+      };
+    }
+  });
+
+  const buffer = await wb.xlsx.writeBuffer();
+  const blob = new Blob([buffer], {type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = '가맹점_데이터_업로드_템플릿.xlsx';
+  document.body.appendChild(a); a.click(); a.remove();
+  URL.revokeObjectURL(url);
 }
 
 function onExcelFileSelected(evt){
@@ -752,7 +848,7 @@ function onExcelFileSelected(evt){
     try{
       const data = new Uint8Array(e.target.result);
       const wb = XLSX.read(data, {type:'array'});
-      const sheet = wb.Sheets[wb.SheetNames[0]];
+      const sheet = wb.Sheets['매장데이터'] || wb.Sheets[wb.SheetNames[0]];
       const rows = XLSX.utils.sheet_to_json(sheet, {defval:''});
       uploadState.fileName = file.name;
       uploadState.parsed = validateExcelRows(rows);
@@ -906,7 +1002,8 @@ function renderUploadPage(){
     <div class="dash-panel">
       <div class="dash-panel-title">1. 템플릿 준비</div>
       <div style="font-size:12.5px; color:var(--text-2); line-height:1.6; margin-bottom:12px;">
-        아래 템플릿을 내려받아 형식에 맞게 데이터를 채운 뒤 업로드해주세요. <b>매장코드</b>가 기존 매장과 일치하면 해당 매장 정보가 업데이트되고, 일치하는 매장이 없으면 신규 매장으로 추가됩니다.
+        아래 템플릿을 내려받아 형식에 맞게 데이터를 채운 뒤 업로드해주세요. <b>매장코드</b>가 기존 매장과 일치하면 해당 매장 정보가 업데이트되고, 일치하는 매장이 없으면 신규 매장으로 추가됩니다.<br>
+        템플릿의 <b>"작성가이드"</b> 시트에서 각 항목의 필수여부와 입력형식을 확인할 수 있고, <b>"매장데이터"</b> 시트에서는 상태값 컬럼(빨간 글씨 헤더 = 필수)을 셀 클릭 시 나오는 드롭다운으로 선택할 수 있습니다. 헤더에 마우스를 올리면 작성 방법 메모도 볼 수 있어요.
       </div>
       <button class="btn-save" style="width:auto; padding:9px 16px;" onclick="downloadExcelTemplate()">템플릿 다운로드 (.xlsx)</button>
     </div>
