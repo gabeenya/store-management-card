@@ -80,26 +80,40 @@ let uploadState = { fileName: null, parsed: null, applying: false, result: null 
 
 /* =================== HELPERS =================== */
 function daysBetween(a, b){ return Math.round((new Date(b) - new Date(a)) / 86400000); }
+function fmtManwon(n){ return `${(Number(n)||0).toLocaleString()}만원`; }
+const CONTRACT_DEFECT_TYPES = ['숙고기간 미준수','인근가맹점 현황문서 미교부','계약서 미교부','정보공개서 미교부','기타'];
+const HYGIENE_ISSUE_AREAS = ['불이익 변경','광고판촉행사 임의 진행','필수품목 임의 변경','인테리어 강제','양수도 강제','비용강제','가격강제','기타'];
+const TERRITORY_SCOPE_LEVEL = {
+  '구획지정':'safe', '반경지정':'warn',
+  '유통입점 (전체/미중복)':'warn', '유통입점 (전체/중복)':'danger', '유통입점 (층)':'safe',
+};
+const METHOD_LEVEL = {
+  '인근가맹점 5곳':'safe', '예외산정(의사결정o)':'warn', '예외산정(임의)':'danger', '미산정':'danger',
+};
+const UNPAID_LIMIT_MANWON = 10000; // 1억원
 function statusLevel(cat, s){
   switch(cat){
     case 'territory':
-      if(s.territory.status==='미입력') return 'neutral';
-      return s.territory.status==='정상설정' ? 'safe' : s.territory.status==='분쟁중' ? 'warn' : 'danger';
+      return TERRITORY_SCOPE_LEVEL[s.territory.scopeType] || 'neutral';
     case 'method':
-      if(s.revenueMethod.status==='미입력') return 'neutral';
-      return s.revenueMethod.status==='정합성확인됨' ? 'safe' : s.revenueMethod.status==='재검토필요' ? 'warn' : 'danger';
+      return METHOD_LEVEL[s.revenueMethod.method] || 'neutral';
     case 'achieve':
       if(s.revenueAchievement.ratio===null || s.revenueAchievement.ratio===undefined) return 'neutral';
-      return s.revenueAchievement.ratio>=90 ? 'safe' : s.revenueAchievement.ratio>=70 ? 'warn' : 'danger';
+      return s.revenueAchievement.ratio>=100 ? 'safe' : s.revenueAchievement.ratio>=70 ? 'warn' : 'danger';
     case 'contract':
       if(s.contractDefect.status==='미입력') return 'neutral';
-      return !s.contractDefect.hasDefect ? 'safe' : s.contractDefect.status==='해결완료' ? 'safe' : s.contractDefect.status==='처리중' ? 'warn' : 'danger';
+      if(s.contractDefect.status==='없음') return 'safe';
+      return s.contractDefect.types.length<=1 ? 'warn' : 'danger';
     case 'unpaid':
-      if(!s.unpaidStatus.hasUnpaid) return 'safe';
-      return daysBetween(s.unpaidStatus.occurredDate, today())<=30 ? 'warn' : 'danger';
+      if(s.unpaidStatus.status==='미입력') return 'neutral';
+      if(s.unpaidStatus.status==='없음') return 'safe';
+      { const amt = Number(s.unpaidStatus.amount)||0;
+        const days = daysBetween(s.unpaidStatus.occurredDate, today());
+        return (amt<=UNPAID_LIMIT_MANWON && days<=30) ? 'warn' : 'danger'; }
     case 'hygiene':
-      if(s.hygiene.result==='미입력') return 'neutral';
-      return s.hygiene.result==='적합' ? 'safe' : s.hygiene.result==='시정요구' ? 'warn' : s.hygiene.result==='점검예정' ? 'safe' : 'danger';
+      if(s.hygiene.status==='미입력') return 'neutral';
+      if(s.hygiene.status==='없음') return 'safe';
+      return s.hygiene.areas.length<=1 ? 'warn' : 'danger';
   }
 }
 function levelScore(l){ return l==='safe'?100:l==='warn'?60:l==='danger'?20:null; }
@@ -123,17 +137,17 @@ function statusLabel(l){ return l==='safe'?'양호':l==='warn'?'주의':l==='dan
 /* =================== ISSUE AGGREGATION =================== */
 const ISSUE_CATS = ['territory','method','achieve','contract','unpaid','hygiene'];
 function categoryLabel(cat){
-  return {territory:'영업지역', method:'매출산정', achieve:'매출달성', contract:'계약하자', unpaid:'미입금', hygiene:'위생점검'}[cat];
+  return {territory:'영업지역', method:'매출산정', achieve:'매출달성', contract:'계약하자', unpaid:'미입금', hygiene:'가맹사업법 이슈'}[cat];
 }
 function issueDetail(cat, s, level){
   const numCls = `risk-num ${level}`;
   switch(cat){
-    case 'territory': return s.territory.noteType==='직접입력' ? (s.territory.noteText||s.territory.status) : (s.territory.noteType||s.territory.status);
-    case 'method': return s.revenueMethod.status;
+    case 'territory': return s.territory.scopeType || '미입력';
+    case 'method': return s.revenueMethod.method || '미입력';
     case 'achieve': return s.revenueAchievement.ratio===null ? '데이터 없음' : `달성률 <span class="${numCls}">${s.revenueAchievement.ratio}%</span>`;
-    case 'contract': return (s.contractDefect.detailType==='기타' ? s.contractDefect.detailText : s.contractDefect.detailType) + ' · ' + s.contractDefect.status;
-    case 'unpaid': return s.unpaidStatus.hasUnpaid ? (s.unpaidStatus.note || '미입금 발생') : '';
-    case 'hygiene': return s.hygiene.specialNote || s.hygiene.result;
+    case 'contract': return s.contractDefect.status==='있음' ? s.contractDefect.types.join(', ') : s.contractDefect.status;
+    case 'unpaid': return s.unpaidStatus.status==='있음' ? (s.unpaidStatus.note || '미입금 발생') : '';
+    case 'hygiene': return s.hygiene.status==='있음' ? s.hygiene.areas.join(', ') : s.hygiene.status;
   }
 }
 function issueMetric(cat, s){
@@ -142,8 +156,8 @@ function issueMetric(cat, s){
     case 'method': return { dateVal:s.revenueMethod.calcDate, dateLabel:'산정일', amount:s.revenueMethod.estimatedAmount };
     case 'achieve': return { dateVal:s.revenueAchievement.periodEnd, dateLabel:'기간종료', amount:s.revenueAchievement.targetAmount };
     case 'contract': return { dateVal:null, dateLabel:null, amount:null };
-    case 'unpaid': return { dateVal: s.unpaidStatus.hasUnpaid ? s.unpaidStatus.occurredDate : null, dateLabel:'발생일자', amount: s.unpaidStatus.hasUnpaid ? s.unpaidStatus.amount : null };
-    case 'hygiene': return { dateVal:s.hygiene.lastCheckDate, dateLabel:'최근점검일', amount:null };
+    case 'unpaid': return { dateVal: s.unpaidStatus.status==='있음' ? s.unpaidStatus.occurredDate : null, dateLabel:'발생일자', amount: s.unpaidStatus.status==='있음' ? fmtManwon(s.unpaidStatus.amount) : null };
+    case 'hygiene': return { dateVal:null, dateLabel:null, amount:null };
   }
 }
 function collectIssues(list){
@@ -491,24 +505,24 @@ function renderMain(){
 
     <div class="stat-grid">
       ${statCard({
-        num:'01', title:'영업지역 설정현황', level:territoryLvl, statusText:s.territory.status, formId:'f1',
+        num:'01', title:'영업지역 설정현황', level:territoryLvl, statusText: s.territory.scopeType==='-'?'미입력':s.territory.scopeType, formId:'f1',
         rows:[
-          {k:'설정 범위', v: s.territory.scopeType==='직접입력' ? s.territory.scopeText : s.territory.scopeType},
+          {k:'설정 범위', v: s.territory.scopeType==='-'?'미입력':s.territory.scopeType},
+          {k:'설정 범위 상세', v: s.territory.scopeText || '-'},
           {k:'설정일', v:s.territory.setDate},
           {k:'비고', v: s.territory.noteType==='직접입력' ? s.territory.noteText : s.territory.noteType},
         ],
         extra:`<div class="edit-form" id="f1">
-          <label>설정 상태</label>
-          <select id="e1-status"><option ${s.territory.status==='정상설정'?'selected':''}>정상설정</option><option ${s.territory.status==='분쟁중'?'selected':''}>분쟁중</option><option ${s.territory.status==='미설정'?'selected':''}>미설정</option><option ${s.territory.status==='미입력'?'selected':''}>미입력</option></select>
           <label>설정 범위</label>
-          <select id="e1-scopeType" onchange="document.getElementById('e1-scopeText-wrap').style.display=this.value==='직접입력'?'':'none'">
+          <select id="e1-scopeType">
+            <option value="-" ${s.territory.scopeType==='-'?'selected':''}>미입력(선택 안 함)</option>
             <option value="구획지정" ${s.territory.scopeType==='구획지정'?'selected':''}>구획지정</option>
             <option value="반경지정" ${s.territory.scopeType==='반경지정'?'selected':''}>반경지정</option>
-            <option value="직접입력" ${s.territory.scopeType==='직접입력'?'selected':''}>직접입력</option>
+            <option value="유통입점 (전체/미중복)" ${s.territory.scopeType==='유통입점 (전체/미중복)'?'selected':''}>유통입점 (전체/미중복)</option>
+            <option value="유통입점 (전체/중복)" ${s.territory.scopeType==='유통입점 (전체/중복)'?'selected':''}>유통입점 (전체/중복)</option>
+            <option value="유통입점 (층)" ${s.territory.scopeType==='유통입점 (층)'?'selected':''}>유통입점 (층)</option>
           </select>
-          <div id="e1-scopeText-wrap" style="${condStyle(s.territory.scopeType,'직접입력')}">
-            <label>설정 범위 상세</label><input id="e1-scopeText" value="${s.territory.scopeText}">
-          </div>
+          <label>설정 범위 상세</label><input id="e1-scopeText" value="${s.territory.scopeText}">
           <label>설정일</label><input id="e1-date" value="${s.territory.setDate}">
           <label>비고</label>
           <select id="e1-noteType" onchange="document.getElementById('e1-noteText-wrap').style.display=this.value==='직접입력'?'':'none'">
@@ -526,22 +540,21 @@ function renderMain(){
       })}
 
       ${statCard({
-        num:'02', title:'예상매출액 산정방식', level:methodLvl, statusText:s.revenueMethod.status, formId:'f2',
+        num:'02', title:'예상매출액 산정방식', level:methodLvl, statusText: s.revenueMethod.method==='-'?'미입력':s.revenueMethod.method, formId:'f2',
         rows:[
-          {k:'산정 방식', v:s.revenueMethod.method},
+          {k:'산정 방식', v: s.revenueMethod.method==='-'?'미입력':s.revenueMethod.method},
           {k:'산정 금액', v:s.revenueMethod.estimatedAmount},
           {k:'산정일', v:s.revenueMethod.calcDate},
         ],
         extra:`<div class="edit-form" id="f2">
           <label>산정 방식</label>
           <select id="e2-method">
-            <option value="-" ${s.revenueMethod.method==='-'?'selected':''}>미산정(선택 안 함)</option>
+            <option value="-" ${s.revenueMethod.method==='-'?'selected':''}>미입력(선택 안 함)</option>
             <option value="인근가맹점 5곳" ${s.revenueMethod.method==='인근가맹점 5곳'?'selected':''}>인근가맹점 5곳</option>
             <option value="예외산정(의사결정o)" ${s.revenueMethod.method==='예외산정(의사결정o)'?'selected':''}>예외산정(의사결정o)</option>
             <option value="예외산정(임의)" ${s.revenueMethod.method==='예외산정(임의)'?'selected':''}>예외산정(임의)</option>
+            <option value="미산정" ${s.revenueMethod.method==='미산정'?'selected':''}>미산정</option>
           </select>
-          <label>검증 상태</label>
-          <select id="e2-status"><option ${s.revenueMethod.status==='정합성확인됨'?'selected':''}>정합성확인됨</option><option ${s.revenueMethod.status==='재검토필요'?'selected':''}>재검토필요</option><option ${s.revenueMethod.status==='미산정'?'selected':''}>미산정</option><option ${s.revenueMethod.status==='미입력'?'selected':''}>미입력</option></select>
           <label>산정 금액</label><input id="e2-amount" value="${s.revenueMethod.estimatedAmount}">
           <label>산정일</label><input id="e2-date" value="${s.revenueMethod.calcDate}">
           <div class="actions"><button class="btn-cancel" onclick="toggleEdit('f2')">취소</button><button class="btn-save" onclick="saveMethod()">저장</button></div>
@@ -566,56 +579,74 @@ function renderMain(){
       })}
 
       ${statCard({
-        num:'04', title:'계약체결단계 하자유무', level:contractLvl, statusText: contractLvl==='neutral'?'미입력':(s.contractDefect.hasDefect?s.contractDefect.status:'하자없음'), formId:'f4',
+        num:'04', title:'계약체결단계 하자유무', level:contractLvl, statusText: s.contractDefect.status==='미입력'?'미입력':(s.contractDefect.status==='있음'?`하자 ${s.contractDefect.types.length}건`:'하자없음'), formId:'f4',
         rows:[
-          {k:'하자 유무', v:s.contractDefect.hasDefect?'있음':'없음'},
-          {k:'내용', v: s.contractDefect.hasDefect ? (s.contractDefect.detailType==='기타' ? s.contractDefect.detailText : s.contractDefect.detailType) : '-'},
+          {k:'하자 유무', v:s.contractDefect.status},
+          {k:'내용', v: s.contractDefect.status==='있음' ? s.contractDefect.types.join(', ') : '-'},
         ],
         extra:`<div class="edit-form" id="f4">
-          <label>하자 유무</label><select id="e4-has"><option value="true" ${s.contractDefect.hasDefect?'selected':''}>있음</option><option value="false" ${!s.contractDefect.hasDefect?'selected':''}>없음</option></select>
-          <label>내용</label>
-          <select id="e4-detailType" onchange="document.getElementById('e4-detailText-wrap').style.display=this.value==='기타'?'':'none'">
-            <option value="숙고기간 위반" ${s.contractDefect.detailType==='숙고기간 위반'?'selected':''}>숙고기간 위반</option>
-            <option value="서류 미교부" ${s.contractDefect.detailType==='서류 미교부'?'selected':''}>서류 미교부</option>
-            <option value="기타" ${s.contractDefect.detailType==='기타'?'selected':''}>기타</option>
+          <label>하자 유무</label>
+          <select id="e4-has" onchange="document.getElementById('e4-types-wrap').style.display=this.value==='있음'?'':'none'">
+            <option value="미입력" ${s.contractDefect.status==='미입력'?'selected':''}>미입력</option>
+            <option value="없음" ${s.contractDefect.status==='없음'?'selected':''}>없음</option>
+            <option value="있음" ${s.contractDefect.status==='있음'?'selected':''}>있음</option>
           </select>
-          <div id="e4-detailText-wrap" style="${condStyle(s.contractDefect.detailType,'기타')}">
-            <label>기타 내용</label><textarea id="e4-detailText">${s.contractDefect.detailText}</textarea>
+          <div id="e4-types-wrap" style="${condStyle(s.contractDefect.status,'있음')}">
+            <label>하자 유형 (복수 선택)</label>
+            <div class="checkbox-group">
+              ${CONTRACT_DEFECT_TYPES.map((t,i)=>`<label class="checkbox-item"><input type="checkbox" id="e4-type-${i}" value="${t}" ${s.contractDefect.types.includes(t)?'checked':''} ${t==='기타'?`onchange="document.getElementById('e4-detailText-wrap').style.display=this.checked?'':'none'"`:''}> ${t}</label>`).join('')}
+            </div>
+            <div id="e4-detailText-wrap" style="${condStyle(s.contractDefect.types.includes('기타'),true)}">
+              <label>기타 내용</label><textarea id="e4-detailText">${s.contractDefect.detailText}</textarea>
+            </div>
           </div>
-          <label>처리 상태</label>
-          <select id="e4-status"><option ${s.contractDefect.status==='해당없음'?'selected':''}>해당없음</option><option ${s.contractDefect.status==='처리중'?'selected':''}>처리중</option><option ${s.contractDefect.status==='해결완료'?'selected':''}>해결완료</option><option ${s.contractDefect.status==='미해결'?'selected':''}>미해결</option><option ${s.contractDefect.status==='미입력'?'selected':''}>미입력</option></select>
           <div class="actions"><button class="btn-cancel" onclick="toggleEdit('f4')">취소</button><button class="btn-save" onclick="saveContract()">저장</button></div>
         </div>`
       })}
 
       ${statCard({
-        num:'05', title:'미입금 발생여부', level:unpaidLvl, statusText: s.unpaidStatus.hasUnpaid?'미입금 발생':'정상', formId:'f5',
+        num:'05', title:'미입금 발생여부', level:unpaidLvl, statusText: s.unpaidStatus.status, formId:'f5',
         rows:[
-          {k:'미입금액', v:s.unpaidStatus.hasUnpaid?s.unpaidStatus.amount:'-', risk: s.unpaidStatus.hasUnpaid?unpaidLvl:null},
-          {k:'발생일자', v:s.unpaidStatus.hasUnpaid?s.unpaidStatus.occurredDate:'-'},
+          {k:'미입금액', v:s.unpaidStatus.status==='있음'?fmtManwon(s.unpaidStatus.amount):'-', risk: s.unpaidStatus.status==='있음'?unpaidLvl:null},
+          {k:'발생일자', v:s.unpaidStatus.status==='있음'?s.unpaidStatus.occurredDate:'-'},
           {k:'비고', v:s.unpaidStatus.note},
         ],
         extra:`<div class="edit-form" id="f5">
-          <label>미입금 여부</label><select id="e5-has"><option value="true" ${s.unpaidStatus.hasUnpaid?'selected':''}>발생</option><option value="false" ${!s.unpaidStatus.hasUnpaid?'selected':''}>없음</option></select>
-          <label>미입금액</label><input id="e5-amount" value="${s.unpaidStatus.amount}">
-          <label>발생일자</label><input id="e5-date" type="date" value="${s.unpaidStatus.occurredDate==='-'?'':s.unpaidStatus.occurredDate}">
+          <label>미입금 여부</label>
+          <select id="e5-has" onchange="document.getElementById('e5-details-wrap').style.display=this.value==='있음'?'':'none'">
+            <option value="미입력" ${s.unpaidStatus.status==='미입력'?'selected':''}>미입력</option>
+            <option value="없음" ${s.unpaidStatus.status==='없음'?'selected':''}>없음</option>
+            <option value="있음" ${s.unpaidStatus.status==='있음'?'selected':''}>있음</option>
+          </select>
+          <div id="e5-details-wrap" style="${condStyle(s.unpaidStatus.status,'있음')}">
+            <label>미입금액 (만원)</label><input id="e5-amount" type="number" value="${s.unpaidStatus.amount}">
+            <label>발생일자</label><input id="e5-date" type="date" value="${s.unpaidStatus.occurredDate==='-'?'':s.unpaidStatus.occurredDate}">
+          </div>
           <label>비고</label><textarea id="e5-note">${s.unpaidStatus.note}</textarea>
           <div class="actions"><button class="btn-cancel" onclick="toggleEdit('f5')">취소</button><button class="btn-save" onclick="saveUnpaid()">저장</button></div>
         </div>`
       })}
 
       ${statCard({
-        num:'06', title:'위생점검 상태', level:hygieneLvl, statusText:s.hygiene.result, formId:'f6',
+        num:'06', title:'기타 가맹사업법 이슈', level:hygieneLvl, statusText: s.hygiene.status==='미입력'?'미입력':(s.hygiene.status==='있음'?`이슈 ${s.hygiene.areas.length}건`:'이슈없음'), formId:'f6',
         rows:[
-          {k:'최근 점검일', v:s.hygiene.lastCheckDate},
-          {k:'다음 점검예정', v:s.hygiene.nextCheckDate},
-          {k:'특이사항', v:s.hygiene.specialNote || '-'},
+          {k:'이슈 발생영역', v: s.hygiene.status==='있음' ? s.hygiene.areas.join(', ') : '-'},
+          {k:'비고', v:s.hygiene.note || '-'},
         ],
         extra:`<div class="edit-form" id="f6">
-          <label>점검 결과</label><select id="e6-result"><option ${s.hygiene.result==='적합'?'selected':''}>적합</option><option ${s.hygiene.result==='시정요구'?'selected':''}>시정요구</option><option ${s.hygiene.result==='부적합'?'selected':''}>부적합</option><option ${s.hygiene.result==='점검예정'?'selected':''}>점검예정</option><option ${s.hygiene.result==='미입력'?'selected':''}>미입력</option></select>
-          <label>최근 점검일</label><input id="e6-last" value="${s.hygiene.lastCheckDate}">
-          <label>다음 점검예정</label><input id="e6-next" value="${s.hygiene.nextCheckDate}">
-          <label>특이사항</label><textarea id="e6-note">${s.hygiene.specialNote}</textarea>
+          <label>이슈 유무</label>
+          <select id="e6-has" onchange="document.getElementById('e6-areas-wrap').style.display=this.value==='있음'?'':'none'">
+            <option value="미입력" ${s.hygiene.status==='미입력'?'selected':''}>미입력</option>
+            <option value="없음" ${s.hygiene.status==='없음'?'selected':''}>없음</option>
+            <option value="있음" ${s.hygiene.status==='있음'?'selected':''}>있음</option>
+          </select>
+          <div id="e6-areas-wrap" style="${condStyle(s.hygiene.status,'있음')}">
+            <label>이슈 발생영역 (복수 선택)</label>
+            <div class="checkbox-group">
+              ${HYGIENE_ISSUE_AREAS.map((t,i)=>`<label class="checkbox-item"><input type="checkbox" id="e6-area-${i}" value="${t}" ${s.hygiene.areas.includes(t)?'checked':''}> ${t}</label>`).join('')}
+            </div>
+          </div>
+          <label>비고</label><textarea id="e6-note">${s.hygiene.note}</textarea>
           <div class="actions"><button class="btn-cancel" onclick="toggleEdit('f6')">취소</button><button class="btn-save" onclick="saveHygiene()">저장</button></div>
         </div>`
       })}
@@ -625,7 +656,7 @@ function renderMain(){
       <div class="sc-top">
         <div>
           <div class="sc-num">07</div>
-          <div class="sc-title">기타 매장운영 특이사항</div>
+          <div class="sc-title">특이사항</div>
         </div>
         <button class="edit-btn" onclick="toggleEdit('f7')" title="수정">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
@@ -648,11 +679,10 @@ function today(){ return new Date().toISOString().slice(0,10); }
 
 async function saveTerritory(){
   const s=currentStore();
-  const scopeType = document.getElementById('e1-scopeType').value;
   const noteType = document.getElementById('e1-noteType').value;
   s.territory = {
-    status:document.getElementById('e1-status').value,
-    scopeType, scopeText: scopeType==='직접입력' ? document.getElementById('e1-scopeText').value : '',
+    scopeType: document.getElementById('e1-scopeType').value,
+    scopeText: document.getElementById('e1-scopeText').value,
     setDate:document.getElementById('e1-date').value,
     noteType, noteText: noteType==='직접입력' ? document.getElementById('e1-noteText').value : '',
   };
@@ -661,7 +691,7 @@ async function saveTerritory(){
 }
 async function saveMethod(){
   const s=currentStore();
-  s.revenueMethod = {method:document.getElementById('e2-method').value, status:document.getElementById('e2-status').value, estimatedAmount:document.getElementById('e2-amount').value, calcDate:document.getElementById('e2-date').value};
+  s.revenueMethod = {method:document.getElementById('e2-method').value, estimatedAmount:document.getElementById('e2-amount').value, calcDate:document.getElementById('e2-date').value};
   persistStore(s);
   renderRoster(); renderMain();
 }
@@ -686,26 +716,32 @@ async function saveAchievement(){
 }
 async function saveContract(){
   const s=currentStore();
-  const hasDefect = document.getElementById('e4-has').value==='true';
-  const detailType = document.getElementById('e4-detailType').value;
+  const status = document.getElementById('e4-has').value;
+  const types = status==='있음' ? CONTRACT_DEFECT_TYPES.filter((t,i)=>document.getElementById(`e4-type-${i}`).checked) : [];
   s.contractDefect = {
-    hasDefect, detailType: hasDefect ? detailType : '-',
-    detailText: (hasDefect && detailType==='기타') ? document.getElementById('e4-detailText').value : '',
-    status:document.getElementById('e4-status').value,
+    status, types,
+    detailText: types.includes('기타') ? document.getElementById('e4-detailText').value : '',
   };
   persistStore(s);
   renderRoster(); renderMain();
 }
 async function saveUnpaid(){
   const s=currentStore();
-  const hasUnpaid = document.getElementById('e5-has').value==='true';
-  s.unpaidStatus = {hasUnpaid, amount:document.getElementById('e5-amount').value, occurredDate: hasUnpaid ? (document.getElementById('e5-date').value || '-') : '-', note:document.getElementById('e5-note').value};
+  const status = document.getElementById('e5-has').value;
+  s.unpaidStatus = {
+    status,
+    amount: status==='있음' ? (document.getElementById('e5-amount').value || 0) : 0,
+    occurredDate: status==='있음' ? (document.getElementById('e5-date').value || '-') : '-',
+    note:document.getElementById('e5-note').value,
+  };
   persistStore(s);
   renderRoster(); renderMain();
 }
 async function saveHygiene(){
   const s=currentStore();
-  s.hygiene = {result:document.getElementById('e6-result').value, lastCheckDate:document.getElementById('e6-last').value, nextCheckDate:document.getElementById('e6-next').value, specialNote:document.getElementById('e6-note').value};
+  const status = document.getElementById('e6-has').value;
+  const areas = status==='있음' ? HYGIENE_ISSUE_AREAS.filter((t,i)=>document.getElementById(`e6-area-${i}`).checked) : [];
+  s.hygiene = { status, areas, note:document.getElementById('e6-note').value };
   persistStore(s);
   renderRoster(); renderMain();
 }
@@ -725,38 +761,34 @@ const EXCEL_COLS = [
   {key:'주소', group:'기본정보', example:'서울시 강남구 테헤란로 1'},
   {key:'담당자', group:'기본정보', example:'홍길동'},
 
-  {key:'영업지역_상태', group:'영업지역', kind:'select', options:['정상설정','분쟁중','미설정','미입력'], example:'정상설정'},
-  {key:'영업지역_설정범위유형', group:'영업지역', kind:'select', options:['구획지정','반경지정','직접입력'], example:'반경지정', note:'"직접입력" 선택 시 오른쪽 상세 칸에 내용을 적어주세요.'},
-  {key:'영업지역_설정범위상세', group:'영업지역', example:'', note:'설정범위유형이 "직접입력"일 때만 작성'},
-  {key:'영업지역_비고유형', group:'영업지역', kind:'select', options:['자사유통입점','전대차','영업지역 중복 있음','영업지역 침해 있음','직접입력'], example:'자사유통입점', note:'"직접입력" 선택 시 오른쪽 상세 칸에 내용을 적어주세요.'},
+  {key:'영업지역_설정범위', group:'영업지역', kind:'select', options:['-','구획지정','반경지정','유통입점 (전체/미중복)','유통입점 (전체/중복)','유통입점 (층)'], example:'반경지정', note:'"-"는 미입력(데이터 없음)을 의미합니다.'},
+  {key:'영업지역_설정범위상세', group:'영업지역', example:''},
+  {key:'영업지역_비고유형', group:'영업지역', kind:'select', options:['자사유통입점','전대차','영업지역 중복 있음','영업지역 침해 있음','직접입력'], example:'자사유통입점', note:'"직접입력" 선택 시 오른쪽 상세 칸에 내용을 적어주세요. 점수에는 영향 없음(참고용).'},
   {key:'영업지역_비고상세', group:'영업지역', example:'', note:'비고유형이 "직접입력"일 때만 작성'},
   {key:'영업지역_설정일', group:'영업지역', kind:'date', example:'2025-01-15'},
 
-  {key:'매출산정_방식', group:'매출산정', kind:'select', options:['인근가맹점 5곳','예외산정(의사결정o)','예외산정(임의)'], example:'인근가맹점 5곳'},
-  {key:'매출산정_상태', group:'매출산정', kind:'select', options:['정합성확인됨','재검토필요','미산정','미입력'], example:'정합성확인됨'},
+  {key:'매출산정_방식', group:'매출산정', kind:'select', options:['-','인근가맹점 5곳','예외산정(의사결정o)','예외산정(임의)','미산정'], example:'인근가맹점 5곳', note:'"-"는 미입력(데이터 없음)을 의미합니다.'},
   {key:'매출산정_금액', group:'매출산정', example:'월 5,000만'},
   {key:'매출산정_산정일', group:'매출산정', kind:'date', example:'2025-01-10'},
 
   {key:'매출달성_실매출', group:'매출달성', example:'5,200만'},
   {key:'매출달성_목표매출', group:'매출달성', example:'5,000만', note:'최소매출 기준'},
-  {key:'매출달성_달성률', group:'매출달성', kind:'number', example:104, note:'% 단위 숫자만 입력 (예: 104)'},
+  {key:'매출달성_달성률', group:'매출달성', kind:'number', example:104, note:'% 단위 숫자만 입력 (예: 104). 100% 이상 안정, 70~99% 주의, 70% 미만 위험'},
   {key:'매출달성_시작일', group:'매출달성', kind:'date', example:'2025-01-01'},
   {key:'매출달성_종료일', group:'매출달성', kind:'date', example:'2025-12-31', note:'시작일로부터 최대 365일 이내'},
 
-  {key:'계약하자_유무', group:'계약하자', kind:'select', options:['있음','없음'], example:'없음'},
-  {key:'계약하자_유형', group:'계약하자', kind:'select', options:['숙고기간 위반','서류 미교부','기타'], example:'', note:'계약하자_유무가 "있음"일 때만 의미가 있습니다.'},
-  {key:'계약하자_상세', group:'계약하자', example:'', note:'유형이 "기타"일 때만 작성'},
-  {key:'계약하자_상태', group:'계약하자', kind:'select', options:['해당없음','처리중','해결완료','미해결','미입력'], example:'해당없음'},
+  {key:'계약하자_유무', group:'계약하자', kind:'select', options:['미입력','없음','있음'], example:'없음'},
+  {key:'계약하자_유형', group:'계약하자', example:'', note:`계약하자_유무가 "있음"일 때, 다음 중 해당하는 유형을 콤마(,)로 구분해 복수 입력: ${CONTRACT_DEFECT_TYPES.join(' / ')}`},
+  {key:'계약하자_상세', group:'계약하자', example:'', note:'유형에 "기타"가 포함될 때만 작성'},
 
-  {key:'미입금_여부', group:'미입금', kind:'select', options:['있음','없음'], example:'없음'},
-  {key:'미입금_금액', group:'미입금', example:'0'},
+  {key:'미입금_여부', group:'미입금', kind:'select', options:['미입력','없음','있음'], example:'없음'},
+  {key:'미입금_금액(만원)', group:'미입금', kind:'number', example:0, note:'만원 단위 숫자만 입력 (예: 295)'},
   {key:'미입금_발생일', group:'미입금', kind:'date', example:'', note:'미입금_여부가 "있음"일 때만 작성'},
   {key:'미입금_비고', group:'미입금', example:'최근 12개월 연체 없음'},
 
-  {key:'위생점검_결과', group:'위생점검', kind:'select', options:['적합','시정요구','부적합','점검예정','미입력'], example:'적합'},
-  {key:'위생점검_최근점검일', group:'위생점검', kind:'date', example:'2025-06-01'},
-  {key:'위생점검_다음점검예정', group:'위생점검', kind:'date', example:'2025-12-01'},
-  {key:'위생점검_특이사항', group:'위생점검', example:''},
+  {key:'가맹사업법이슈_유무', group:'가맹사업법이슈', kind:'select', options:['미입력','없음','있음'], example:'없음'},
+  {key:'가맹사업법이슈_발생영역', group:'가맹사업법이슈', example:'', note:`가맹사업법이슈_유무가 "있음"일 때, 다음 중 해당하는 영역을 콤마(,)로 구분해 복수 입력: ${HYGIENE_ISSUE_AREAS.join(' / ')}`},
+  {key:'가맹사업법이슈_비고', group:'가맹사업법이슈', example:''},
 
   {key:'기타_메모', group:'기타', example:''},
   {key:'기타_작성자', group:'기타', example:'담당자명'},
@@ -764,7 +796,7 @@ const EXCEL_COLS = [
 const EXCEL_HEADERS = EXCEL_COLS.map(c=>c.key);
 const EXCEL_GROUP_COLORS = {
   '기본정보':'FFE2E8F0', '영업지역':'FFDCEAFB', '매출산정':'FFE0F2E9', '매출달성':'FFE0F2E9',
-  '계약하자':'FFFCE4E4', '미입금':'FFFCE4E4', '위생점검':'FFFDEFD3', '기타':'FFE9E5F7',
+  '계약하자':'FFFCE4E4', '미입금':'FFFCE4E4', '가맹사업법이슈':'FFFDEFD3', '기타':'FFE9E5F7',
 };
 
 async function downloadExcelTemplate(){
@@ -887,7 +919,6 @@ function validateExcelRows(rows){
 function buildStoreFromExcelRow(row, code, name, brand, existing){
   const cs = v => (v===undefined||v===null) ? '' : String(v).trim();
   const pick = (v, allowed, fallback) => allowed.includes(cs(v)) ? cs(v) : fallback;
-  const boolish = v => ['Y','y','예','있음','TRUE','true','1'].includes(cs(v));
   const id = existing ? existing.id : code.replace(/[^A-Za-z0-9]/g,'').toUpperCase();
 
   const ratioRaw = cs(row['매출달성_달성률']);
@@ -904,16 +935,14 @@ function buildStoreFromExcelRow(row, code, name, brand, existing){
     address: cs(row['주소']) || (existing ? existing.address : '-'),
     manager: cs(row['담당자']) || (existing ? existing.manager : '-'),
     territory: {
-      status: pick(row['영업지역_상태'], ['정상설정','분쟁중','미설정','미입력'], '미입력'),
-      scopeType: cs(row['영업지역_설정범위유형']) || '-',
+      scopeType: pick(row['영업지역_설정범위'], ['-','구획지정','반경지정','유통입점 (전체/미중복)','유통입점 (전체/중복)','유통입점 (층)'], '-'),
       scopeText: cs(row['영업지역_설정범위상세']),
       noteType: cs(row['영업지역_비고유형']) || '-',
       noteText: cs(row['영업지역_비고상세']),
       setDate: cs(row['영업지역_설정일']) || '-',
     },
     revenueMethod: {
-      method: cs(row['매출산정_방식']) || '-',
-      status: pick(row['매출산정_상태'], ['정합성확인됨','재검토필요','미산정','미입력'], '미입력'),
+      method: pick(row['매출산정_방식'], ['-','인근가맹점 5곳','예외산정(의사결정o)','예외산정(임의)','미산정'], '-'),
       calcDate: cs(row['매출산정_산정일']) || '-',
       estimatedAmount: cs(row['매출산정_금액']) || '-',
     },
@@ -926,22 +955,20 @@ function buildStoreFromExcelRow(row, code, name, brand, existing){
       periodEnd: cs(row['매출달성_종료일']) || '-',
     },
     contractDefect: {
-      hasDefect: boolish(row['계약하자_유무']),
-      detailType: cs(row['계약하자_유형']) || '-',
+      status: pick(row['계약하자_유무'], ['미입력','없음','있음'], '미입력'),
+      types: cs(row['계약하자_유형']).split(',').map(t=>t.trim()).filter(t=>CONTRACT_DEFECT_TYPES.includes(t)),
       detailText: cs(row['계약하자_상세']),
-      status: pick(row['계약하자_상태'], ['해당없음','처리중','해결완료','미해결','미입력'], '미입력'),
     },
     unpaidStatus: {
-      hasUnpaid: boolish(row['미입금_여부']),
-      amount: cs(row['미입금_금액']) || '0',
+      status: pick(row['미입금_여부'], ['미입력','없음','있음'], '미입력'),
+      amount: Number(row['미입금_금액(만원)']) || 0,
       occurredDate: cs(row['미입금_발생일']) || '-',
       note: cs(row['미입금_비고']),
     },
     hygiene: {
-      result: pick(row['위생점검_결과'], ['적합','시정요구','부적합','점검예정','미입력'], '미입력'),
-      lastCheckDate: cs(row['위생점검_최근점검일']) || '-',
-      nextCheckDate: cs(row['위생점검_다음점검예정']) || '-',
-      specialNote: cs(row['위생점검_특이사항']),
+      status: pick(row['가맹사업법이슈_유무'], ['미입력','없음','있음'], '미입력'),
+      areas: cs(row['가맹사업법이슈_발생영역']).split(',').map(t=>t.trim()).filter(t=>HYGIENE_ISSUE_AREAS.includes(t)),
+      note: cs(row['가맹사업법이슈_비고']),
     },
     etc: {
       memo: cs(row['기타_메모']) || (existing ? existing.etc.memo : ''),
