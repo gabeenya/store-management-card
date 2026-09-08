@@ -535,6 +535,7 @@ function renderMain(){
         extra:`<div class="edit-form" id="f2">
           <label>산정 방식</label>
           <select id="e2-method">
+            <option value="-" ${s.revenueMethod.method==='-'?'selected':''}>미산정(선택 안 함)</option>
             <option value="인근가맹점 5곳" ${s.revenueMethod.method==='인근가맹점 5곳'?'selected':''}>인근가맹점 5곳</option>
             <option value="예외산정(의사결정o)" ${s.revenueMethod.method==='예외산정(의사결정o)'?'selected':''}>예외산정(의사결정o)</option>
             <option value="예외산정(임의)" ${s.revenueMethod.method==='예외산정(임의)'?'selected':''}>예외산정(임의)</option>

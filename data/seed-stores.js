@@ -82,42 +82,42 @@ let stores = [
       "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 33,
-      "actualAmount": "3,634만",
-      "targetAmount": "1.1억",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        36,
-        39,
-        35,
-        31,
-        34,
-        33
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2024-11-01",
-      "periodEnd": "2025-09-08"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
-      "hasDefect": true,
-      "detailType": "숙고기간 위반",
+      "hasDefect": false,
+      "detailType": "-",
       "detailText": "",
-      "status": "처리중"
+      "status": "해당없음"
     },
     "unpaidStatus": {
-      "hasUnpaid": true,
-      "amount": "295만원",
-      "occurredDate": "2026-01-15",
-      "note": "2개월 이상 연체, 내용증명 발송 완료"
+      "hasUnpaid": false,
+      "amount": "0",
+      "occurredDate": "-",
+      "note": ""
     },
     "hygiene": {
-      "result": "부적합",
-      "lastCheckDate": "2025-10-24",
-      "nextCheckDate": "2026-11-08",
-      "specialNote": "방역 소독 미실시로 시정 요구"
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
+      "specialNote": ""
     },
     "etc": {
-      "memo": "위험 항목 다수 발생, 본사 관리팀 개입 검토 중.",
+      "memo": "위험 항목 다수 발생, 본사 관리팀 개입 검토 중.\n\n---\n[특이사항] *계약 일체 서류 없음",
       "author": "정하은",
-      "date": "2026-08-17"
+      "date": "2026-09-08"
     }
   },
   {
@@ -128,56 +128,56 @@ let stores = [
     "address": "-",
     "manager": "-",
     "territory": {
-      "status": "분쟁중",
-      "scopeType": "구획지정",
-      "scopeText": "",
-      "noteType": "영업지역 침해 있음",
-      "noteText": "",
+      "status": "정상설정",
+      "scopeType": "직접입력",
+      "scopeText": "속초 이마트내",
+      "noteType": "전대차",
+      "noteText": "속초 이마트내",
       "setDate": "2025-06-15"
     },
     "revenueMethod": {
-      "method": "인근가맹점 5곳",
-      "status": "재검토필요",
-      "calcDate": "2026-04-24",
-      "estimatedAmount": "월 1.39억"
+      "method": "-",
+      "status": "미산정",
+      "calcDate": "-",
+      "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 66,
-      "actualAmount": "747만",
-      "targetAmount": "1,132만",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        61,
-        66,
-        70,
-        71,
-        72,
-        66
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2025-10-24",
-      "periodEnd": "2026-07-04"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
       "hasDefect": true,
-      "detailType": "서류 미교부",
+      "detailType": "숙고기간 위반",
       "detailText": "",
       "status": "미해결"
     },
     "unpaidStatus": {
-      "hasUnpaid": true,
-      "amount": "199만원",
-      "occurredDate": "2026-02-14",
-      "note": "본사 정산 시스템 오류로 미입금 장기화"
+      "hasUnpaid": false,
+      "amount": "0",
+      "occurredDate": "-",
+      "note": ""
     },
     "hygiene": {
-      "result": "시정요구",
-      "lastCheckDate": "2026-06-04",
-      "nextCheckDate": "2026-12-24",
-      "specialNote": "조리대 정리정돈 미흡"
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
+      "specialNote": ""
     },
     "etc": {
-      "memo": "연속 위험 신호 확인됨, 우선 관리 대상 지정.",
+      "memo": "연속 위험 신호 확인됨, 우선 관리 대상 지정.\n\n---\n[계약체결단계/하자유무] 숙고기간 위반\n[특이사항] *위반 시정 요구 사실 있음\n\n*전대차계약 \n\n*영업 이행서 있음 - 목표매출 강제 행위에 해당되어 법위반\n\n*임박 요청서 있음 (10.09.10.) - 실질과 다르다면 법위반\n[계약체결일] *최초 계약일 :\n10.09.10.\n\n사후품의건 (0916)\n\n*재계약일:\n14.12.24.\n[영업지역 설정 사항] 속초 이마트내",
       "author": "박도현",
-      "date": "2026-08-22"
+      "date": "2026-09-08"
     }
   },
   {
@@ -188,56 +188,56 @@ let stores = [
     "address": "-",
     "manager": "-",
     "territory": {
-      "status": "미설정",
-      "scopeType": "-",
-      "scopeText": "",
+      "status": "정상설정",
+      "scopeType": "직접입력",
+      "scopeText": "부천 뉴코아내",
       "noteType": "-",
       "noteText": "",
       "setDate": "-"
     },
     "revenueMethod": {
-      "method": "-",
-      "status": "미산정",
+      "method": "예외산정(임의)",
+      "status": "정합성확인됨",
       "calcDate": "-",
       "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 117,
-      "actualAmount": "1.38억",
-      "targetAmount": "1.18억",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        112,
-        117,
-        113,
-        115,
-        116,
-        117
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2025-09-26",
-      "periodEnd": "2026-08-13"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
       "hasDefect": true,
-      "detailType": "기타",
-      "detailText": "위약금 조항 누락",
+      "detailType": "숙고기간 위반",
+      "detailText": "",
       "status": "미해결"
     },
     "unpaidStatus": {
-      "hasUnpaid": true,
-      "amount": "603만원",
-      "occurredDate": "2025-11-12",
-      "note": "2개월 이상 연체, 내용증명 발송 완료"
+      "hasUnpaid": false,
+      "amount": "0",
+      "occurredDate": "-",
+      "note": ""
     },
     "hygiene": {
-      "result": "부적합",
-      "lastCheckDate": "2025-08-05",
-      "nextCheckDate": "2026-12-18",
-      "specialNote": "식품위생법 위반사항 적발, 시정명령 발부"
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
+      "specialNote": ""
     },
     "etc": {
-      "memo": "연속 위험 신호 확인됨, 우선 관리 대상 지정.",
+      "memo": "연속 위험 신호 확인됨, 우선 관리 대상 지정.\n\n---\n[계약체결단계/하자유무] 숙고기간 위반\n[계약체결일] 14.09.24.\n[가맹계약서상 점주] 전용재\n[영업지역 설정 사항] 부천 뉴코아내\n[예상매출액 산정방식] 영업시간 (12)\n유동인구 (-) 내점율 (-) 실구매율 (-) 객단가 (2900) 365",
       "author": "정하은",
-      "date": "2026-08-25"
+      "date": "2026-09-08"
     }
   },
   {
@@ -248,10 +248,10 @@ let stores = [
     "address": "-",
     "manager": "-",
     "territory": {
-      "status": "분쟁중",
+      "status": "정상설정",
       "scopeType": "반경지정",
       "scopeText": "",
-      "noteType": "영업지역 중복 있음",
+      "noteType": "-",
       "noteText": "",
       "setDate": "2024-05-02"
     },
@@ -262,42 +262,42 @@ let stores = [
       "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 72,
-      "actualAmount": "2,944만",
-      "targetAmount": "4,089만",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        84,
-        78,
-        79,
-        81,
-        75,
-        72
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2025-02-25",
-      "periodEnd": "2025-10-21"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
-      "hasDefect": true,
-      "detailType": "서류 미교부",
+      "hasDefect": false,
+      "detailType": "-",
       "detailText": "",
-      "status": "미해결"
+      "status": "해당없음"
     },
     "unpaidStatus": {
       "hasUnpaid": false,
       "amount": "0",
       "occurredDate": "-",
-      "note": "최근 12개월 연체 없음"
+      "note": ""
     },
     "hygiene": {
-      "result": "시정요구",
-      "lastCheckDate": "2026-04-28",
-      "nextCheckDate": "2026-11-28",
-      "specialNote": "조리대 정리정돈 미흡"
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
+      "specialNote": ""
     },
     "etc": {
-      "memo": "",
-      "author": "-",
-      "date": "-"
+      "memo": "[계약체결일] *정 : 15.05.08.\n*임: \n14.06.17.\n*임 재계약일: 15.05.08.\n*양수도 계약일\n(정-유):\n15.10.01.\n\n*유 계약일:\n15.10.20.\n[가맹계약서상 점주] 박명화 \n임지혜\n정이동\n유형실\n[영업지역 설정 사항] 점포중심 반경 500미터 원",
+      "author": "엑셀 실사자료",
+      "date": "2026-09-08"
     }
   },
   {
@@ -317,24 +317,24 @@ let stores = [
     },
     "revenueMethod": {
       "method": "예외산정(임의)",
-      "status": "재검토필요",
-      "calcDate": "2024-12-27",
-      "estimatedAmount": "월 1.55억"
+      "status": "정합성확인됨",
+      "calcDate": "-",
+      "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 79,
-      "actualAmount": "1.33억",
-      "targetAmount": "1.69억",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        68,
-        71,
-        72,
-        76,
-        76,
-        79
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2025-08-05",
-      "periodEnd": "2026-07-21"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
       "hasDefect": true,
@@ -346,13 +346,13 @@ let stores = [
       "hasUnpaid": false,
       "amount": "0",
       "occurredDate": "-",
-      "note": "최근 12개월 연체 없음"
+      "note": ""
     },
     "hygiene": {
-      "result": "시정요구",
-      "lastCheckDate": "2026-04-25",
-      "nextCheckDate": "2026-10-12",
-      "specialNote": "냉장 보관 온도 기록 미흡, 시정 안내함"
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
+      "specialNote": ""
     },
     "etc": {
       "memo": "",
@@ -369,9 +369,9 @@ let stores = [
     "manager": "-",
     "territory": {
       "status": "정상설정",
-      "scopeType": "구획지정",
-      "scopeText": "",
-      "noteType": "전대차",
+      "scopeType": "직접입력",
+      "scopeText": "유통점 내 (특수상권)",
+      "noteType": "-",
       "noteText": "",
       "setDate": "2023-01-24"
     },
@@ -382,42 +382,42 @@ let stores = [
       "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 122,
-      "actualAmount": "1.21억",
-      "targetAmount": "9,877만",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        126,
-        121,
-        123,
-        124,
-        119,
-        122
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2025-10-04",
-      "periodEnd": "2026-05-25"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
-      "hasDefect": true,
-      "detailType": "숙고기간 위반",
+      "hasDefect": false,
+      "detailType": "-",
       "detailText": "",
-      "status": "처리중"
+      "status": "해당없음"
     },
     "unpaidStatus": {
-      "hasUnpaid": true,
-      "amount": "1,659만원",
-      "occurredDate": "2026-06-05",
-      "note": "가맹점주 사정으로 로열티 미입금 지속"
+      "hasUnpaid": false,
+      "amount": "0",
+      "occurredDate": "-",
+      "note": ""
     },
     "hygiene": {
-      "result": "부적합",
-      "lastCheckDate": "2026-01-27",
-      "nextCheckDate": "2026-12-13",
-      "specialNote": "식품위생법 위반사항 적발, 시정명령 발부"
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
+      "specialNote": ""
     },
     "etc": {
-      "memo": "",
-      "author": "-",
-      "date": "-"
+      "memo": "[계약체결단계/하자유무] 이슈없음\n[특이사항] *점포 환경 개선 진행 사실 및 \n비용 지원 확인서 (20% ) 있음\n(15.08.06.)\n\n*영업 이행서 있음 - 목표매출강제 행위 법위반\n\n* 오픈 임박 요청서 있음(10.06.22) - 실질과 다르다면 법위반\n\n*가맹금 직입금 법위반\n[계약체결일] *최초 계약일 :\n10.06.22.\n\n*재계약일 : 15.02.27.\n[가맹계약서상 점주] 홍한나\n[영업지역 설정 사항] 유통점 내 (특수상권)",
+      "author": "엑셀 실사자료",
+      "date": "2026-09-08"
     }
   },
   {
@@ -488,56 +488,56 @@ let stores = [
     "address": "-",
     "manager": "-",
     "territory": {
-      "status": "미설정",
-      "scopeType": "-",
-      "scopeText": "",
+      "status": "정상설정",
+      "scopeType": "직접입력",
+      "scopeText": "특수상권 동아백화점 수성점 내\n\n동아백화점 수성점 7층 내 (박)",
       "noteType": "-",
       "noteText": "",
       "setDate": "-"
     },
     "revenueMethod": {
-      "method": "-",
-      "status": "미산정",
+      "method": "예외산정(임의)",
+      "status": "정합성확인됨",
       "calcDate": "-",
       "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 82,
-      "actualAmount": "1.34억",
-      "targetAmount": "1.64억",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        75,
-        78,
-        78,
-        84,
-        84,
-        82
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2025-03-10",
-      "periodEnd": "2025-10-23"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
-      "hasDefect": true,
-      "detailType": "서류 미교부",
+      "hasDefect": false,
+      "detailType": "-",
       "detailText": "",
-      "status": "처리중"
+      "status": "해당없음"
     },
     "unpaidStatus": {
-      "hasUnpaid": true,
-      "amount": "862만원",
-      "occurredDate": "2026-04-10",
-      "note": "가맹점주 사정으로 로열티 미입금 지속"
+      "hasUnpaid": false,
+      "amount": "0",
+      "occurredDate": "-",
+      "note": ""
     },
     "hygiene": {
-      "result": "적합",
-      "lastCheckDate": "2025-08-28",
-      "nextCheckDate": "2026-11-06",
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
       "specialNote": ""
     },
     "etc": {
-      "memo": "",
-      "author": "-",
-      "date": "-"
+      "memo": "[특이사항] * 송현민 예상매출액 산정서 표지 있음(18.02.07.)\n[계약체결일] 15.01.16. (김), 구 판매점 계약서에 체결일만 미기재한 건 하나 있음\n\n18.02.07. (송)\n\n22.03.25. ( 박)\n[가맹계약서상 점주] 이정아\n김다래 (14.03.26. 양수도 내용증명)\n송현민(18.02.06. 양수도)\n박정미(22.04.01. 기준 가맹계약 인수 합의서 있음)\n[영업지역 설정 사항] 특수상권 동아백화점 수성점 내\n\n동아백화점 수성점 7층 내 (박)\n[예상매출액 산정방식] 양수도 매장\n1년 pos매출",
+      "author": "엑셀 실사자료",
+      "date": "2026-09-08"
     }
   },
   {
@@ -548,56 +548,56 @@ let stores = [
     "address": "-",
     "manager": "-",
     "territory": {
-      "status": "미설정",
-      "scopeType": "-",
+      "status": "정상설정",
+      "scopeType": "구획지정",
       "scopeText": "",
       "noteType": "-",
       "noteText": "",
       "setDate": "-"
     },
     "revenueMethod": {
-      "method": "예외산정(의사결정o)",
+      "method": "예외산정(임의)",
       "status": "정합성확인됨",
-      "calcDate": "2024-08-22",
-      "estimatedAmount": "월 1.66억"
+      "calcDate": "-",
+      "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 81,
-      "actualAmount": "5,791만",
-      "targetAmount": "7,149만",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        89,
-        89,
-        86,
-        82,
-        82,
-        81
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2025-07-02",
-      "periodEnd": "2025-12-29"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
-      "hasDefect": true,
-      "detailType": "기타",
-      "detailText": "임대차계약 갱신일 표기 오류",
-      "status": "미해결"
+      "hasDefect": false,
+      "detailType": "-",
+      "detailText": "",
+      "status": "해당없음"
     },
     "unpaidStatus": {
-      "hasUnpaid": true,
-      "amount": "1,559만원",
-      "occurredDate": "2026-08-19",
-      "note": "카드 매출 정산 지연으로 인한 일시 미입금"
+      "hasUnpaid": false,
+      "amount": "0",
+      "occurredDate": "-",
+      "note": ""
     },
     "hygiene": {
-      "result": "부적합",
-      "lastCheckDate": "2026-01-17",
-      "nextCheckDate": "2026-10-13",
-      "specialNote": "식품위생법 위반사항 적발, 시정명령 발부"
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
+      "specialNote": ""
     },
     "etc": {
-      "memo": "",
-      "author": "-",
-      "date": "-"
+      "memo": "[계약체결일] 18.11.20.\n[가맹계약서상 점주] 박성규\n[영업지역 설정 사항] 구획으로 표시\n[예상매출액 산정방식] 영업시간 (15) * \n유동인구 (57561)* 내점율 (1.3%) * 실구매율 (30%) * 객단가 (3000) * 365",
+      "author": "엑셀 실사자료",
+      "date": "2026-09-08"
     }
   },
   {
@@ -856,25 +856,25 @@ let stores = [
       "setDate": "2024-09-10"
     },
     "revenueMethod": {
-      "method": "인근가맹점 5곳",
-      "status": "재검토필요",
-      "calcDate": "2024-07-31",
-      "estimatedAmount": "월 936만"
+      "method": "-",
+      "status": "미산정",
+      "calcDate": "-",
+      "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 80,
-      "actualAmount": "1,794만",
-      "targetAmount": "2,243만",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        81,
-        85,
-        80,
-        82,
-        79,
-        80
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2025-10-18",
-      "periodEnd": "2026-08-11"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
       "hasDefect": true,
@@ -883,21 +883,21 @@ let stores = [
       "status": "미해결"
     },
     "unpaidStatus": {
-      "hasUnpaid": true,
-      "amount": "438만원",
-      "occurredDate": "2026-06-09",
-      "note": "본사 정산 시스템 오류로 미입금 장기화"
+      "hasUnpaid": false,
+      "amount": "0",
+      "occurredDate": "-",
+      "note": ""
     },
     "hygiene": {
-      "result": "시정요구",
-      "lastCheckDate": "2026-04-16",
-      "nextCheckDate": "2027-02-21",
-      "specialNote": "위생모 미착용 적발, 현장 시정 완료"
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
+      "specialNote": ""
     },
     "etc": {
-      "memo": "",
-      "author": "-",
-      "date": "-"
+      "memo": "[계약체결단계/하자유무] 일체 서류 없음\n[특이사항] *인테리어 견적서 있음 - 당사 거래 강제인지 여부 확인 필요",
+      "author": "엑셀 실사자료",
+      "date": "2026-09-08"
     }
   },
   {
@@ -1162,19 +1162,19 @@ let stores = [
       "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 25,
-      "actualAmount": "1,262만",
-      "targetAmount": "5,049만",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        25,
-        27,
-        26,
-        29,
-        31,
-        25
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2025-03-23",
-      "periodEnd": "2026-02-11"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
       "hasDefect": true,
@@ -1183,16 +1183,16 @@ let stores = [
       "status": "미해결"
     },
     "unpaidStatus": {
-      "hasUnpaid": true,
-      "amount": "305만원",
-      "occurredDate": "2026-06-14",
-      "note": "가맹점주 사정으로 로열티 미입금 지속"
+      "hasUnpaid": false,
+      "amount": "0",
+      "occurredDate": "-",
+      "note": ""
     },
     "hygiene": {
-      "result": "시정요구",
-      "lastCheckDate": "2025-09-09",
-      "nextCheckDate": "2026-10-26",
-      "specialNote": "냉장 보관 온도 기록 미흡, 시정 안내함"
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
+      "specialNote": ""
     },
     "etc": {
       "memo": "매출 부진 및 계약 관리 항목 다수 위험 상태. 현장 점검 필요.",
@@ -1208,56 +1208,56 @@ let stores = [
     "address": "-",
     "manager": "-",
     "territory": {
-      "status": "분쟁중",
+      "status": "정상설정",
       "scopeType": "반경지정",
       "scopeText": "",
-      "noteType": "영업지역 중복 있음",
+      "noteType": "-",
       "noteText": "",
       "setDate": "2024-07-03"
     },
     "revenueMethod": {
-      "method": "-",
-      "status": "미산정",
+      "method": "예외산정(임의)",
+      "status": "정합성확인됨",
       "calcDate": "-",
       "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 72,
-      "actualAmount": "1.1억",
-      "targetAmount": "1.53억",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        77,
-        79,
-        78,
-        72,
-        73,
-        72
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2024-08-08",
-      "periodEnd": "2025-07-02"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
-      "hasDefect": true,
-      "detailType": "숙고기간 위반",
+      "hasDefect": false,
+      "detailType": "-",
       "detailText": "",
-      "status": "미해결"
+      "status": "해당없음"
     },
     "unpaidStatus": {
-      "hasUnpaid": true,
-      "amount": "1,345만원",
-      "occurredDate": "2026-03-26",
-      "note": "가맹점주 사정으로 로열티 미입금 지속"
+      "hasUnpaid": false,
+      "amount": "0",
+      "occurredDate": "-",
+      "note": ""
     },
     "hygiene": {
-      "result": "적합",
-      "lastCheckDate": "2025-11-04",
-      "nextCheckDate": "2026-12-11",
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
       "specialNote": ""
     },
     "etc": {
-      "memo": "",
-      "author": "-",
-      "date": "-"
+      "memo": "[계약체결일] 15.01.19.\n[가맹계약서상 점주] 채혜진\n[영업지역 설정 사항] 점포중심 반경 500미터 원\n[예상매출액 산정방식] *유사매장4개포스매출\n *입지여건가중치(0.90)*경쟁강도 가중치(1.05)",
+      "author": "엑셀 실사자료",
+      "date": "2026-09-08"
     }
   },
   {
@@ -1277,24 +1277,24 @@ let stores = [
     },
     "revenueMethod": {
       "method": "예외산정(임의)",
-      "status": "재검토필요",
-      "calcDate": "2024-11-24",
-      "estimatedAmount": "월 2,305만"
+      "status": "정합성확인됨",
+      "calcDate": "-",
+      "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 113,
-      "actualAmount": "812만",
-      "targetAmount": "719만",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        100,
-        107,
-        104,
-        105,
-        105,
-        113
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2025-01-08",
-      "periodEnd": "2025-08-10"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
       "hasDefect": true,
@@ -1303,16 +1303,16 @@ let stores = [
       "status": "미해결"
     },
     "unpaidStatus": {
-      "hasUnpaid": true,
-      "amount": "407만원",
-      "occurredDate": "2026-01-21",
-      "note": "카드사 정산 오류로 장기 미입금 발생"
+      "hasUnpaid": false,
+      "amount": "0",
+      "occurredDate": "-",
+      "note": ""
     },
     "hygiene": {
-      "result": "시정요구",
-      "lastCheckDate": "2026-04-01",
-      "nextCheckDate": "2027-03-09",
-      "specialNote": "위생모 미착용 적발, 현장 시정 완료"
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
+      "specialNote": ""
     },
     "etc": {
       "memo": "",
@@ -1568,56 +1568,56 @@ let stores = [
     "address": "-",
     "manager": "-",
     "territory": {
-      "status": "미설정",
-      "scopeType": "-",
+      "status": "정상설정",
+      "scopeType": "반경지정",
       "scopeText": "",
       "noteType": "-",
       "noteText": "",
       "setDate": "-"
     },
     "revenueMethod": {
-      "method": "인근가맹점 5곳",
-      "status": "정합성확인됨",
-      "calcDate": "2025-06-26",
-      "estimatedAmount": "월 1.5억"
+      "method": "-",
+      "status": "미산정",
+      "calcDate": "-",
+      "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 71,
-      "actualAmount": "1.34억",
-      "targetAmount": "1.88억",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        86,
-        79,
-        76,
-        78,
-        75,
-        71
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2024-12-26",
-      "periodEnd": "2025-09-23"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
       "hasDefect": true,
-      "detailType": "숙고기간 위반",
+      "detailType": "서류 미교부",
       "detailText": "",
       "status": "미해결"
     },
     "unpaidStatus": {
-      "hasUnpaid": true,
-      "amount": "1,115만원",
-      "occurredDate": "2026-03-13",
-      "note": "2개월 이상 연체, 내용증명 발송 완료"
+      "hasUnpaid": false,
+      "amount": "0",
+      "occurredDate": "-",
+      "note": ""
     },
     "hygiene": {
-      "result": "부적합",
-      "lastCheckDate": "2026-04-16",
-      "nextCheckDate": "2026-12-01",
-      "specialNote": "유통기한 경과 식자재 발견, 즉시 폐기 조치"
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
+      "specialNote": ""
     },
     "etc": {
-      "memo": "",
-      "author": "-",
-      "date": "-"
+      "memo": "[계약체결단계/하자유무] 사전 서류 제공내역 없음\n[특이사항] 밀알재단과 특수한 계약으로 확인됨\n[계약체결일] *재계약이라고 기재되어 있고, 별도의 관련 서류는 없음\n\n일자: 15.07.01.\n[가맹계약서상 점주] 이종면\n[영업지역 설정 사항] 점포중심 반경 500미터 원",
+      "author": "엑셀 실사자료",
+      "date": "2026-09-08"
     }
   },
   {
@@ -1637,24 +1637,24 @@ let stores = [
     },
     "revenueMethod": {
       "method": "인근가맹점 5곳",
-      "status": "재검토필요",
-      "calcDate": "2024-04-01",
-      "estimatedAmount": "월 1.08억"
+      "status": "정합성확인됨",
+      "calcDate": "-",
+      "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 30,
-      "actualAmount": "3,046만",
-      "targetAmount": "1.02억",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        28,
-        27,
-        31,
-        32,
-        28,
-        30
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2025-09-08",
-      "periodEnd": "2026-06-26"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
       "hasDefect": true,
@@ -1663,16 +1663,16 @@ let stores = [
       "status": "미해결"
     },
     "unpaidStatus": {
-      "hasUnpaid": true,
-      "amount": "459만원",
-      "occurredDate": "2026-08-05",
-      "note": "월말 정산 일정 조정 중"
+      "hasUnpaid": false,
+      "amount": "0",
+      "occurredDate": "-",
+      "note": ""
     },
     "hygiene": {
-      "result": "시정요구",
-      "lastCheckDate": "2026-05-06",
-      "nextCheckDate": "2026-12-27",
-      "specialNote": "위생모 미착용 적발, 현장 시정 완료"
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
+      "specialNote": ""
     },
     "etc": {
       "memo": "",
@@ -1688,56 +1688,56 @@ let stores = [
     "address": "-",
     "manager": "-",
     "territory": {
-      "status": "분쟁중",
+      "status": "정상설정",
       "scopeType": "반경지정",
       "scopeText": "",
-      "noteType": "영업지역 침해 있음",
+      "noteType": "-",
       "noteText": "",
       "setDate": "2026-02-05"
     },
     "revenueMethod": {
-      "method": "-",
-      "status": "미산정",
+      "method": "예외산정(임의)",
+      "status": "정합성확인됨",
       "calcDate": "-",
       "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 64,
-      "actualAmount": "7,172만",
-      "targetAmount": "1.12억",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        51,
-        57,
-        62,
-        61,
-        58,
-        64
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2024-07-06",
-      "periodEnd": "2025-05-12"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
       "hasDefect": true,
-      "detailType": "서류 미교부",
+      "detailType": "숙고기간 위반",
       "detailText": "",
       "status": "미해결"
     },
     "unpaidStatus": {
-      "hasUnpaid": true,
-      "amount": "365만원",
-      "occurredDate": "2025-10-17",
-      "note": "가맹점주 사정으로 로열티 미입금 지속"
+      "hasUnpaid": false,
+      "amount": "0",
+      "occurredDate": "-",
+      "note": ""
     },
     "hygiene": {
-      "result": "부적합",
-      "lastCheckDate": "2026-03-14",
-      "nextCheckDate": "2027-03-08",
-      "specialNote": "조리기구 위생관리 기준 미달로 재점검 필요"
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
+      "specialNote": ""
     },
     "etc": {
-      "memo": "연속 위험 신호 확인됨, 우선 관리 대상 지정.",
+      "memo": "연속 위험 신호 확인됨, 우선 관리 대상 지정.\n\n---\n[계약체결단계/하자유무] 숙고기간 위반\n[계약체결일] 16.03.11.\n[가맹계약서상 점주] 문행수\n[영업지역 설정 사항] 점포 중심 반경 500 미터 원\n[예상매출액 산정방식] 영업시간 (9) * \n내점율 (0.25) * 유동인구 (757)*실구매율 (0.75) * 객단가 (2900) *30",
       "author": "이수민",
-      "date": "2026-08-15"
+      "date": "2026-09-08"
     }
   },
   {
@@ -1748,56 +1748,56 @@ let stores = [
     "address": "-",
     "manager": "-",
     "territory": {
-      "status": "분쟁중",
-      "scopeType": "반경지정",
-      "scopeText": "",
-      "noteType": "영업지역 중복 있음",
+      "status": "정상설정",
+      "scopeType": "직접입력",
+      "scopeText": "가맹 계약서 일부 누락으로 계약 체결 일자 및 영업 지역 설정 사항 확인 안됨",
+      "noteType": "-",
       "noteText": "",
       "setDate": "2024-10-16"
     },
     "revenueMethod": {
-      "method": "예외산정(의사결정o)",
-      "status": "재검토필요",
-      "calcDate": "2026-06-14",
-      "estimatedAmount": "월 1.15억"
+      "method": "예외산정(임의)",
+      "status": "정합성확인됨",
+      "calcDate": "-",
+      "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 32,
-      "actualAmount": "528만",
-      "targetAmount": "1,651만",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        25,
-        23,
-        25,
-        29,
-        34,
-        32
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2024-08-27",
-      "periodEnd": "2025-08-10"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
-      "hasDefect": true,
-      "detailType": "서류 미교부",
+      "hasDefect": false,
+      "detailType": "-",
       "detailText": "",
-      "status": "미해결"
+      "status": "해당없음"
     },
     "unpaidStatus": {
-      "hasUnpaid": true,
-      "amount": "1,250만원",
-      "occurredDate": "2026-07-23",
-      "note": "카드사 정산 오류로 장기 미입금 발생"
+      "hasUnpaid": false,
+      "amount": "0",
+      "occurredDate": "-",
+      "note": ""
     },
     "hygiene": {
-      "result": "시정요구",
-      "lastCheckDate": "2026-02-12",
-      "nextCheckDate": "2026-12-28",
-      "specialNote": "냉장 보관 온도 기록 미흡, 시정 안내함"
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
+      "specialNote": ""
     },
     "etc": {
-      "memo": "위험 항목 다수 발생, 본사 관리팀 개입 검토 중.",
+      "memo": "위험 항목 다수 발생, 본사 관리팀 개입 검토 중.\n\n---\n[특이사항] *계약 체결일자 확인 불가\n[가맹계약서상 점주] 김귀옥\n[영업지역 설정 사항] 가맹 계약서 일부 누락으로 계약 체결 일자 및 영업 지역 설정 사항 확인 안됨\n[예상매출액 산정방식] 양수도 매장\n1년 pos매출",
       "author": "이수민",
-      "date": "2026-08-22"
+      "date": "2026-09-08"
     }
   },
   {
@@ -1816,25 +1816,25 @@ let stores = [
       "setDate": "2022-11-07"
     },
     "revenueMethod": {
-      "method": "예외산정(의사결정o)",
-      "status": "정합성확인됨",
-      "calcDate": "2024-09-26",
-      "estimatedAmount": "월 7,234만"
+      "method": "-",
+      "status": "미산정",
+      "calcDate": "-",
+      "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 91,
-      "actualAmount": "5,308만",
-      "targetAmount": "5,833만",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        100,
-        101,
-        96,
-        92,
-        95,
-        91
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2025-07-11",
-      "periodEnd": "2026-04-08"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
       "hasDefect": false,
@@ -1846,18 +1846,18 @@ let stores = [
       "hasUnpaid": false,
       "amount": "0",
       "occurredDate": "-",
-      "note": "최근 12개월 연체 없음"
+      "note": ""
     },
     "hygiene": {
-      "result": "점검예정",
-      "lastCheckDate": "2026-07-28",
-      "nextCheckDate": "2027-02-22",
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
       "specialNote": ""
     },
     "etc": {
-      "memo": "",
-      "author": "-",
-      "date": "-"
+      "memo": "[특이사항] *계약 일체 서류 없음",
+      "author": "엑셀 실사자료",
+      "date": "2026-09-08"
     }
   },
   {
@@ -2288,56 +2288,56 @@ let stores = [
     "address": "-",
     "manager": "-",
     "territory": {
-      "status": "분쟁중",
-      "scopeType": "구획지정",
-      "scopeText": "",
-      "noteType": "영업지역 침해 있음",
+      "status": "정상설정",
+      "scopeType": "직접입력",
+      "scopeText": "홈플러스 춘천점 내",
+      "noteType": "-",
       "noteText": "",
       "setDate": "2025-10-24"
     },
     "revenueMethod": {
-      "method": "-",
-      "status": "미산정",
+      "method": "예외산정(임의)",
+      "status": "정합성확인됨",
       "calcDate": "-",
       "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 48,
-      "actualAmount": "9,361만",
-      "targetAmount": "1.95억",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        38,
-        39,
-        41,
-        42,
-        43,
-        48
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2024-11-30",
-      "periodEnd": "2025-11-17"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
-      "hasDefect": true,
-      "detailType": "숙고기간 위반",
+      "hasDefect": false,
+      "detailType": "-",
       "detailText": "",
-      "status": "처리중"
+      "status": "해당없음"
     },
     "unpaidStatus": {
-      "hasUnpaid": true,
-      "amount": "1,459만원",
-      "occurredDate": "2026-04-13",
-      "note": "본사 정산 시스템 오류로 미입금 장기화"
+      "hasUnpaid": false,
+      "amount": "0",
+      "occurredDate": "-",
+      "note": ""
     },
     "hygiene": {
-      "result": "점검예정",
-      "lastCheckDate": "2025-12-25",
-      "nextCheckDate": "2027-02-21",
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
       "specialNote": ""
     },
     "etc": {
-      "memo": "",
-      "author": "-",
-      "date": "-"
+      "memo": "[계약체결일] 14.11.11.\n\n계약서 없음(첫장 끝장만 있음)\n[가맹계약서상 점주] 이은하\n[영업지역 설정 사항] 홈플러스 춘천점 내\n[예상매출액 산정방식] *영업시간(12) *\n유동인구(5000)* 내점율(2%)*\n실구매율(1.0)*객단가(2700)*365",
+      "author": "엑셀 실사자료",
+      "date": "2026-09-08"
     }
   },
   {
@@ -2349,55 +2349,55 @@ let stores = [
     "manager": "-",
     "territory": {
       "status": "정상설정",
-      "scopeType": "구획지정",
+      "scopeType": "반경지정",
       "scopeText": "",
-      "noteType": "자사유통입점",
+      "noteType": "-",
       "noteText": "",
       "setDate": "2024-11-08"
     },
     "revenueMethod": {
-      "method": "예외산정(의사결정o)",
-      "status": "재검토필요",
-      "calcDate": "2026-05-07",
-      "estimatedAmount": "월 1.06억"
+      "method": "예외산정(임의)",
+      "status": "정합성확인됨",
+      "calcDate": "-",
+      "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 32,
-      "actualAmount": "1,375만",
-      "targetAmount": "4,296만",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        42,
-        39,
-        34,
-        38,
-        31,
-        32
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2024-09-13",
-      "periodEnd": "2025-04-22"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
-      "hasDefect": true,
-      "detailType": "숙고기간 위반",
+      "hasDefect": false,
+      "detailType": "-",
       "detailText": "",
-      "status": "처리중"
+      "status": "해당없음"
     },
     "unpaidStatus": {
-      "hasUnpaid": true,
-      "amount": "995만원",
-      "occurredDate": "2026-02-11",
-      "note": "카드사 정산 오류로 장기 미입금 발생"
+      "hasUnpaid": false,
+      "amount": "0",
+      "occurredDate": "-",
+      "note": ""
     },
     "hygiene": {
-      "result": "부적합",
-      "lastCheckDate": "2026-04-14",
-      "nextCheckDate": "2027-03-13",
-      "specialNote": "조리기구 위생관리 기준 미달로 재점검 필요"
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
+      "specialNote": ""
     },
     "etc": {
-      "memo": "",
-      "author": "-",
-      "date": "-"
+      "memo": "[특이사항] *계약 일부 내용 유실\n[계약체결일] 14.09.30.\n(김지희)\n16.12.27. \n(김지숙)\n[가맹계약서상 점주] 김지원\n김지희\n김지숙\n(셋다자매)\n[영업지역 설정 사항] 점포중심 반경 500미터 원\n[예상매출액 산정방식] 양수도 매장\n1년 pos매출",
+      "author": "엑셀 실사자료",
+      "date": "2026-09-08"
     }
   },
   {
@@ -2422,19 +2422,19 @@ let stores = [
       "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 35,
-      "actualAmount": "6,268만",
-      "targetAmount": "1.79억",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        44,
-        46,
-        40,
-        38,
-        37,
-        35
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2024-12-29",
-      "periodEnd": "2025-07-05"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
       "hasDefect": true,
@@ -2443,16 +2443,16 @@ let stores = [
       "status": "처리중"
     },
     "unpaidStatus": {
-      "hasUnpaid": true,
-      "amount": "558만원",
-      "occurredDate": "2025-10-22",
-      "note": "본사 정산 시스템 오류로 미입금 장기화"
+      "hasUnpaid": false,
+      "amount": "0",
+      "occurredDate": "-",
+      "note": ""
     },
     "hygiene": {
-      "result": "시정요구",
-      "lastCheckDate": "2026-04-23",
-      "nextCheckDate": "2027-01-09",
-      "specialNote": "냉장 보관 온도 기록 미흡, 시정 안내함"
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
+      "specialNote": ""
     },
     "etc": {
       "memo": "연속 위험 신호 확인됨, 우선 관리 대상 지정.",
@@ -2469,9 +2469,9 @@ let stores = [
     "manager": "-",
     "territory": {
       "status": "정상설정",
-      "scopeType": "구획지정",
-      "scopeText": "",
-      "noteType": "전대차",
+      "scopeType": "직접입력",
+      "scopeText": "아울렛 내 (특수상권)",
+      "noteType": "-",
       "noteText": "",
       "setDate": "2024-10-11"
     },
@@ -2482,42 +2482,42 @@ let stores = [
       "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 25,
-      "actualAmount": "3,427만",
-      "targetAmount": "1.37억",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        18,
-        21,
-        23,
-        24,
-        25,
-        25
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2025-08-31",
-      "periodEnd": "2026-04-28"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
       "hasDefect": true,
-      "detailType": "숙고기간 위반",
+      "detailType": "서류 미교부",
       "detailText": "",
-      "status": "처리중"
+      "status": "미해결"
     },
     "unpaidStatus": {
-      "hasUnpaid": true,
-      "amount": "1,594만원",
-      "occurredDate": "2026-07-20",
-      "note": "가맹점주 사정으로 로열티 미입금 지속"
+      "hasUnpaid": false,
+      "amount": "0",
+      "occurredDate": "-",
+      "note": ""
     },
     "hygiene": {
-      "result": "시정요구",
-      "lastCheckDate": "2026-06-13",
-      "nextCheckDate": "2026-11-17",
-      "specialNote": "냉장 보관 온도 기록 미흡, 시정 안내함"
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
+      "specialNote": ""
     },
     "etc": {
-      "memo": "",
-      "author": "-",
-      "date": "-"
+      "memo": "[계약체결단계/하자유무] 사전 서류 제공내역 없음\n[특이사항] *영업 이행서 있음 - 목표매출 강제 행위로 법위반\n\n*오픈 임박 요청서 있음 (10.12.28.) - 실질과 다르다면 법위반\n[계약체결일] *최초 계약일 : 10.12.28.(이성애 계약)\n\n(품의 11.01.03. 으로 사후 품의 건 )\n\n*재계약일:\n15.01.22.\n[가맹계약서상 점주] 이성애\n[영업지역 설정 사항] 아울렛 내 (특수상권)",
+      "author": "엑셀 실사자료",
+      "date": "2026-09-08"
     }
   },
   {
@@ -2528,11 +2528,11 @@ let stores = [
     "address": "-",
     "manager": "-",
     "territory": {
-      "status": "미설정",
-      "scopeType": "-",
-      "scopeText": "",
-      "noteType": "-",
-      "noteText": "",
+      "status": "정상설정",
+      "scopeType": "직접입력",
+      "scopeText": "특수상권 이마트 대전 복합 터미널 내",
+      "noteType": "전대차",
+      "noteText": "특수상권 이마트 대전 복합 터미널 내",
       "setDate": "-"
     },
     "revenueMethod": {
@@ -2542,42 +2542,42 @@ let stores = [
       "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 75,
-      "actualAmount": "7,028만",
-      "targetAmount": "9,371만",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        63,
-        63,
-        69,
-        70,
-        76,
-        75
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2025-01-14",
-      "periodEnd": "2025-12-09"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
       "hasDefect": true,
-      "detailType": "서류 미교부",
+      "detailType": "숙고기간 위반",
       "detailText": "",
       "status": "미해결"
     },
     "unpaidStatus": {
-      "hasUnpaid": true,
-      "amount": "1,103만원",
-      "occurredDate": "2026-08-25",
-      "note": "로열티 분할 협의 중"
+      "hasUnpaid": false,
+      "amount": "0",
+      "occurredDate": "-",
+      "note": ""
     },
     "hygiene": {
-      "result": "적합",
-      "lastCheckDate": "2026-06-06",
-      "nextCheckDate": "2026-11-28",
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
       "specialNote": ""
     },
     "etc": {
-      "memo": "",
-      "author": "-",
-      "date": "-"
+      "memo": "[계약체결단계/하자유무] 숙고기간 위반\n[특이사항] *전대차 계약\n[계약체결일] 11.12.12.(이)\n재계약 : 15.02.27.(이)\n[가맹계약서상 점주] 이혜경\n(양도양수 요청 공문 발송 일자 18.03.07.)\n\n윤인영 ( 계약서만 있고 계약서 제일 뒷장도 없어서 체결일도 확인 불가)\n[영업지역 설정 사항] 특수상권 이마트 대전 복합 터미널 내",
+      "author": "엑셀 실사자료",
+      "date": "2026-09-08"
     }
   },
   {
@@ -2658,23 +2658,23 @@ let stores = [
     "revenueMethod": {
       "method": "예외산정(의사결정o)",
       "status": "정합성확인됨",
-      "calcDate": "2025-06-15",
-      "estimatedAmount": "월 1.24억"
+      "calcDate": "-",
+      "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 112,
-      "actualAmount": "1.23억",
-      "targetAmount": "1.09억",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        107,
-        109,
-        107,
-        110,
-        113,
-        112
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2024-11-04",
-      "periodEnd": "2025-05-25"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
       "hasDefect": false,
@@ -2686,12 +2686,12 @@ let stores = [
       "hasUnpaid": false,
       "amount": "0",
       "occurredDate": "-",
-      "note": "최근 12개월 연체 없음"
+      "note": ""
     },
     "hygiene": {
-      "result": "적합",
-      "lastCheckDate": "2026-04-19",
-      "nextCheckDate": "2026-09-27",
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
       "specialNote": ""
     },
     "etc": {
@@ -2708,56 +2708,56 @@ let stores = [
     "address": "-",
     "manager": "-",
     "territory": {
-      "status": "미설정",
-      "scopeType": "-",
-      "scopeText": "",
+      "status": "정상설정",
+      "scopeType": "직접입력",
+      "scopeText": "특수상권 (유통점 내)",
       "noteType": "-",
       "noteText": "",
       "setDate": "-"
     },
     "revenueMethod": {
-      "method": "인근가맹점 5곳",
-      "status": "재검토필요",
-      "calcDate": "2024-04-27",
-      "estimatedAmount": "월 1.56억"
+      "method": "-",
+      "status": "미산정",
+      "calcDate": "-",
+      "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 62,
-      "actualAmount": "1,799만",
-      "targetAmount": "2,901만",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        63,
-        66,
-        66,
-        68,
-        63,
-        62
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2025-03-22",
-      "periodEnd": "2026-02-06"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
-      "hasDefect": true,
-      "detailType": "기타",
-      "detailText": "보증금 조항 불일치",
-      "status": "미해결"
+      "hasDefect": false,
+      "detailType": "-",
+      "detailText": "",
+      "status": "해당없음"
     },
     "unpaidStatus": {
-      "hasUnpaid": true,
-      "amount": "1,630만원",
-      "occurredDate": "2026-05-01",
-      "note": "카드사 정산 오류로 장기 미입금 발생"
+      "hasUnpaid": false,
+      "amount": "0",
+      "occurredDate": "-",
+      "note": ""
     },
     "hygiene": {
-      "result": "부적합",
-      "lastCheckDate": "2025-12-25",
-      "nextCheckDate": "2027-02-01",
-      "specialNote": "방역 소독 미실시로 시정 요구"
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
+      "specialNote": ""
     },
     "etc": {
-      "memo": "",
-      "author": "-",
-      "date": "-"
+      "memo": "[특이사항] *계약 일부 내용 유실\n[계약체결일] *재계약일 :\n15.02.10. (남)\n[가맹계약서상 점주] 남현모\n[영업지역 설정 사항] 특수상권 (유통점 내)",
+      "author": "엑셀 실사자료",
+      "date": "2026-09-08"
     }
   },
   {
@@ -2768,56 +2768,56 @@ let stores = [
     "address": "-",
     "manager": "-",
     "territory": {
-      "status": "분쟁중",
+      "status": "정상설정",
       "scopeType": "반경지정",
       "scopeText": "",
-      "noteType": "영업지역 중복 있음",
+      "noteType": "-",
       "noteText": "",
       "setDate": "2026-03-10"
     },
     "revenueMethod": {
-      "method": "예외산정(의사결정o)",
+      "method": "예외산정(임의)",
       "status": "정합성확인됨",
-      "calcDate": "2025-02-06",
-      "estimatedAmount": "월 7,341만"
+      "calcDate": "-",
+      "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 100,
-      "actualAmount": "1.22억",
-      "targetAmount": "1.22억",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        103,
-        101,
-        105,
-        99,
-        103,
-        100
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2024-06-26",
-      "periodEnd": "2025-04-23"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
       "hasDefect": true,
-      "detailType": "숙고기간 위반",
+      "detailType": "서류 미교부",
       "detailText": "",
       "status": "미해결"
     },
     "unpaidStatus": {
-      "hasUnpaid": true,
-      "amount": "163만원",
-      "occurredDate": "2026-06-14",
-      "note": "본사 정산 시스템 오류로 미입금 장기화"
+      "hasUnpaid": false,
+      "amount": "0",
+      "occurredDate": "-",
+      "note": ""
     },
     "hygiene": {
-      "result": "부적합",
-      "lastCheckDate": "2026-06-23",
-      "nextCheckDate": "2027-02-04",
-      "specialNote": "조리기구 위생관리 기준 미달로 재점검 필요"
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
+      "specialNote": ""
     },
     "etc": {
-      "memo": "",
-      "author": "-",
-      "date": "-"
+      "memo": "[계약체결단계/하자유무] 사전 서류 제공내역 없음\n[계약체결일] 계약서상 체결일자 누락\n[가맹계약서상 점주] 김용현\n[영업지역 설정 사항] 점포중심 반경 500 미터 원\n[예상매출액 산정방식] 1일 유동인구 (24496) * 내점율 (0.5%) * 실구매율 (100%) * 객단가 (4400) * 365",
+      "author": "엑셀 실사자료",
+      "date": "2026-09-08"
     }
   },
   {
@@ -2837,24 +2837,24 @@ let stores = [
     },
     "revenueMethod": {
       "method": "인근가맹점 5곳",
-      "status": "재검토필요",
-      "calcDate": "2025-04-08",
-      "estimatedAmount": "월 1,231만"
+      "status": "정합성확인됨",
+      "calcDate": "-",
+      "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 79,
-      "actualAmount": "9,218만",
-      "targetAmount": "1.17억",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        64,
-        63,
-        66,
-        71,
-        74,
-        79
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2025-08-24",
-      "periodEnd": "2026-08-16"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
       "hasDefect": true,
@@ -2863,15 +2863,15 @@ let stores = [
       "status": "처리중"
     },
     "unpaidStatus": {
-      "hasUnpaid": true,
-      "amount": "988만원",
-      "occurredDate": "2026-08-21",
-      "note": "로열티 분할 협의 중"
+      "hasUnpaid": false,
+      "amount": "0",
+      "occurredDate": "-",
+      "note": ""
     },
     "hygiene": {
-      "result": "적합",
-      "lastCheckDate": "2026-03-13",
-      "nextCheckDate": "2026-12-16",
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
       "specialNote": ""
     },
     "etc": {
@@ -2888,33 +2888,33 @@ let stores = [
     "address": "-",
     "manager": "-",
     "territory": {
-      "status": "분쟁중",
+      "status": "정상설정",
       "scopeType": "반경지정",
       "scopeText": "",
-      "noteType": "영업지역 중복 있음",
+      "noteType": "-",
       "noteText": "",
       "setDate": "2025-04-30"
     },
     "revenueMethod": {
-      "method": "-",
-      "status": "미산정",
+      "method": "예외산정(임의)",
+      "status": "정합성확인됨",
       "calcDate": "-",
       "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 31,
-      "actualAmount": "855만",
-      "targetAmount": "2,758만",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        19,
-        17,
-        17,
-        23,
-        25,
-        31
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2024-09-20",
-      "periodEnd": "2025-06-23"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
       "hasDefect": false,
@@ -2926,18 +2926,18 @@ let stores = [
       "hasUnpaid": false,
       "amount": "0",
       "occurredDate": "-",
-      "note": "최근 12개월 연체 없음"
+      "note": ""
     },
     "hygiene": {
-      "result": "시정요구",
-      "lastCheckDate": "2025-11-24",
-      "nextCheckDate": "2026-11-15",
-      "specialNote": "위생모 미착용 적발, 현장 시정 완료"
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
+      "specialNote": ""
     },
     "etc": {
-      "memo": "",
-      "author": "-",
-      "date": "-"
+      "memo": "[계약체결일] 15.07.31.\n*계약서 일부만 (띄엄띄엄) 있음\n[가맹계약서상 점주] 전주원\n[영업지역 설정 사항] 점포중심 반경 500미터 원\n[예상매출액 산정방식] *영업시간(14) *\n유동인구(17439)* 내점율(1%)*\n실구매율(0.6)*객단가(3000)*365",
+      "author": "엑셀 실사자료",
+      "date": "2026-09-08"
     }
   },
   {
@@ -3069,9 +3069,9 @@ let stores = [
     "manager": "-",
     "territory": {
       "status": "정상설정",
-      "scopeType": "반경지정",
-      "scopeText": "",
-      "noteType": "자사유통입점",
+      "scopeType": "직접입력",
+      "scopeText": "부평 2001 아울렛 내 (특수상권)",
+      "noteType": "-",
       "noteText": "",
       "setDate": "2023-10-12"
     },
@@ -3082,79 +3082,19 @@ let stores = [
       "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 111,
-      "actualAmount": "1.58억",
-      "targetAmount": "1.42억",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        124,
-        124,
-        124,
-        124,
-        118,
-        111
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2025-09-30",
-      "periodEnd": "2026-04-15"
-    },
-    "contractDefect": {
-      "hasDefect": true,
-      "detailType": "숙고기간 위반",
-      "detailText": "",
-      "status": "미해결"
-    },
-    "unpaidStatus": {
-      "hasUnpaid": false,
-      "amount": "0",
-      "occurredDate": "-",
-      "note": "최근 12개월 연체 없음"
-    },
-    "hygiene": {
-      "result": "점검예정",
-      "lastCheckDate": "2025-12-22",
-      "nextCheckDate": "2026-10-15",
-      "specialNote": ""
-    },
-    "etc": {
-      "memo": "",
-      "author": "-",
-      "date": "-"
-    }
-  },
-  {
-    "id": "CAFE011",
-    "name": "더카페 홍성터미널점",
-    "brand": "더카페",
-    "code": "CAFE-011",
-    "address": "-",
-    "manager": "-",
-    "territory": {
-      "status": "분쟁중",
-      "scopeType": "구획지정",
-      "scopeText": "",
-      "noteType": "영업지역 침해 있음",
-      "noteText": "",
-      "setDate": "2024-08-20"
-    },
-    "revenueMethod": {
-      "method": "인근가맹점 5곳",
-      "status": "정합성확인됨",
-      "calcDate": "2025-05-23",
-      "estimatedAmount": "월 9,436만"
-    },
-    "revenueAchievement": {
-      "ratio": 46,
-      "actualAmount": "4,624만",
-      "targetAmount": "1.01억",
-      "trend": [
-        46,
-        49,
-        44,
-        47,
-        50,
-        46
-      ],
-      "periodStart": "2024-10-29",
-      "periodEnd": "2025-07-03"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
       "hasDefect": true,
@@ -3166,18 +3106,78 @@ let stores = [
       "hasUnpaid": false,
       "amount": "0",
       "occurredDate": "-",
-      "note": "최근 12개월 연체 없음"
+      "note": ""
     },
     "hygiene": {
-      "result": "시정요구",
-      "lastCheckDate": "2025-12-17",
-      "nextCheckDate": "2026-11-20",
-      "specialNote": "위생모 미착용 적발, 현장 시정 완료"
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
+      "specialNote": ""
     },
     "etc": {
-      "memo": "",
-      "author": "-",
-      "date": "-"
+      "memo": "[계약체결단계/하자유무] 사전 서류 제공내역 없음\n[계약체결일] *재계약이라고 기재되어 있고, 별도의 관련 서류는 없음\n\n일자: 14.12.30.\n[가맹계약서상 점주] 유순희\n[영업지역 설정 사항] 부평 2001 아울렛 내 (특수상권)",
+      "author": "엑셀 실사자료",
+      "date": "2026-09-08"
+    }
+  },
+  {
+    "id": "CAFE011",
+    "name": "더카페 홍성터미널점",
+    "brand": "더카페",
+    "code": "CAFE-011",
+    "address": "-",
+    "manager": "-",
+    "territory": {
+      "status": "정상설정",
+      "scopeType": "직접입력",
+      "scopeText": "홍성 터미널 내 (특수상권)",
+      "noteType": "-",
+      "noteText": "",
+      "setDate": "2024-08-20"
+    },
+    "revenueMethod": {
+      "method": "-",
+      "status": "미산정",
+      "calcDate": "-",
+      "estimatedAmount": "-"
+    },
+    "revenueAchievement": {
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
+      "trend": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "periodStart": "-",
+      "periodEnd": "-"
+    },
+    "contractDefect": {
+      "hasDefect": true,
+      "detailType": "서류 미교부",
+      "detailText": "",
+      "status": "미해결"
+    },
+    "unpaidStatus": {
+      "hasUnpaid": false,
+      "amount": "0",
+      "occurredDate": "-",
+      "note": ""
+    },
+    "hygiene": {
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
+      "specialNote": ""
+    },
+    "etc": {
+      "memo": "[계약체결단계/하자유무] 사전 서류 제공내역 없음\n[특이사항] *영업 이행서 있음 - 목표매출 강제 행위 법위반\n*오픈 임박 요청서 있음 (11.08.11.) - 실질과 다르다면 법위반\n[계약체결일] *최초계약일:\n계약서상 미기재\n\n*재계약일:\n15.02.26.\n[가맹계약서상 점주] 정예숙\n[영업지역 설정 사항] 홍성 터미널 내 (특수상권)",
+      "author": "엑셀 실사자료",
+      "date": "2026-09-08"
     }
   },
   {
@@ -3189,55 +3189,55 @@ let stores = [
     "manager": "-",
     "territory": {
       "status": "정상설정",
-      "scopeType": "구획지정",
-      "scopeText": "",
-      "noteType": "전대차",
+      "scopeType": "직접입력",
+      "scopeText": "동아쇼핑 대구 5층 내",
+      "noteType": "-",
       "noteText": "",
       "setDate": "2025-02-11"
     },
     "revenueMethod": {
-      "method": "예외산정(의사결정o)",
-      "status": "재검토필요",
-      "calcDate": "2025-04-09",
-      "estimatedAmount": "월 1.1억"
+      "method": "예외산정(임의)",
+      "status": "정합성확인됨",
+      "calcDate": "-",
+      "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 64,
-      "actualAmount": "6,831만",
-      "targetAmount": "1.07억",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        62,
-        65,
-        65,
-        65,
-        63,
-        64
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2025-09-03",
-      "periodEnd": "2026-05-31"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
-      "hasDefect": false,
-      "detailType": "-",
+      "hasDefect": true,
+      "detailType": "숙고기간 위반",
       "detailText": "",
-      "status": "해당없음"
+      "status": "미해결"
     },
     "unpaidStatus": {
-      "hasUnpaid": true,
-      "amount": "979만원",
-      "occurredDate": "2026-05-16",
-      "note": "본사 정산 시스템 오류로 미입금 장기화"
+      "hasUnpaid": false,
+      "amount": "0",
+      "occurredDate": "-",
+      "note": ""
     },
     "hygiene": {
-      "result": "부적합",
-      "lastCheckDate": "2026-05-28",
-      "nextCheckDate": "2026-12-27",
-      "specialNote": "조리기구 위생관리 기준 미달로 재점검 필요"
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
+      "specialNote": ""
     },
     "etc": {
-      "memo": "",
-      "author": "-",
-      "date": "-"
+      "memo": "[계약체결단계/하자유무] 숙고기간 위반\n[특이사항] *가맹 계약 인수\n합의서, 22.04.01. 효력발생일\n\n*영업 양수도 계약서, 22.04.01.\n[계약체결일] 22.03.25. (김), \n계약서 표지 기재\n[가맹계약서상 점주] 서정희\n김영채(22.02.25. 양수도희망 내용증명 )\n[영업지역 설정 사항] 동아쇼핑 대구 5층 내\n[예상매출액 산정방식] 양수도 매장\n1년 pos매출",
+      "author": "엑셀 실사자료",
+      "date": "2026-09-08"
     }
   },
   {
@@ -3262,19 +3262,19 @@ let stores = [
       "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 45,
-      "actualAmount": "9,093만",
-      "targetAmount": "2.02억",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        60,
-        60,
-        59,
-        51,
-        51,
-        45
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2026-01-27",
-      "periodEnd": "2026-08-12"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
       "hasDefect": true,
@@ -3283,16 +3283,16 @@ let stores = [
       "status": "미해결"
     },
     "unpaidStatus": {
-      "hasUnpaid": true,
-      "amount": "195만원",
-      "occurredDate": "2026-01-20",
-      "note": "2개월 이상 연체, 내용증명 발송 완료"
+      "hasUnpaid": false,
+      "amount": "0",
+      "occurredDate": "-",
+      "note": ""
     },
     "hygiene": {
-      "result": "부적합",
-      "lastCheckDate": "2025-10-25",
-      "nextCheckDate": "2027-02-25",
-      "specialNote": "식품위생법 위반사항 적발, 시정명령 발부"
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
+      "specialNote": ""
     },
     "etc": {
       "memo": "전 항목 위험 상태로 즉시 현장 점검 및 계약 해지 검토 대상.",
@@ -3488,11 +3488,11 @@ let stores = [
     "address": "-",
     "manager": "-",
     "territory": {
-      "status": "미설정",
-      "scopeType": "-",
-      "scopeText": "",
-      "noteType": "-",
-      "noteText": "",
+      "status": "정상설정",
+      "scopeType": "직접입력",
+      "scopeText": "이마트 동해점 내",
+      "noteType": "전대차",
+      "noteText": "이마트 동해점 내",
       "setDate": "-"
     },
     "revenueMethod": {
@@ -3502,42 +3502,42 @@ let stores = [
       "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 57,
-      "actualAmount": "1.18억",
-      "targetAmount": "2.06억",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        51,
-        55,
-        54,
-        53,
-        52,
-        57
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2025-10-17",
-      "periodEnd": "2026-07-24"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
-      "hasDefect": true,
-      "detailType": "숙고기간 위반",
+      "hasDefect": false,
+      "detailType": "-",
       "detailText": "",
-      "status": "처리중"
+      "status": "해당없음"
     },
     "unpaidStatus": {
       "hasUnpaid": false,
       "amount": "0",
       "occurredDate": "-",
-      "note": "최근 12개월 연체 없음"
+      "note": ""
     },
     "hygiene": {
-      "result": "시정요구",
-      "lastCheckDate": "2026-03-14",
-      "nextCheckDate": "2026-11-02",
-      "specialNote": "냉장 보관 온도 기록 미흡, 시정 안내함"
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
+      "specialNote": ""
     },
     "etc": {
-      "memo": "",
-      "author": "-",
-      "date": "-"
+      "memo": "[특이사항] *전대차 계약\n[계약체결일] 14.05.16.\n (구, 가맹법 개정으로 추가 작성해야 함을 명시 )\n\n*15.03.13.(구)\n\n*유부자 가맹 계약 체결일은 없음(16.02.18. 이라고 계약 품의서에만 기록)\n[가맹계약서상 점주] 김진견\n구지애(14.05.21. 양수)\n유부자(16.02.15. 양수, 양도양수계약서 작성)\n[영업지역 설정 사항] 이마트 동해점 내",
+      "author": "엑셀 실사자료",
+      "date": "2026-09-08"
     }
   },
   {
@@ -3549,55 +3549,55 @@ let stores = [
     "manager": "-",
     "territory": {
       "status": "정상설정",
-      "scopeType": "구획지정",
-      "scopeText": "",
-      "noteType": "자사유통입점",
-      "noteText": "",
+      "scopeType": "직접입력",
+      "scopeText": "4층 지도, 4층",
+      "noteType": "영업지역 침해 있음",
+      "noteText": "4층 지도, 4층",
       "setDate": "2024-08-20"
     },
     "revenueMethod": {
-      "method": "인근가맹점 5곳",
+      "method": "예외산정(임의)",
       "status": "정합성확인됨",
-      "calcDate": "2026-05-03",
-      "estimatedAmount": "월 1.72억"
+      "calcDate": "-",
+      "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 118,
-      "actualAmount": "1.5억",
-      "targetAmount": "1.27억",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        115,
-        116,
-        120,
-        122,
-        117,
-        118
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2025-10-18",
-      "periodEnd": "2026-06-20"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
-      "hasDefect": false,
-      "detailType": "-",
+      "hasDefect": true,
+      "detailType": "기타",
       "detailText": "",
-      "status": "해당없음"
+      "status": "미해결"
     },
     "unpaidStatus": {
-      "hasUnpaid": true,
-      "amount": "658만원",
-      "occurredDate": "2026-08-07",
-      "note": "월말 정산 일정 조정 중"
+      "hasUnpaid": false,
+      "amount": "0",
+      "occurredDate": "-",
+      "note": ""
     },
     "hygiene": {
-      "result": "적합",
-      "lastCheckDate": "2026-04-08",
-      "nextCheckDate": "2027-02-07",
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
       "specialNote": ""
     },
     "etc": {
-      "memo": "",
-      "author": "-",
-      "date": "-"
+      "memo": "[특이사항] *장혜숙VIP 점 점주 오픈 동의서 있음 (해당 점주가 송파 4층관 동의)20.03.26. - 영업지역 침해 법위반\n\n* 직영 -> 가맹 전환 건\n[계약체결일] 20.03.26.\n[가맹계약서상 점주] 박춘봉\n[영업지역 설정 사항] 4층 지도, 4층\n[예상매출액 산정방식] 양수도 매장\n1년 pos매출",
+      "author": "엑셀 실사자료",
+      "date": "2026-09-08"
     }
   },
   {
@@ -3608,9 +3608,9 @@ let stores = [
     "address": "-",
     "manager": "-",
     "territory": {
-      "status": "미설정",
-      "scopeType": "-",
-      "scopeText": "",
+      "status": "정상설정",
+      "scopeType": "직접입력",
+      "scopeText": "아울렛 내 (특수상권)",
       "noteType": "-",
       "noteText": "",
       "setDate": "-"
@@ -3622,19 +3622,19 @@ let stores = [
       "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 64,
-      "actualAmount": "9,959만",
-      "targetAmount": "1.56억",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        58,
-        57,
-        59,
-        61,
-        63,
-        64
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2025-07-13",
-      "periodEnd": "2026-03-03"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
       "hasDefect": true,
@@ -3643,21 +3643,21 @@ let stores = [
       "status": "미해결"
     },
     "unpaidStatus": {
-      "hasUnpaid": true,
-      "amount": "1,467만원",
-      "occurredDate": "2026-01-28",
-      "note": "본사 정산 시스템 오류로 미입금 장기화"
+      "hasUnpaid": false,
+      "amount": "0",
+      "occurredDate": "-",
+      "note": ""
     },
     "hygiene": {
-      "result": "부적합",
-      "lastCheckDate": "2025-10-12",
-      "nextCheckDate": "2026-10-07",
-      "specialNote": "방역 소독 미실시로 시정 요구"
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
+      "specialNote": ""
     },
     "etc": {
-      "memo": "전 항목 위험 상태로 즉시 현장 점검 및 계약 해지 검토 대상.",
+      "memo": "전 항목 위험 상태로 즉시 현장 점검 및 계약 해지 검토 대상.\n\n---\n[계약체결단계/하자유무] 숙고기간 위반\n[특이사항] *영업 이행서 있음 - 목표매출 강제행위 법위반\n\n*오픈 임박 요청서 있음 (11.09.07.) - 실질과 다르다면 법위반\n[계약체결일] *최초 계약일:\n11.09.07.\n\n*재계약일 :15.01.16.\n[가맹계약서상 점주] 김성애\n[영업지역 설정 사항] 아울렛 내 (특수상권)",
       "author": "정하은",
-      "date": "2026-08-07"
+      "date": "2026-09-08"
     }
   },
   {
@@ -3668,33 +3668,33 @@ let stores = [
     "address": "-",
     "manager": "-",
     "territory": {
-      "status": "미설정",
-      "scopeType": "-",
-      "scopeText": "",
+      "status": "정상설정",
+      "scopeType": "직접입력",
+      "scopeText": "특수상권 평촌 뉴코아 내",
       "noteType": "-",
       "noteText": "",
       "setDate": "-"
     },
     "revenueMethod": {
-      "method": "인근가맹점 5곳",
-      "status": "재검토필요",
-      "calcDate": "2026-03-12",
-      "estimatedAmount": "월 5,361만"
+      "method": "-",
+      "status": "미산정",
+      "calcDate": "-",
+      "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 95,
-      "actualAmount": "1.81억",
-      "targetAmount": "1.9억",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        91,
-        94,
-        93,
-        91,
-        91,
-        95
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2025-01-27",
-      "periodEnd": "2025-12-20"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
       "hasDefect": true,
@@ -3703,21 +3703,21 @@ let stores = [
       "status": "미해결"
     },
     "unpaidStatus": {
-      "hasUnpaid": true,
-      "amount": "1,137만원",
-      "occurredDate": "2026-03-10",
-      "note": "본사 정산 시스템 오류로 미입금 장기화"
+      "hasUnpaid": false,
+      "amount": "0",
+      "occurredDate": "-",
+      "note": ""
     },
     "hygiene": {
-      "result": "시정요구",
-      "lastCheckDate": "2026-07-11",
-      "nextCheckDate": "2026-11-20",
-      "specialNote": "냉장 보관 온도 기록 미흡, 시정 안내함"
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
+      "specialNote": ""
     },
     "etc": {
-      "memo": "",
-      "author": "-",
-      "date": "-"
+      "memo": "[계약체결단계/하자유무] 사전 서류 제공내역 없음\n[특이사항] *계약시 가맹금 및 이행 보증금 입금 완료 표기 (예치 완료인지 확인 필요-직입금이라면 법위반)\n\n*계약 이후 매출등에 대해 어떤 이의도 제기하지 않겠다는 특약 내용 있으나 무효\n\n*인테리어 진행 건 있음 (2018)-당사 제안 및 비용 미부담건이라면 법위반\n[계약체결일] *최초 계약:\n주식회사 이엘인터내셔날\n\n04.11.01.\n[가맹계약서상 점주] 성유미\n[영업지역 설정 사항] 특수상권 평촌 뉴코아 내",
+      "author": "엑셀 실사자료",
+      "date": "2026-09-08"
     }
   },
   {
@@ -3738,23 +3738,23 @@ let stores = [
     "revenueMethod": {
       "method": "예외산정(의사결정o)",
       "status": "정합성확인됨",
-      "calcDate": "2025-01-23",
-      "estimatedAmount": "월 1.36억"
+      "calcDate": "-",
+      "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 105,
-      "actualAmount": "1.23억",
-      "targetAmount": "1.17억",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        91,
-        95,
-        97,
-        101,
-        100,
-        105
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2024-12-28",
-      "periodEnd": "2025-10-07"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
       "hasDefect": false,
@@ -3766,12 +3766,12 @@ let stores = [
       "hasUnpaid": false,
       "amount": "0",
       "occurredDate": "-",
-      "note": "최근 12개월 연체 없음"
+      "note": ""
     },
     "hygiene": {
-      "result": "적합",
-      "lastCheckDate": "2026-03-24",
-      "nextCheckDate": "2026-10-04",
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
       "specialNote": ""
     },
     "etc": {
@@ -3788,56 +3788,56 @@ let stores = [
     "address": "-",
     "manager": "-",
     "territory": {
-      "status": "분쟁중",
-      "scopeType": "반경지정",
-      "scopeText": "",
-      "noteType": "영업지역 중복 있음",
-      "noteText": "",
+      "status": "정상설정",
+      "scopeType": "직접입력",
+      "scopeText": "특수상권 내",
+      "noteType": "전대차",
+      "noteText": "특수상권 내",
       "setDate": "2024-08-28"
     },
     "revenueMethod": {
-      "method": "예외산정(의사결정o)",
-      "status": "재검토필요",
-      "calcDate": "2024-04-14",
-      "estimatedAmount": "월 1.18억"
+      "method": "-",
+      "status": "미산정",
+      "calcDate": "-",
+      "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 76,
-      "actualAmount": "1.43억",
-      "targetAmount": "1.88억",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        78,
-        81,
-        80,
-        81,
-        75,
-        76
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2025-04-12",
-      "periodEnd": "2025-12-04"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
-      "hasDefect": true,
-      "detailType": "숙고기간 위반",
+      "hasDefect": false,
+      "detailType": "-",
       "detailText": "",
-      "status": "처리중"
+      "status": "해당없음"
     },
     "unpaidStatus": {
-      "hasUnpaid": true,
-      "amount": "1,206만원",
-      "occurredDate": "2026-08-08",
-      "note": "월말 정산 일정 조정 중"
+      "hasUnpaid": false,
+      "amount": "0",
+      "occurredDate": "-",
+      "note": ""
     },
     "hygiene": {
-      "result": "점검예정",
-      "lastCheckDate": "2026-06-24",
-      "nextCheckDate": "2027-01-10",
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
       "specialNote": ""
     },
     "etc": {
-      "memo": "",
-      "author": "-",
-      "date": "-"
+      "memo": "[특이사항] *전대차 계약\n[계약체결일] *최초계약일:\n13.10.23.\n\n*재계약일:\n15.03.12.\n[가맹계약서상 점주] 원신영\n[영업지역 설정 사항] 특수상권 내",
+      "author": "엑셀 실사자료",
+      "date": "2026-09-08"
     }
   },
   {
@@ -3848,8 +3848,8 @@ let stores = [
     "address": "-",
     "manager": "-",
     "territory": {
-      "status": "미설정",
-      "scopeType": "-",
+      "status": "정상설정",
+      "scopeType": "반경지정",
       "scopeText": "",
       "noteType": "-",
       "noteText": "",
@@ -3857,47 +3857,47 @@ let stores = [
     },
     "revenueMethod": {
       "method": "예외산정(임의)",
-      "status": "재검토필요",
-      "calcDate": "2025-02-04",
-      "estimatedAmount": "월 1.32억"
+      "status": "정합성확인됨",
+      "calcDate": "-",
+      "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 71,
-      "actualAmount": "7,498만",
-      "targetAmount": "1.06억",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        79,
-        76,
-        71,
-        73,
-        73,
-        71
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2025-05-23",
-      "periodEnd": "2026-04-12"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
-      "hasDefect": true,
-      "detailType": "기타",
-      "detailText": "위약금 조항 누락",
-      "status": "미해결"
+      "hasDefect": false,
+      "detailType": "-",
+      "detailText": "",
+      "status": "해당없음"
     },
     "unpaidStatus": {
-      "hasUnpaid": true,
-      "amount": "809만원",
-      "occurredDate": "2026-04-17",
-      "note": "2개월 이상 연체, 내용증명 발송 완료"
+      "hasUnpaid": false,
+      "amount": "0",
+      "occurredDate": "-",
+      "note": ""
     },
     "hygiene": {
-      "result": "시정요구",
-      "lastCheckDate": "2026-07-17",
-      "nextCheckDate": "2027-03-14",
-      "specialNote": "위생모 미착용 적발, 현장 시정 완료"
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
+      "specialNote": ""
     },
     "etc": {
-      "memo": "연속 위험 신호 확인됨, 우선 관리 대상 지정.",
+      "memo": "연속 위험 신호 확인됨, 우선 관리 대상 지정.\n\n---\n[계약체결일] 21.04.12.  (계약서 표지에 기재)\n[가맹계약서상 점주] 최복남\n[영업지역 설정 사항] 점포 중심 반경 500미터 원\n[예상매출액 산정방식] 유사 4개 매장 1년간 POS 매출 평균액의 70%",
       "author": "박도현",
-      "date": "2026-08-14"
+      "date": "2026-09-08"
     }
   },
   {
@@ -3922,19 +3922,19 @@ let stores = [
       "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 81,
-      "actualAmount": "1.7억",
-      "targetAmount": "2.1억",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        93,
-        90,
-        89,
-        89,
-        86,
-        81
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2024-12-31",
-      "periodEnd": "2025-09-14"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
       "hasDefect": false,
@@ -3946,13 +3946,13 @@ let stores = [
       "hasUnpaid": false,
       "amount": "0",
       "occurredDate": "-",
-      "note": "최근 12개월 연체 없음"
+      "note": ""
     },
     "hygiene": {
-      "result": "부적합",
-      "lastCheckDate": "2025-07-24",
-      "nextCheckDate": "2026-12-22",
-      "specialNote": "유통기한 경과 식자재 발견, 즉시 폐기 조치"
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
+      "specialNote": ""
     },
     "etc": {
       "memo": "",
@@ -3982,19 +3982,19 @@ let stores = [
       "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 114,
-      "actualAmount": "2,185만",
-      "targetAmount": "1,917만",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        108,
-        108,
-        108,
-        108,
-        115,
-        114
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2024-12-26",
-      "periodEnd": "2025-11-08"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
       "hasDefect": true,
@@ -4003,15 +4003,15 @@ let stores = [
       "status": "미해결"
     },
     "unpaidStatus": {
-      "hasUnpaid": true,
-      "amount": "1,546만원",
-      "occurredDate": "2025-11-22",
-      "note": "카드사 정산 오류로 장기 미입금 발생"
+      "hasUnpaid": false,
+      "amount": "0",
+      "occurredDate": "-",
+      "note": ""
     },
     "hygiene": {
-      "result": "적합",
-      "lastCheckDate": "2026-03-23",
-      "nextCheckDate": "2026-11-05",
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
       "specialNote": ""
     },
     "etc": {
@@ -4042,19 +4042,19 @@ let stores = [
       "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 115,
-      "actualAmount": "1,440만",
-      "targetAmount": "1,252만",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        100,
-        99,
-        104,
-        112,
-        113,
-        115
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2024-12-08",
-      "periodEnd": "2025-09-10"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
       "hasDefect": true,
@@ -4063,16 +4063,16 @@ let stores = [
       "status": "미해결"
     },
     "unpaidStatus": {
-      "hasUnpaid": true,
-      "amount": "155만원",
-      "occurredDate": "2026-03-05",
-      "note": "가맹점주 사정으로 로열티 미입금 지속"
+      "hasUnpaid": false,
+      "amount": "0",
+      "occurredDate": "-",
+      "note": ""
     },
     "hygiene": {
-      "result": "시정요구",
-      "lastCheckDate": "2026-04-16",
-      "nextCheckDate": "2026-12-12",
-      "specialNote": "냉장 보관 온도 기록 미흡, 시정 안내함"
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
+      "specialNote": ""
     },
     "etc": {
       "memo": "",
@@ -4089,55 +4089,55 @@ let stores = [
     "manager": "-",
     "territory": {
       "status": "정상설정",
-      "scopeType": "구획지정",
+      "scopeType": "반경지정",
       "scopeText": "",
-      "noteType": "전대차",
+      "noteType": "-",
       "noteText": "",
       "setDate": "2025-12-30"
     },
     "revenueMethod": {
-      "method": "예외산정(의사결정o)",
-      "status": "정합성확인됨",
-      "calcDate": "2025-12-26",
-      "estimatedAmount": "월 3,272만"
+      "method": "-",
+      "status": "미산정",
+      "calcDate": "-",
+      "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 107,
-      "actualAmount": "916만",
-      "targetAmount": "856만",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        106,
-        109,
-        109,
-        108,
-        111,
-        107
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2025-01-18",
-      "periodEnd": "2025-12-14"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
-      "hasDefect": true,
-      "detailType": "서류 미교부",
+      "hasDefect": false,
+      "detailType": "-",
       "detailText": "",
-      "status": "해결완료"
+      "status": "해당없음"
     },
     "unpaidStatus": {
-      "hasUnpaid": true,
-      "amount": "734만원",
-      "occurredDate": "2026-08-25",
-      "note": "카드 매출 정산 지연으로 인한 일시 미입금"
+      "hasUnpaid": false,
+      "amount": "0",
+      "occurredDate": "-",
+      "note": ""
     },
     "hygiene": {
-      "result": "부적합",
-      "lastCheckDate": "2026-05-04",
-      "nextCheckDate": "2027-02-20",
-      "specialNote": "방역 소독 미실시로 시정 요구"
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
+      "specialNote": ""
     },
     "etc": {
-      "memo": "",
-      "author": "-",
-      "date": "-"
+      "memo": "[특이사항] *지속적인 사입 물품 사용 및 미개선으로 인한 자재 공급 중단 공문 등 있음 , 사입금지 합의서 있음\n[계약체결일] 17.09.05. (윤진희)\n[가맹계약서상 점주] 이희경 (폐업, 17.09.17. )\n윤진희 (양수도 계약일 : 미기재)\n[영업지역 설정 사항] 반경 500미터 원",
+      "author": "엑셀 실사자료",
+      "date": "2026-09-08"
     }
   },
   {
@@ -4148,56 +4148,56 @@ let stores = [
     "address": "-",
     "manager": "-",
     "territory": {
-      "status": "분쟁중",
-      "scopeType": "반경지정",
+      "status": "정상설정",
+      "scopeType": "구획지정",
       "scopeText": "",
-      "noteType": "영업지역 침해 있음",
+      "noteType": "-",
       "noteText": "",
       "setDate": "2024-10-22"
     },
     "revenueMethod": {
-      "method": "-",
-      "status": "미산정",
+      "method": "예외산정(임의)",
+      "status": "정합성확인됨",
       "calcDate": "-",
       "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 49,
-      "actualAmount": "2,220만",
-      "targetAmount": "4,530만",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        40,
-        45,
-        43,
-        42,
-        49,
-        49
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2025-04-25",
-      "periodEnd": "2025-12-27"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
-      "hasDefect": true,
-      "detailType": "숙고기간 위반",
+      "hasDefect": false,
+      "detailType": "-",
       "detailText": "",
-      "status": "미해결"
+      "status": "해당없음"
     },
     "unpaidStatus": {
       "hasUnpaid": false,
       "amount": "0",
       "occurredDate": "-",
-      "note": "최근 12개월 연체 없음"
+      "note": ""
     },
     "hygiene": {
-      "result": "점검예정",
-      "lastCheckDate": "2025-09-01",
-      "nextCheckDate": "2027-01-05",
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
       "specialNote": ""
     },
     "etc": {
-      "memo": "",
-      "author": "-",
-      "date": "-"
+      "memo": "[계약체결일] 20.09.28.\n[가맹계약서상 점주] 최수희\n[영업지역 설정 사항] 지도에 구획으로 표시, A/B/C/ 상권 구획으로 표시\n[예상매출액 산정방식] 영업시간 (12) * 1일 유동인구 (48213) * 내점율 (0.5%) * 실구매율 (100%) * 객단가 (3200) * 264일",
+      "author": "엑셀 실사자료",
+      "date": "2026-09-08"
     }
   },
   {
@@ -4217,24 +4217,24 @@ let stores = [
     },
     "revenueMethod": {
       "method": "인근가맹점 5곳",
-      "status": "재검토필요",
-      "calcDate": "2026-03-08",
-      "estimatedAmount": "월 1.56억"
+      "status": "정합성확인됨",
+      "calcDate": "-",
+      "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 50,
-      "actualAmount": "5,754만",
-      "targetAmount": "1.15억",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        42,
-        43,
-        45,
-        46,
-        45,
-        50
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2024-07-10",
-      "periodEnd": "2025-06-05"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
       "hasDefect": true,
@@ -4243,15 +4243,15 @@ let stores = [
       "status": "미해결"
     },
     "unpaidStatus": {
-      "hasUnpaid": true,
-      "amount": "1,593만원",
-      "occurredDate": "2026-05-15",
-      "note": "카드사 정산 오류로 장기 미입금 발생"
+      "hasUnpaid": false,
+      "amount": "0",
+      "occurredDate": "-",
+      "note": ""
     },
     "hygiene": {
-      "result": "점검예정",
-      "lastCheckDate": "2025-11-05",
-      "nextCheckDate": "2026-10-11",
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
       "specialNote": ""
     },
     "etc": {
@@ -4278,23 +4278,23 @@ let stores = [
     "revenueMethod": {
       "method": "인근가맹점 5곳",
       "status": "정합성확인됨",
-      "calcDate": "2026-05-05",
-      "estimatedAmount": "월 1.57억"
+      "calcDate": "-",
+      "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 101,
-      "actualAmount": "1.24억",
-      "targetAmount": "1.23억",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        98,
-        101,
-        104,
-        101,
-        100,
-        101
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2025-01-03",
-      "periodEnd": "2025-10-12"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
       "hasDefect": true,
@@ -4303,16 +4303,16 @@ let stores = [
       "status": "해결완료"
     },
     "unpaidStatus": {
-      "hasUnpaid": true,
-      "amount": "1,310만원",
-      "occurredDate": "2026-01-31",
-      "note": "2개월 이상 연체, 내용증명 발송 완료"
+      "hasUnpaid": false,
+      "amount": "0",
+      "occurredDate": "-",
+      "note": ""
     },
     "hygiene": {
-      "result": "부적합",
-      "lastCheckDate": "2026-02-07",
-      "nextCheckDate": "2026-11-06",
-      "specialNote": "유통기한 경과 식자재 발견, 즉시 폐기 조치"
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
+      "specialNote": ""
     },
     "etc": {
       "memo": "",
@@ -4342,19 +4342,19 @@ let stores = [
       "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 105,
-      "actualAmount": "1억",
-      "targetAmount": "9,565만",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        106,
-        104,
-        106,
-        102,
-        100,
-        105
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2024-09-16",
-      "periodEnd": "2025-06-20"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
       "hasDefect": true,
@@ -4363,16 +4363,16 @@ let stores = [
       "status": "미해결"
     },
     "unpaidStatus": {
-      "hasUnpaid": true,
-      "amount": "111만원",
-      "occurredDate": "2026-08-05",
-      "note": "로열티 분할 협의 중"
+      "hasUnpaid": false,
+      "amount": "0",
+      "occurredDate": "-",
+      "note": ""
     },
     "hygiene": {
-      "result": "부적합",
-      "lastCheckDate": "2026-01-11",
-      "nextCheckDate": "2026-12-23",
-      "specialNote": "방역 소독 미실시로 시정 요구"
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
+      "specialNote": ""
     },
     "etc": {
       "memo": "",
@@ -4397,24 +4397,24 @@ let stores = [
     },
     "revenueMethod": {
       "method": "예외산정(임의)",
-      "status": "재검토필요",
-      "calcDate": "2024-07-06",
-      "estimatedAmount": "월 9,339만"
+      "status": "정합성확인됨",
+      "calcDate": "-",
+      "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 78,
-      "actualAmount": "4,276만",
-      "targetAmount": "5,482만",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        64,
-        69,
-        68,
-        70,
-        76,
-        78
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2025-07-18",
-      "periodEnd": "2026-01-14"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
       "hasDefect": true,
@@ -4423,16 +4423,16 @@ let stores = [
       "status": "미해결"
     },
     "unpaidStatus": {
-      "hasUnpaid": true,
-      "amount": "1,580만원",
-      "occurredDate": "2026-08-17",
-      "note": "월말 정산 일정 조정 중"
+      "hasUnpaid": false,
+      "amount": "0",
+      "occurredDate": "-",
+      "note": ""
     },
     "hygiene": {
-      "result": "시정요구",
-      "lastCheckDate": "2026-05-27",
-      "nextCheckDate": "2027-02-12",
-      "specialNote": "조리대 정리정돈 미흡"
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
+      "specialNote": ""
     },
     "etc": {
       "memo": "",
@@ -4458,23 +4458,23 @@ let stores = [
     "revenueMethod": {
       "method": "인근가맹점 5곳",
       "status": "정합성확인됨",
-      "calcDate": "2025-10-20",
-      "estimatedAmount": "월 1.61억"
+      "calcDate": "-",
+      "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 45,
-      "actualAmount": "5,011만",
-      "targetAmount": "1.11억",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        43,
-        45,
-        42,
-        44,
-        42,
-        45
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2025-05-23",
-      "periodEnd": "2026-02-27"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
       "hasDefect": true,
@@ -4483,15 +4483,15 @@ let stores = [
       "status": "미해결"
     },
     "unpaidStatus": {
-      "hasUnpaid": true,
-      "amount": "641만원",
-      "occurredDate": "2026-07-29",
-      "note": "월말 정산 일정 조정 중"
+      "hasUnpaid": false,
+      "amount": "0",
+      "occurredDate": "-",
+      "note": ""
     },
     "hygiene": {
-      "result": "적합",
-      "lastCheckDate": "2025-12-20",
-      "nextCheckDate": "2027-02-09",
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
       "specialNote": ""
     },
     "etc": {
@@ -4518,23 +4518,23 @@ let stores = [
     "revenueMethod": {
       "method": "인근가맹점 5곳",
       "status": "정합성확인됨",
-      "calcDate": "2025-07-02",
-      "estimatedAmount": "월 1,486만"
+      "calcDate": "-",
+      "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 38,
-      "actualAmount": "3,861만",
-      "targetAmount": "1.02억",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        43,
-        38,
-        42,
-        43,
-        40,
-        38
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2024-05-06",
-      "periodEnd": "2025-04-26"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
       "hasDefect": true,
@@ -4546,13 +4546,13 @@ let stores = [
       "hasUnpaid": false,
       "amount": "0",
       "occurredDate": "-",
-      "note": "최근 12개월 연체 없음"
+      "note": ""
     },
     "hygiene": {
-      "result": "시정요구",
-      "lastCheckDate": "2025-08-05",
-      "nextCheckDate": "2027-02-28",
-      "specialNote": "냉장 보관 온도 기록 미흡, 시정 안내함"
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
+      "specialNote": ""
     },
     "etc": {
       "memo": "",
@@ -4628,56 +4628,56 @@ let stores = [
     "address": "-",
     "manager": "-",
     "territory": {
-      "status": "미설정",
-      "scopeType": "-",
-      "scopeText": "",
+      "status": "정상설정",
+      "scopeType": "직접입력",
+      "scopeText": "야탑 엔씨 유통점 내",
       "noteType": "-",
       "noteText": "",
       "setDate": "-"
     },
     "revenueMethod": {
-      "method": "-",
-      "status": "미산정",
+      "method": "예외산정(임의)",
+      "status": "정합성확인됨",
       "calcDate": "-",
       "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 53,
-      "actualAmount": "5,489만",
-      "targetAmount": "1.04억",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        60,
-        55,
-        58,
-        52,
-        55,
-        53
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2025-07-10",
-      "periodEnd": "2026-05-31"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
-      "hasDefect": true,
-      "detailType": "서류 미교부",
+      "hasDefect": false,
+      "detailType": "-",
       "detailText": "",
-      "status": "미해결"
+      "status": "해당없음"
     },
     "unpaidStatus": {
-      "hasUnpaid": true,
-      "amount": "382만원",
-      "occurredDate": "2026-03-10",
-      "note": "카드사 정산 오류로 장기 미입금 발생"
+      "hasUnpaid": false,
+      "amount": "0",
+      "occurredDate": "-",
+      "note": ""
     },
     "hygiene": {
-      "result": "적합",
-      "lastCheckDate": "2026-06-23",
-      "nextCheckDate": "2027-02-14",
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
       "specialNote": ""
     },
     "etc": {
-      "memo": "매출 부진 및 계약 관리 항목 다수 위험 상태. 현장 점검 필요.",
+      "memo": "매출 부진 및 계약 관리 항목 다수 위험 상태. 현장 점검 필요.\n\n---\n[계약체결일] 17.05.12.\n[가맹계약서상 점주] 이윤\n[영업지역 설정 사항] 야탑 엔씨 유통점 내\n[예상매출액 산정방식] *델라보 야탑 엔씨점\n월평균 매출액",
       "author": "박도현",
-      "date": "2026-08-19"
+      "date": "2026-09-08"
     }
   },
   {
@@ -4762,19 +4762,19 @@ let stores = [
       "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 58,
-      "actualAmount": "1.21억",
-      "targetAmount": "2.09억",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        49,
-        48,
-        54,
-        57,
-        60,
-        58
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2025-02-10",
-      "periodEnd": "2025-08-27"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
       "hasDefect": true,
@@ -4783,15 +4783,15 @@ let stores = [
       "status": "미해결"
     },
     "unpaidStatus": {
-      "hasUnpaid": true,
-      "amount": "320만원",
-      "occurredDate": "2025-12-13",
-      "note": "2개월 이상 연체, 내용증명 발송 완료"
+      "hasUnpaid": false,
+      "amount": "0",
+      "occurredDate": "-",
+      "note": ""
     },
     "hygiene": {
-      "result": "적합",
-      "lastCheckDate": "2026-06-05",
-      "nextCheckDate": "2026-12-14",
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
       "specialNote": ""
     },
     "etc": {
@@ -4817,24 +4817,24 @@ let stores = [
     },
     "revenueMethod": {
       "method": "예외산정(의사결정o)",
-      "status": "재검토필요",
-      "calcDate": "2025-09-20",
-      "estimatedAmount": "월 8,374만"
+      "status": "정합성확인됨",
+      "calcDate": "-",
+      "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 72,
-      "actualAmount": "1.47억",
-      "targetAmount": "2.05억",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        61,
-        66,
-        66,
-        68,
-        68,
-        72
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2025-11-30",
-      "periodEnd": "2026-07-30"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
       "hasDefect": true,
@@ -4843,16 +4843,16 @@ let stores = [
       "status": "미해결"
     },
     "unpaidStatus": {
-      "hasUnpaid": true,
-      "amount": "1,099만원",
-      "occurredDate": "2026-08-22",
-      "note": "월말 정산 일정 조정 중"
+      "hasUnpaid": false,
+      "amount": "0",
+      "occurredDate": "-",
+      "note": ""
     },
     "hygiene": {
-      "result": "시정요구",
-      "lastCheckDate": "2026-07-12",
-      "nextCheckDate": "2027-01-09",
-      "specialNote": "조리대 정리정돈 미흡"
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
+      "specialNote": ""
     },
     "etc": {
       "memo": "",
@@ -7628,33 +7628,33 @@ let stores = [
     "address": "-",
     "manager": "-",
     "territory": {
-      "status": "미설정",
-      "scopeType": "-",
-      "scopeText": "",
+      "status": "정상설정",
+      "scopeType": "직접입력",
+      "scopeText": "안양 2001 아울렛 내 (특수상권)",
       "noteType": "-",
       "noteText": "",
       "setDate": "-"
     },
     "revenueMethod": {
-      "method": "예외산정(임의)",
-      "status": "재검토필요",
-      "calcDate": "2024-07-02",
-      "estimatedAmount": "월 5,554만"
+      "method": "-",
+      "status": "미산정",
+      "calcDate": "-",
+      "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 74,
-      "actualAmount": "5,810만",
-      "targetAmount": "7,852만",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        63,
-        62,
-        62,
-        64,
-        70,
-        74
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2025-08-11",
-      "periodEnd": "2026-05-14"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
       "hasDefect": true,
@@ -7663,21 +7663,21 @@ let stores = [
       "status": "미해결"
     },
     "unpaidStatus": {
-      "hasUnpaid": true,
-      "amount": "206만원",
-      "occurredDate": "2026-08-20",
-      "note": "월말 정산 일정 조정 중"
+      "hasUnpaid": false,
+      "amount": "0",
+      "occurredDate": "-",
+      "note": ""
     },
     "hygiene": {
-      "result": "시정요구",
-      "lastCheckDate": "2026-06-06",
-      "nextCheckDate": "2026-12-23",
-      "specialNote": "조리대 정리정돈 미흡"
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
+      "specialNote": ""
     },
     "etc": {
-      "memo": "",
-      "author": "-",
-      "date": "-"
+      "memo": "[계약체결단계/하자유무] 사전 서류 제공내역 없음\n[특이사항] *일시불로 비용 지급한다고 되어 있어 예치한 것인지 확인 필요\n\n\n*계약 이후 매출등에 대해 어떤 이의도 제기하지 않겠다는 특약 있으나 무효\n[계약체결일] *최초 계약 :\n 05.06.20.\n\n*재계약 : 15.01.22.\n[가맹계약서상 점주] 김현주\n[영업지역 설정 사항] 안양 2001 아울렛 내 (특수상권)",
+      "author": "엑셀 실사자료",
+      "date": "2026-09-08"
     }
   },
   {
@@ -7688,9 +7688,9 @@ let stores = [
     "address": "-",
     "manager": "-",
     "territory": {
-      "status": "미설정",
-      "scopeType": "-",
-      "scopeText": "",
+      "status": "정상설정",
+      "scopeType": "직접입력",
+      "scopeText": "동수원 뉴코아 8층 내",
       "noteType": "-",
       "noteText": "",
       "setDate": "-"
@@ -7702,42 +7702,42 @@ let stores = [
       "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 25,
-      "actualAmount": "2,163만",
-      "targetAmount": "8,652만",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        16,
-        21,
-        23,
-        26,
-        27,
-        25
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2025-10-25",
-      "periodEnd": "2026-04-30"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
       "hasDefect": true,
       "detailType": "서류 미교부",
       "detailText": "",
-      "status": "처리중"
+      "status": "미해결"
     },
     "unpaidStatus": {
-      "hasUnpaid": true,
-      "amount": "714만원",
-      "occurredDate": "2026-03-09",
-      "note": "2개월 이상 연체, 내용증명 발송 완료"
+      "hasUnpaid": false,
+      "amount": "0",
+      "occurredDate": "-",
+      "note": ""
     },
     "hygiene": {
-      "result": "부적합",
-      "lastCheckDate": "2025-08-15",
-      "nextCheckDate": "2027-02-14",
-      "specialNote": "방역 소독 미실시로 시정 요구"
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
+      "specialNote": ""
     },
     "etc": {
-      "memo": "위험 항목 다수 발생, 본사 관리팀 개입 검토 중.",
+      "memo": "위험 항목 다수 발생, 본사 관리팀 개입 검토 중.\n\n---\n[계약체결단계/하자유무] 사전 서류 제공내역 없음\n[특이사항] *1층 입점 매장에 대한 오픈 동의서 있음 \n(17.09.26.)\n\n*계약시 가맹금 및 이행 보증금 입금 완료 표기 (예치 완료인지 확인 필요 - 직입금이라면 법위반)\n\n*계약 이후 매출등에 대해 어떤 이의도 제기하지 않겠다는 특약 있으나 무효\n[계약체결일] *최초계약일: 07.04.05.\n\n*재계약일:\n15.01.22.\n[가맹계약서상 점주] 노주헌\n[영업지역 설정 사항] 동수원 뉴코아 8층 내",
       "author": "정하은",
-      "date": "2026-08-10"
+      "date": "2026-09-08"
     }
   },
   {
@@ -7748,9 +7748,9 @@ let stores = [
     "address": "-",
     "manager": "-",
     "territory": {
-      "status": "미설정",
-      "scopeType": "-",
-      "scopeText": "",
+      "status": "정상설정",
+      "scopeType": "직접입력",
+      "scopeText": "평촌 뉴코아내 (특수상권)",
       "noteType": "-",
       "noteText": "",
       "setDate": "-"
@@ -7762,19 +7762,19 @@ let stores = [
       "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 29,
-      "actualAmount": "871만",
-      "targetAmount": "3,003만",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        37,
-        36,
-        39,
-        33,
-        35,
-        29
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2025-07-30",
-      "periodEnd": "2026-07-24"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
       "hasDefect": true,
@@ -7783,21 +7783,21 @@ let stores = [
       "status": "미해결"
     },
     "unpaidStatus": {
-      "hasUnpaid": true,
-      "amount": "294만원",
-      "occurredDate": "2026-03-16",
-      "note": "가맹점주 사정으로 로열티 미입금 지속"
+      "hasUnpaid": false,
+      "amount": "0",
+      "occurredDate": "-",
+      "note": ""
     },
     "hygiene": {
-      "result": "부적합",
-      "lastCheckDate": "2026-06-05",
-      "nextCheckDate": "2027-01-26",
-      "specialNote": "식품위생법 위반사항 적발, 시정명령 발부"
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
+      "specialNote": ""
     },
     "etc": {
-      "memo": "종합 위험도 최고 수준, 본사 긴급 개입 필요.",
+      "memo": "종합 위험도 최고 수준, 본사 긴급 개입 필요.\n\n---\n[계약체결단계/하자유무] 사전 서류 제공내역 없음\n[특이사항] *매출 등 이행서 있음 - 목표매출강제행위로 법위반\n\n*계약시 가맹금 및 예수 보증금 입금 - 직입금이라면 법위반\n[계약체결일] *백승운 최초 계약일:07.01.03.\n\n*양수도 계약서 작성일: 10.06.01.\n\n*조복희 최초 계약일 : 10.06.01.\n\n*조복희 재계약일 : 14.01.13.\n[가맹계약서상 점주] 조복희\n[영업지역 설정 사항] 평촌 뉴코아내 (특수상권)",
       "author": "정하은",
-      "date": "2026-08-22"
+      "date": "2026-09-08"
     }
   },
   {
@@ -7822,19 +7822,19 @@ let stores = [
       "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 118,
-      "actualAmount": "2.01억",
-      "targetAmount": "1.7억",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        126,
-        125,
-        123,
-        119,
-        121,
-        118
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2025-07-31",
-      "periodEnd": "2026-06-26"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
       "hasDefect": true,
@@ -7843,15 +7843,15 @@ let stores = [
       "status": "미해결"
     },
     "unpaidStatus": {
-      "hasUnpaid": true,
-      "amount": "1,181만원",
-      "occurredDate": "2026-05-03",
-      "note": "카드사 정산 오류로 장기 미입금 발생"
+      "hasUnpaid": false,
+      "amount": "0",
+      "occurredDate": "-",
+      "note": ""
     },
     "hygiene": {
-      "result": "적합",
-      "lastCheckDate": "2025-07-24",
-      "nextCheckDate": "2026-10-20",
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
       "specialNote": ""
     },
     "etc": {
@@ -7877,24 +7877,24 @@ let stores = [
     },
     "revenueMethod": {
       "method": "예외산정(임의)",
-      "status": "재검토필요",
-      "calcDate": "2025-06-16",
-      "estimatedAmount": "월 2,754만"
+      "status": "정합성확인됨",
+      "calcDate": "-",
+      "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 69,
-      "actualAmount": "1.41억",
-      "targetAmount": "2.04억",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        62,
-        64,
-        62,
-        60,
-        62,
-        69
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2025-03-09",
-      "periodEnd": "2025-12-23"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
       "hasDefect": true,
@@ -7906,13 +7906,13 @@ let stores = [
       "hasUnpaid": false,
       "amount": "0",
       "occurredDate": "-",
-      "note": "최근 12개월 연체 없음"
+      "note": ""
     },
     "hygiene": {
-      "result": "시정요구",
-      "lastCheckDate": "2026-06-03",
-      "nextCheckDate": "2026-12-21",
-      "specialNote": "조리대 정리정돈 미흡"
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
+      "specialNote": ""
     },
     "etc": {
       "memo": "",
@@ -7929,32 +7929,32 @@ let stores = [
     "manager": "-",
     "territory": {
       "status": "정상설정",
-      "scopeType": "반경지정",
-      "scopeText": "",
-      "noteType": "전대차",
+      "scopeType": "직접입력",
+      "scopeText": "엑스코 엔씨 내",
+      "noteType": "-",
       "noteText": "",
       "setDate": "2023-06-27"
     },
     "revenueMethod": {
-      "method": "예외산정(의사결정o)",
-      "status": "정합성확인됨",
-      "calcDate": "2026-06-26",
-      "estimatedAmount": "월 3,138만"
+      "method": "-",
+      "status": "미산정",
+      "calcDate": "-",
+      "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 44,
-      "actualAmount": "6,802만",
-      "targetAmount": "1.55억",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        29,
-        34,
-        39,
-        39,
-        46,
-        44
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2024-07-29",
-      "periodEnd": "2025-06-02"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
       "hasDefect": false,
@@ -7966,18 +7966,18 @@ let stores = [
       "hasUnpaid": false,
       "amount": "0",
       "occurredDate": "-",
-      "note": "최근 12개월 연체 없음"
+      "note": ""
     },
     "hygiene": {
-      "result": "적합",
-      "lastCheckDate": "2026-05-10",
-      "nextCheckDate": "2026-10-06",
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
       "specialNote": ""
     },
     "etc": {
-      "memo": "",
-      "author": "-",
-      "date": "-"
+      "memo": "[계약체결일] *최초계약일:\n12.08.10.\n\n*재계약일:\n15.01.15.\n[가맹계약서상 점주] 최숙원\n[영업지역 설정 사항] 엑스코 엔씨 내",
+      "author": "엑셀 실사자료",
+      "date": "2026-09-08"
     }
   },
   {
@@ -7996,48 +7996,48 @@ let stores = [
       "setDate": "-"
     },
     "revenueMethod": {
-      "method": "예외산정(의사결정o)",
-      "status": "정합성확인됨",
-      "calcDate": "2025-02-28",
-      "estimatedAmount": "월 1.15억"
+      "method": "-",
+      "status": "미산정",
+      "calcDate": "-",
+      "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 36,
-      "actualAmount": "4,443만",
-      "targetAmount": "1.23억",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        36,
-        40,
-        35,
-        38,
-        39,
-        36
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2024-11-19",
-      "periodEnd": "2025-07-21"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
-      "hasDefect": true,
-      "detailType": "숙고기간 위반",
+      "hasDefect": false,
+      "detailType": "-",
       "detailText": "",
-      "status": "처리중"
+      "status": "해당없음"
     },
     "unpaidStatus": {
-      "hasUnpaid": true,
-      "amount": "503만원",
-      "occurredDate": "2026-06-13",
-      "note": "2개월 이상 연체, 내용증명 발송 완료"
+      "hasUnpaid": false,
+      "amount": "0",
+      "occurredDate": "-",
+      "note": ""
     },
     "hygiene": {
-      "result": "시정요구",
-      "lastCheckDate": "2025-10-13",
-      "nextCheckDate": "2027-01-11",
-      "specialNote": "조리대 정리정돈 미흡"
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
+      "specialNote": ""
     },
     "etc": {
-      "memo": "",
-      "author": "-",
-      "date": "-"
+      "memo": "[특이사항] 사전서류 제공내역 없음",
+      "author": "엑셀 실사자료",
+      "date": "2026-09-08"
     }
   },
   {
@@ -8049,32 +8049,32 @@ let stores = [
     "manager": "-",
     "territory": {
       "status": "정상설정",
-      "scopeType": "구획지정",
+      "scopeType": "반경지정",
       "scopeText": "",
-      "noteType": "자사유통입점",
+      "noteType": "-",
       "noteText": "",
       "setDate": "2023-09-21"
     },
     "revenueMethod": {
-      "method": "예외산정(임의)",
-      "status": "재검토필요",
-      "calcDate": "2025-01-26",
-      "estimatedAmount": "월 1.14억"
+      "method": "-",
+      "status": "미산정",
+      "calcDate": "-",
+      "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 81,
-      "actualAmount": "1.41억",
-      "targetAmount": "1.74억",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        94,
-        93,
-        90,
-        87,
-        87,
-        81
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2025-02-03",
-      "periodEnd": "2025-08-12"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
       "hasDefect": false,
@@ -8083,21 +8083,21 @@ let stores = [
       "status": "해당없음"
     },
     "unpaidStatus": {
-      "hasUnpaid": true,
-      "amount": "1,199만원",
-      "occurredDate": "2026-08-06",
-      "note": "월말 정산 일정 조정 중"
+      "hasUnpaid": false,
+      "amount": "0",
+      "occurredDate": "-",
+      "note": ""
     },
     "hygiene": {
-      "result": "시정요구",
-      "lastCheckDate": "2025-11-30",
-      "nextCheckDate": "2026-10-30",
-      "specialNote": "냉장 보관 온도 기록 미흡, 시정 안내함"
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
+      "specialNote": ""
     },
     "etc": {
-      "memo": "",
-      "author": "-",
-      "date": "-"
+      "memo": "[계약체결일] *최초계약일:\n13.08.21.\n\n*재계약일:\n15.01.30.\n[가맹계약서상 점주] 변연주\n[영업지역 설정 사항] 점포 중심 반경 500미터 원",
+      "author": "엑셀 실사자료",
+      "date": "2026-09-08"
     }
   },
   {
@@ -8122,19 +8122,19 @@ let stores = [
       "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 50,
-      "actualAmount": "7,391만",
-      "targetAmount": "1.48억",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        37,
-        38,
-        39,
-        38,
-        48,
-        50
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2025-08-30",
-      "periodEnd": "2026-08-13"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
       "hasDefect": false,
@@ -8143,21 +8143,21 @@ let stores = [
       "status": "해당없음"
     },
     "unpaidStatus": {
-      "hasUnpaid": true,
-      "amount": "715만원",
-      "occurredDate": "2026-05-04",
-      "note": "가맹점주 사정으로 로열티 미입금 지속"
+      "hasUnpaid": false,
+      "amount": "0",
+      "occurredDate": "-",
+      "note": ""
     },
     "hygiene": {
-      "result": "점검예정",
-      "lastCheckDate": "2026-06-21",
-      "nextCheckDate": "2026-10-12",
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
       "specialNote": ""
     },
     "etc": {
-      "memo": "",
-      "author": "-",
-      "date": "-"
+      "memo": "[특이사항] *가격인상건 관련내용 동의서 있음(상세 내용 확인은 어려움)-가격통제인지 여부 확인 필요함\n[계약체결일] *최초계약일:\n14.01.10.\n__구버전 계약서 유지중\n[가맹계약서상 점주] 신영희",
+      "author": "엑셀 실사자료",
+      "date": "2026-09-08"
     }
   },
   {
@@ -8176,48 +8176,48 @@ let stores = [
       "setDate": "2024-08-06"
     },
     "revenueMethod": {
-      "method": "예외산정(의사결정o)",
-      "status": "재검토필요",
-      "calcDate": "2025-11-01",
-      "estimatedAmount": "월 1.57억"
+      "method": "예외산정(임의)",
+      "status": "정합성확인됨",
+      "calcDate": "-",
+      "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 78,
-      "actualAmount": "8,071만",
-      "targetAmount": "1.03억",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        69,
-        67,
-        68,
-        69,
-        75,
-        78
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2024-12-11",
-      "periodEnd": "2025-06-15"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
-      "hasDefect": true,
-      "detailType": "서류 미교부",
+      "hasDefect": false,
+      "detailType": "-",
       "detailText": "",
-      "status": "해결완료"
+      "status": "해당없음"
     },
     "unpaidStatus": {
       "hasUnpaid": false,
       "amount": "0",
       "occurredDate": "-",
-      "note": "최근 12개월 연체 없음"
+      "note": ""
     },
     "hygiene": {
-      "result": "적합",
-      "lastCheckDate": "2025-09-29",
-      "nextCheckDate": "2026-11-20",
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
       "specialNote": ""
     },
     "etc": {
-      "memo": "",
-      "author": "-",
-      "date": "-"
+      "memo": "[특이사항] *전대차 계약\n[계약체결일] *최초계약일:\n14.07.18.\n____구버전 계약서 유지중\n[가맹계약서상 점주] 신경미\n[예상매출액 산정방식] *유사매장4개포스매출\n *입지여건가중치(0.90)*경쟁강도 가중치(0.90)",
+      "author": "엑셀 실사자료",
+      "date": "2026-09-08"
     }
   },
   {
@@ -8236,205 +8236,25 @@ let stores = [
       "setDate": "2025-08-02"
     },
     "revenueMethod": {
-      "method": "인근가맹점 5곳",
+      "method": "예외산정(임의)",
       "status": "정합성확인됨",
-      "calcDate": "2026-04-07",
-      "estimatedAmount": "월 3,782만"
-    },
-    "revenueAchievement": {
-      "ratio": 121,
-      "actualAmount": "2.44억",
-      "targetAmount": "2.02억",
-      "trend": [
-        108,
-        110,
-        109,
-        110,
-        115,
-        121
-      ],
-      "periodStart": "2024-12-06",
-      "periodEnd": "2025-11-07"
-    },
-    "contractDefect": {
-      "hasDefect": true,
-      "detailType": "숙고기간 위반",
-      "detailText": "",
-      "status": "처리중"
-    },
-    "unpaidStatus": {
-      "hasUnpaid": true,
-      "amount": "1,524만원",
-      "occurredDate": "2026-08-09",
-      "note": "카드 매출 정산 지연으로 인한 일시 미입금"
-    },
-    "hygiene": {
-      "result": "시정요구",
-      "lastCheckDate": "2025-12-17",
-      "nextCheckDate": "2026-10-14",
-      "specialNote": "위생모 미착용 적발, 현장 시정 완료"
-    },
-    "etc": {
-      "memo": "",
-      "author": "-",
-      "date": "-"
-    }
-  },
-  {
-    "id": "CAFE026",
-    "name": "더카페 이마트 광산점 B1층",
-    "brand": "더카페",
-    "code": "CAFE-026",
-    "address": "-",
-    "manager": "-",
-    "territory": {
-      "status": "분쟁중",
-      "scopeType": "반경지정",
-      "scopeText": "",
-      "noteType": "영업지역 중복 있음",
-      "noteText": "",
-      "setDate": "2025-03-31"
-    },
-    "revenueMethod": {
-      "method": "예외산정(의사결정o)",
-      "status": "재검토필요",
-      "calcDate": "2026-06-20",
-      "estimatedAmount": "월 1.18억"
-    },
-    "revenueAchievement": {
-      "ratio": 38,
-      "actualAmount": "1,284만",
-      "targetAmount": "3,379만",
-      "trend": [
-        24,
-        27,
-        31,
-        35,
-        41,
-        38
-      ],
-      "periodStart": "2024-11-30",
-      "periodEnd": "2025-07-21"
-    },
-    "contractDefect": {
-      "hasDefect": true,
-      "detailType": "서류 미교부",
-      "detailText": "",
-      "status": "처리중"
-    },
-    "unpaidStatus": {
-      "hasUnpaid": true,
-      "amount": "987만원",
-      "occurredDate": "2026-08-07",
-      "note": "로열티 분할 협의 중"
-    },
-    "hygiene": {
-      "result": "부적합",
-      "lastCheckDate": "2026-04-11",
-      "nextCheckDate": "2027-02-10",
-      "specialNote": "조리기구 위생관리 기준 미달로 재점검 필요"
-    },
-    "etc": {
-      "memo": "",
-      "author": "-",
-      "date": "-"
-    }
-  },
-  {
-    "id": "CAFE025",
-    "name": "더카페 오산시청점",
-    "brand": "더카페",
-    "code": "CAFE-025",
-    "address": "-",
-    "manager": "-",
-    "territory": {
-      "status": "정상설정",
-      "scopeType": "구획지정",
-      "scopeText": "",
-      "noteType": "전대차",
-      "noteText": "",
-      "setDate": "2026-01-18"
-    },
-    "revenueMethod": {
-      "method": "-",
-      "status": "미산정",
       "calcDate": "-",
       "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 40,
-      "actualAmount": "2,073만",
-      "targetAmount": "5,183만",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        28,
-        27,
-        35,
-        37,
-        43,
-        40
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2025-09-24",
-      "periodEnd": "2026-06-22"
-    },
-    "contractDefect": {
-      "hasDefect": true,
-      "detailType": "숙고기간 위반",
-      "detailText": "",
-      "status": "처리중"
-    },
-    "unpaidStatus": {
-      "hasUnpaid": true,
-      "amount": "745만원",
-      "occurredDate": "2026-02-19",
-      "note": "2개월 이상 연체, 내용증명 발송 완료"
-    },
-    "hygiene": {
-      "result": "시정요구",
-      "lastCheckDate": "2025-12-18",
-      "nextCheckDate": "2026-11-23",
-      "specialNote": "냉장 보관 온도 기록 미흡, 시정 안내함"
-    },
-    "etc": {
-      "memo": "",
-      "author": "-",
-      "date": "-"
-    }
-  },
-  {
-    "id": "CAFE028",
-    "name": "더카페 이랜드 목포점",
-    "brand": "더카페",
-    "code": "CAFE-028",
-    "address": "-",
-    "manager": "-",
-    "territory": {
-      "status": "분쟁중",
-      "scopeType": "구획지정",
-      "scopeText": "",
-      "noteType": "영업지역 중복 있음",
-      "noteText": "",
-      "setDate": "2026-01-07"
-    },
-    "revenueMethod": {
-      "method": "-",
-      "status": "미산정",
-      "calcDate": "-",
-      "estimatedAmount": "-"
-    },
-    "revenueAchievement": {
-      "ratio": 27,
-      "actualAmount": "1,030만",
-      "targetAmount": "3,814만",
-      "trend": [
-        23,
-        23,
-        21,
-        23,
-        27,
-        27
-      ],
-      "periodStart": "2024-11-22",
-      "periodEnd": "2025-07-01"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
       "hasDefect": true,
@@ -8446,18 +8266,198 @@ let stores = [
       "hasUnpaid": false,
       "amount": "0",
       "occurredDate": "-",
-      "note": "최근 12개월 연체 없음"
+      "note": ""
     },
     "hygiene": {
-      "result": "점검예정",
-      "lastCheckDate": "2026-06-01",
-      "nextCheckDate": "2026-10-03",
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
       "specialNote": ""
     },
     "etc": {
-      "memo": "",
-      "author": "-",
-      "date": "-"
+      "memo": "[계약체결단계/하자유무] 숙고기간 위반\n[계약체결일] 15.04.14.\n계약서 없음(첫장 끝장만 있음\n[가맹계약서상 점주] 조지현\n[예상매출액 산정방식] *주변 상권 관련 사항 \n이마트 내라고만 되어 있고 누락\n*영업시간(12) *\n유동인구(2800)* 내점율(5%)*\n실구매율(1.0)*객단가(2700)*341",
+      "author": "엑셀 실사자료",
+      "date": "2026-09-08"
+    }
+  },
+  {
+    "id": "CAFE026",
+    "name": "더카페 이마트 광산점 B1층",
+    "brand": "더카페",
+    "code": "CAFE-026",
+    "address": "-",
+    "manager": "-",
+    "territory": {
+      "status": "정상설정",
+      "scopeType": "직접입력",
+      "scopeText": "이마트 광산점 (특수상권)",
+      "noteType": "전대차",
+      "noteText": "이마트 광산점 (특수상권)",
+      "setDate": "2025-03-31"
+    },
+    "revenueMethod": {
+      "method": "-",
+      "status": "미산정",
+      "calcDate": "-",
+      "estimatedAmount": "-"
+    },
+    "revenueAchievement": {
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
+      "trend": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "periodStart": "-",
+      "periodEnd": "-"
+    },
+    "contractDefect": {
+      "hasDefect": false,
+      "detailType": "-",
+      "detailText": "",
+      "status": "해당없음"
+    },
+    "unpaidStatus": {
+      "hasUnpaid": false,
+      "amount": "0",
+      "occurredDate": "-",
+      "note": ""
+    },
+    "hygiene": {
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
+      "specialNote": ""
+    },
+    "etc": {
+      "memo": "[특이사항] *전대차 계약 \n*계약서 전체 유실\n[계약체결일] 16.02.16.\n[가맹계약서상 점주] (이지혜)\n곽애란\n[영업지역 설정 사항] 이마트 광산점 (특수상권)",
+      "author": "엑셀 실사자료",
+      "date": "2026-09-08"
+    }
+  },
+  {
+    "id": "CAFE025",
+    "name": "더카페 오산시청점",
+    "brand": "더카페",
+    "code": "CAFE-025",
+    "address": "-",
+    "manager": "-",
+    "territory": {
+      "status": "정상설정",
+      "scopeType": "반경지정",
+      "scopeText": "",
+      "noteType": "-",
+      "noteText": "",
+      "setDate": "2026-01-18"
+    },
+    "revenueMethod": {
+      "method": "-",
+      "status": "미산정",
+      "calcDate": "-",
+      "estimatedAmount": "-"
+    },
+    "revenueAchievement": {
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
+      "trend": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "periodStart": "-",
+      "periodEnd": "-"
+    },
+    "contractDefect": {
+      "hasDefect": false,
+      "detailType": "-",
+      "detailText": "",
+      "status": "해당없음"
+    },
+    "unpaidStatus": {
+      "hasUnpaid": false,
+      "amount": "0",
+      "occurredDate": "-",
+      "note": ""
+    },
+    "hygiene": {
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
+      "specialNote": ""
+    },
+    "etc": {
+      "memo": "[계약체결일] *양수도\n계약일:\n15.08.26.\n(부부 명의 변경)\n\n*15.03.04.\n*계약일 :15.08.26.\n[가맹계약서상 점주] 김이선\n강준원\n[영업지역 설정 사항] 점포중심 반경 500미터 원",
+      "author": "엑셀 실사자료",
+      "date": "2026-09-08"
+    }
+  },
+  {
+    "id": "CAFE028",
+    "name": "더카페 이랜드 목포점",
+    "brand": "더카페",
+    "code": "CAFE-028",
+    "address": "-",
+    "manager": "-",
+    "territory": {
+      "status": "정상설정",
+      "scopeType": "반경지정",
+      "scopeText": "",
+      "noteType": "-",
+      "noteText": "",
+      "setDate": "2026-01-07"
+    },
+    "revenueMethod": {
+      "method": "-",
+      "status": "미산정",
+      "calcDate": "-",
+      "estimatedAmount": "-"
+    },
+    "revenueAchievement": {
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
+      "trend": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "periodStart": "-",
+      "periodEnd": "-"
+    },
+    "contractDefect": {
+      "hasDefect": true,
+      "detailType": "기타",
+      "detailText": "",
+      "status": "미해결"
+    },
+    "unpaidStatus": {
+      "hasUnpaid": false,
+      "amount": "0",
+      "occurredDate": "-",
+      "note": ""
+    },
+    "hygiene": {
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
+      "specialNote": ""
+    },
+    "etc": {
+      "memo": "[특이사항] *오픈 임박\n요청서 있음(심, 11.05.06. - 실제와 상이하다면 법위반\n[계약체결일] *11.05.06. (심)\n\n*14.04.11.\n(김) \n\n*16.03.08. (심2)\n[가맹계약서상 점주] 심정영\n김윤태(14.04.11. 양수)\n심정영(16.03.08. )\n[영업지역 설정 사항] 점포 중심 반경 500 미터 원",
+      "author": "엑셀 실사자료",
+      "date": "2026-09-08"
     }
   },
   {
@@ -8482,42 +8482,42 @@ let stores = [
       "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 25,
-      "actualAmount": "1,113만",
-      "targetAmount": "4,450만",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        25,
-        29,
-        26,
-        22,
-        19,
-        25
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2024-05-18",
-      "periodEnd": "2025-05-02"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
-      "hasDefect": true,
-      "detailType": "기타",
-      "detailText": "보증금 조항 불일치",
-      "status": "미해결"
+      "hasDefect": false,
+      "detailType": "-",
+      "detailText": "",
+      "status": "해당없음"
     },
     "unpaidStatus": {
       "hasUnpaid": false,
       "amount": "0",
       "occurredDate": "-",
-      "note": "최근 12개월 연체 없음"
+      "note": ""
     },
     "hygiene": {
-      "result": "부적합",
-      "lastCheckDate": "2025-11-04",
-      "nextCheckDate": "2027-02-15",
-      "specialNote": "방역 소독 미실시로 시정 요구"
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
+      "specialNote": ""
     },
     "etc": {
-      "memo": "연속 위험 신호 확인됨, 우선 관리 대상 지정.",
+      "memo": "연속 위험 신호 확인됨, 우선 관리 대상 지정.\n\n---\n[계약체결일] 17.03.23.\n[가맹계약서상 점주] 한신교회",
       "author": "박도현",
-      "date": "2026-08-15"
+      "date": "2026-09-08"
     }
   },
   {
@@ -8531,53 +8531,53 @@ let stores = [
       "status": "정상설정",
       "scopeType": "반경지정",
       "scopeText": "",
-      "noteType": "자사유통입점",
+      "noteType": "-",
       "noteText": "",
       "setDate": "2023-01-30"
     },
     "revenueMethod": {
-      "method": "예외산정(의사결정o)",
-      "status": "재검토필요",
-      "calcDate": "2024-12-19",
-      "estimatedAmount": "월 1,999만"
+      "method": "-",
+      "status": "미산정",
+      "calcDate": "-",
+      "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 115,
-      "actualAmount": "1.95억",
-      "targetAmount": "1.69억",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        106,
-        110,
-        112,
-        116,
-        114,
-        115
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2026-01-20",
-      "periodEnd": "2026-08-07"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
       "hasDefect": true,
-      "detailType": "서류 미교부",
+      "detailType": "기타",
       "detailText": "",
       "status": "미해결"
     },
     "unpaidStatus": {
-      "hasUnpaid": true,
-      "amount": "268만원",
-      "occurredDate": "2025-12-13",
-      "note": "카드사 정산 오류로 장기 미입금 발생"
+      "hasUnpaid": false,
+      "amount": "0",
+      "occurredDate": "-",
+      "note": ""
     },
     "hygiene": {
-      "result": "부적합",
-      "lastCheckDate": "2026-07-06",
-      "nextCheckDate": "2027-02-04",
-      "specialNote": "조리기구 위생관리 기준 미달로 재점검 필요"
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
+      "specialNote": ""
     },
     "etc": {
-      "memo": "",
-      "author": "-",
-      "date": "-"
+      "memo": "[특이사항] *리뉴얼 예상 견적서 있음 - 당사가 요구한 것인지 여부와 실제 진행 여부에 따라 법위반 소지 있음\n[계약체결일] 14.03.19. (맹)\n15.05.06.(박)\n[가맹계약서상 점주] 우희정(14.03.03. 양수도 요청 )\n맹화순(양수도 계약 체결일 : 14.03.10.)\n박현\n유승경(양수도 계약 체결일 17.04.14.)\n[영업지역 설정 사항] 점포중심 반경 500미터 원",
+      "author": "엑셀 실사자료",
+      "date": "2026-09-08"
     }
   },
   {
@@ -8602,42 +8602,42 @@ let stores = [
       "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 85,
-      "actualAmount": "1.3억",
-      "targetAmount": "1.53억",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        70,
-        70,
-        75,
-        80,
-        84,
-        85
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2024-08-11",
-      "periodEnd": "2025-06-23"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
-      "hasDefect": true,
-      "detailType": "숙고기간 위반",
+      "hasDefect": false,
+      "detailType": "-",
       "detailText": "",
-      "status": "처리중"
+      "status": "해당없음"
     },
     "unpaidStatus": {
       "hasUnpaid": false,
       "amount": "0",
       "occurredDate": "-",
-      "note": "최근 12개월 연체 없음"
+      "note": ""
     },
     "hygiene": {
-      "result": "시정요구",
-      "lastCheckDate": "2025-11-15",
-      "nextCheckDate": "2026-11-07",
-      "specialNote": "조리대 정리정돈 미흡"
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
+      "specialNote": ""
     },
     "etc": {
-      "memo": "",
-      "author": "-",
-      "date": "-"
+      "memo": "[특이사항] *인테리어 견적서 있음 - 당사 거래 강제인지 여부 확인 필요 \n*관리비 조정요청 내용증명 있음 - 임대차 계약관계 개입 여부 확인 필요\n[가맹계약서상 점주] 강소영",
+      "author": "엑셀 실사자료",
+      "date": "2026-09-08"
     }
   },
   {
@@ -8649,32 +8649,32 @@ let stores = [
     "manager": "-",
     "territory": {
       "status": "정상설정",
-      "scopeType": "구획지정",
-      "scopeText": "",
+      "scopeType": "직접입력",
+      "scopeText": "이마트 내 위치 (특수상권)",
       "noteType": "전대차",
-      "noteText": "",
+      "noteText": "이마트 내 위치 (특수상권)",
       "setDate": "2024-02-10"
     },
     "revenueMethod": {
-      "method": "예외산정(의사결정o)",
-      "status": "재검토필요",
-      "calcDate": "2024-10-16",
-      "estimatedAmount": "월 1.42억"
+      "method": "-",
+      "status": "미산정",
+      "calcDate": "-",
+      "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 62,
-      "actualAmount": "8,082만",
-      "targetAmount": "1.3억",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        73,
-        68,
-        65,
-        60,
-        63,
-        62
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2025-05-20",
-      "periodEnd": "2025-12-04"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
       "hasDefect": false,
@@ -8683,21 +8683,21 @@ let stores = [
       "status": "해당없음"
     },
     "unpaidStatus": {
-      "hasUnpaid": true,
-      "amount": "846만원",
-      "occurredDate": "2026-07-18",
-      "note": "본사 정산 시스템 오류로 미입금 장기화"
+      "hasUnpaid": false,
+      "amount": "0",
+      "occurredDate": "-",
+      "note": ""
     },
     "hygiene": {
-      "result": "부적합",
-      "lastCheckDate": "2025-10-11",
-      "nextCheckDate": "2027-01-26",
-      "specialNote": "유통기한 경과 식자재 발견, 즉시 폐기 조치"
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
+      "specialNote": ""
     },
     "etc": {
-      "memo": "",
-      "author": "-",
-      "date": "-"
+      "memo": "[특이사항] *전대차 계약\n*계약 일부 내용 유실\n[계약체결일] 17.07.26.\n[가맹계약서상 점주] 김정희\n이지현 (양수일 : 17.08.18.)\n[영업지역 설정 사항] 이마트 내 위치 (특수상권)",
+      "author": "엑셀 실사자료",
+      "date": "2026-09-08"
     }
   },
   {
@@ -8708,56 +8708,56 @@ let stores = [
     "address": "-",
     "manager": "-",
     "territory": {
-      "status": "미설정",
-      "scopeType": "-",
+      "status": "정상설정",
+      "scopeType": "구획지정",
       "scopeText": "",
       "noteType": "-",
       "noteText": "",
       "setDate": "-"
     },
     "revenueMethod": {
-      "method": "-",
-      "status": "미산정",
+      "method": "예외산정(임의)",
+      "status": "정합성확인됨",
       "calcDate": "-",
       "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 49,
-      "actualAmount": "1,123만",
-      "targetAmount": "2,292만",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        37,
-        41,
-        40,
-        44,
-        47,
-        49
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2024-12-03",
-      "periodEnd": "2025-10-24"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
-      "hasDefect": true,
-      "detailType": "숙고기간 위반",
+      "hasDefect": false,
+      "detailType": "-",
       "detailText": "",
-      "status": "처리중"
+      "status": "해당없음"
     },
     "unpaidStatus": {
-      "hasUnpaid": true,
-      "amount": "300만원",
-      "occurredDate": "2026-08-17",
-      "note": "월말 정산 일정 조정 중"
+      "hasUnpaid": false,
+      "amount": "0",
+      "occurredDate": "-",
+      "note": ""
     },
     "hygiene": {
-      "result": "시정요구",
-      "lastCheckDate": "2025-10-14",
-      "nextCheckDate": "2027-01-09",
-      "specialNote": "조리대 정리정돈 미흡"
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
+      "specialNote": ""
     },
     "etc": {
-      "memo": "위험 항목 다수 발생, 본사 관리팀 개입 검토 중.",
+      "memo": "위험 항목 다수 발생, 본사 관리팀 개입 검토 중.\n\n---\n[특이사항] *계약 일부 내용 유실\n[계약체결일] 17.11.03.\n[가맹계약서상 점주] 황혜경\n[영업지역 설정 사항] 지도에 구획으로 표시 \n(계약서는 확인 안되고 예상 매출액 산정서에만 있음)\n[예상매출액 산정방식] 영업시간 (15) \n유동인구 (11099) 내점율 (10프로) 실구매율 (10.7 프러) 객단가 (3000) 30일",
       "author": "정하은",
-      "date": "2026-08-06"
+      "date": "2026-09-08"
     }
   },
   {
@@ -8768,11 +8768,11 @@ let stores = [
     "address": "-",
     "manager": "-",
     "territory": {
-      "status": "미설정",
-      "scopeType": "-",
-      "scopeText": "",
-      "noteType": "-",
-      "noteText": "",
+      "status": "정상설정",
+      "scopeType": "직접입력",
+      "scopeText": "마트내 위치 (특수상권)",
+      "noteType": "전대차",
+      "noteText": "마트내 위치 (특수상권)",
       "setDate": "-"
     },
     "revenueMethod": {
@@ -8782,42 +8782,42 @@ let stores = [
       "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 49,
-      "actualAmount": "8,737만",
-      "targetAmount": "1.78억",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        43,
-        44,
-        44,
-        43,
-        50,
-        49
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2025-05-30",
-      "periodEnd": "2026-01-15"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
-      "hasDefect": true,
-      "detailType": "서류 미교부",
+      "hasDefect": false,
+      "detailType": "-",
       "detailText": "",
-      "status": "미해결"
+      "status": "해당없음"
     },
     "unpaidStatus": {
-      "hasUnpaid": true,
-      "amount": "1,750만원",
-      "occurredDate": "2026-06-24",
-      "note": "가맹점주 사정으로 로열티 미입금 지속"
+      "hasUnpaid": false,
+      "amount": "0",
+      "occurredDate": "-",
+      "note": ""
     },
     "hygiene": {
-      "result": "적합",
-      "lastCheckDate": "2026-06-04",
-      "nextCheckDate": "2026-12-18",
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
       "specialNote": ""
     },
     "etc": {
-      "memo": "",
-      "author": "-",
-      "date": "-"
+      "memo": "[특이사항] *전대차 계약\n*계약 일부 내용 유실\n[계약체결일] 13.04.15. (김)\n17.08.14. (선)\n[가맹계약서상 점주] 김학규\n김선자 (17.07.28.)\n[영업지역 설정 사항] 마트내 위치 (특수상권)",
+      "author": "엑셀 실사자료",
+      "date": "2026-09-08"
     }
   },
   {
@@ -8829,32 +8829,32 @@ let stores = [
     "manager": "-",
     "territory": {
       "status": "정상설정",
-      "scopeType": "반경지정",
-      "scopeText": "",
-      "noteType": "전대차",
+      "scopeType": "직접입력",
+      "scopeText": "특수상권 아울렛 내 (소)",
+      "noteType": "-",
       "noteText": "",
       "setDate": "2022-11-13"
     },
     "revenueMethod": {
-      "method": "인근가맹점 5곳",
-      "status": "정합성확인됨",
-      "calcDate": "2025-07-10",
-      "estimatedAmount": "월 1.73억"
+      "method": "-",
+      "status": "미산정",
+      "calcDate": "-",
+      "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 27,
-      "actualAmount": "4,655만",
-      "targetAmount": "1.72억",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        14,
-        15,
-        21,
-        25,
-        28,
-        27
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2025-06-09",
-      "periodEnd": "2026-02-03"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
       "hasDefect": true,
@@ -8866,18 +8866,18 @@ let stores = [
       "hasUnpaid": false,
       "amount": "0",
       "occurredDate": "-",
-      "note": "최근 12개월 연체 없음"
+      "note": ""
     },
     "hygiene": {
-      "result": "부적합",
-      "lastCheckDate": "2025-08-25",
-      "nextCheckDate": "2027-01-27",
-      "specialNote": "조리기구 위생관리 기준 미달로 재점검 필요"
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
+      "specialNote": ""
     },
     "etc": {
-      "memo": "",
-      "author": "-",
-      "date": "-"
+      "memo": "[계약체결단계/하자유무] 숙고기간 위반\n[계약체결일] 07.12.31. (황)\n08.11.24. (이)\n13.06.11. (소) 최초\n15.01.16. (소) 재계약\n[가맹계약서상 점주] 최주환\n황정윤 (07.12.31. 양수도)\n이승희\n소원철\n[영업지역 설정 사항] 특수상권 아울렛 내 (소)",
+      "author": "엑셀 실사자료",
+      "date": "2026-09-08"
     }
   },
   {
@@ -8888,10 +8888,10 @@ let stores = [
     "address": "-",
     "manager": "-",
     "territory": {
-      "status": "분쟁중",
-      "scopeType": "구획지정",
-      "scopeText": "",
-      "noteType": "영업지역 침해 있음",
+      "status": "정상설정",
+      "scopeType": "직접입력",
+      "scopeText": "서수원 하나로마트 내",
+      "noteType": "-",
       "noteText": "",
       "setDate": "2025-10-24"
     },
@@ -8902,42 +8902,42 @@ let stores = [
       "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 79,
-      "actualAmount": "8,075만",
-      "targetAmount": "1.02억",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        83,
-        83,
-        86,
-        86,
-        81,
-        79
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2025-07-12",
-      "periodEnd": "2026-06-29"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
-      "hasDefect": true,
-      "detailType": "서류 미교부",
+      "hasDefect": false,
+      "detailType": "-",
       "detailText": "",
-      "status": "처리중"
+      "status": "해당없음"
     },
     "unpaidStatus": {
-      "hasUnpaid": true,
-      "amount": "1,458만원",
-      "occurredDate": "2026-07-31",
-      "note": "카드 매출 정산 지연으로 인한 일시 미입금"
+      "hasUnpaid": false,
+      "amount": "0",
+      "occurredDate": "-",
+      "note": ""
     },
     "hygiene": {
-      "result": "시정요구",
-      "lastCheckDate": "2026-07-15",
-      "nextCheckDate": "2026-12-03",
-      "specialNote": "냉장 보관 온도 기록 미흡, 시정 안내함"
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
+      "specialNote": ""
     },
     "etc": {
-      "memo": "",
-      "author": "-",
-      "date": "-"
+      "memo": "[계약체결일] 12.05.04.(원)\n15.01.21. (원), 재계약\n17.11.21. (이)\n[가맹계약서상 점주] 서금이\n원미진(12.04.26. 양수도 계약서 체결 )\n이보현\n[영업지역 설정 사항] 서수원 하나로마트 내",
+      "author": "엑셀 실사자료",
+      "date": "2026-09-08"
     }
   },
   {
@@ -8948,56 +8948,56 @@ let stores = [
     "address": "-",
     "manager": "-",
     "territory": {
-      "status": "분쟁중",
+      "status": "정상설정",
       "scopeType": "반경지정",
       "scopeText": "",
-      "noteType": "영업지역 중복 있음",
+      "noteType": "-",
       "noteText": "",
       "setDate": "2024-12-23"
     },
     "revenueMethod": {
-      "method": "인근가맹점 5곳",
-      "status": "재검토필요",
-      "calcDate": "2024-08-29",
-      "estimatedAmount": "월 1.4억"
+      "method": "예외산정(임의)",
+      "status": "정합성확인됨",
+      "calcDate": "-",
+      "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 51,
-      "actualAmount": "7,116만",
-      "targetAmount": "1.4억",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        47,
-        52,
-        52,
-        50,
-        52,
-        51
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2025-10-18",
-      "periodEnd": "2026-06-03"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
-      "hasDefect": true,
-      "detailType": "숙고기간 위반",
+      "hasDefect": false,
+      "detailType": "-",
       "detailText": "",
-      "status": "처리중"
+      "status": "해당없음"
     },
     "unpaidStatus": {
-      "hasUnpaid": true,
-      "amount": "1,159만원",
-      "occurredDate": "2025-10-14",
-      "note": "본사 정산 시스템 오류로 미입금 장기화"
+      "hasUnpaid": false,
+      "amount": "0",
+      "occurredDate": "-",
+      "note": ""
     },
     "hygiene": {
-      "result": "시정요구",
-      "lastCheckDate": "2025-07-22",
-      "nextCheckDate": "2027-01-16",
-      "specialNote": "조리대 정리정돈 미흡"
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
+      "specialNote": ""
     },
     "etc": {
-      "memo": "",
-      "author": "-",
-      "date": "-"
+      "memo": "[계약체결일] 19.06.10.\n[가맹계약서상 점주] 김성도\n[영업지역 설정 사항] 점포중심 반경 500미터 원\n[예상매출액 산정방식] 8~22 까지의 유동인구 (15877) * 내점율 (1.5%) * 실구매율 (40%) * (객단가 3000) * 365",
+      "author": "엑셀 실사자료",
+      "date": "2026-09-08"
     }
   },
   {
@@ -9008,9 +9008,9 @@ let stores = [
     "address": "-",
     "manager": "-",
     "territory": {
-      "status": "미설정",
-      "scopeType": "-",
-      "scopeText": "",
+      "status": "정상설정",
+      "scopeType": "직접입력",
+      "scopeText": "계약서상 확인 안됨 \n(초기 점주와의 계약서에 있는 것 같은데 초기 점주 계약 서류 확인 불가 )",
       "noteType": "-",
       "noteText": "",
       "setDate": "-"
@@ -9022,42 +9022,42 @@ let stores = [
       "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 26,
-      "actualAmount": "5,484만",
-      "targetAmount": "2.11억",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        31,
-        31,
-        34,
-        32,
-        33,
-        26
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2025-09-06",
-      "periodEnd": "2026-07-15"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
-      "hasDefect": true,
-      "detailType": "기타",
-      "detailText": "위약금 조항 누락",
-      "status": "미해결"
+      "hasDefect": false,
+      "detailType": "-",
+      "detailText": "",
+      "status": "해당없음"
     },
     "unpaidStatus": {
-      "hasUnpaid": true,
-      "amount": "1,022만원",
-      "occurredDate": "2025-12-31",
-      "note": "본사 정산 시스템 오류로 미입금 장기화"
+      "hasUnpaid": false,
+      "amount": "0",
+      "occurredDate": "-",
+      "note": ""
     },
     "hygiene": {
-      "result": "부적합",
-      "lastCheckDate": "2026-06-22",
-      "nextCheckDate": "2027-01-20",
-      "specialNote": "유통기한 경과 식자재 발견, 즉시 폐기 조치"
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
+      "specialNote": ""
     },
     "etc": {
-      "memo": "전 항목 위험 상태로 즉시 현장 점검 및 계약 해지 검토 대상.",
+      "memo": "전 항목 위험 상태로 즉시 현장 점검 및 계약 해지 검토 대상.\n\n---\n[특이사항] *인테리어 견적서 있음 - 당사 강제인지 여부 확인필요\n[계약체결일] 19.01.02. (이)\n[가맹계약서상 점주] 전주원\n이은영(포괄 양도 양수 계약서, 양수도 계약서 18.12.12.)\n[영업지역 설정 사항] 계약서상 확인 안됨 \n(초기 점주와의 계약서에 있는 것 같은데 초기 점주 계약 서류 확인 불가 )",
       "author": "정하은",
-      "date": "2026-08-09"
+      "date": "2026-09-08"
     }
   },
   {
@@ -9068,56 +9068,56 @@ let stores = [
     "address": "-",
     "manager": "-",
     "territory": {
-      "status": "미설정",
-      "scopeType": "-",
+      "status": "정상설정",
+      "scopeType": "구획지정",
       "scopeText": "",
       "noteType": "-",
       "noteText": "",
       "setDate": "-"
     },
     "revenueMethod": {
-      "method": "-",
-      "status": "미산정",
+      "method": "예외산정(임의)",
+      "status": "정합성확인됨",
       "calcDate": "-",
       "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 59,
-      "actualAmount": "3,053만",
-      "targetAmount": "5,175만",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        50,
-        48,
-        52,
-        54,
-        59,
-        59
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2025-07-16",
-      "periodEnd": "2026-07-13"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
-      "hasDefect": true,
-      "detailType": "기타",
-      "detailText": "보증금 조항 불일치",
-      "status": "미해결"
+      "hasDefect": false,
+      "detailType": "-",
+      "detailText": "",
+      "status": "해당없음"
     },
     "unpaidStatus": {
-      "hasUnpaid": true,
-      "amount": "688만원",
-      "occurredDate": "2026-07-21",
-      "note": "카드사 정산 오류로 장기 미입금 발생"
+      "hasUnpaid": false,
+      "amount": "0",
+      "occurredDate": "-",
+      "note": ""
     },
     "hygiene": {
-      "result": "부적합",
-      "lastCheckDate": "2025-09-16",
-      "nextCheckDate": "2027-03-02",
-      "specialNote": "조리기구 위생관리 기준 미달로 재점검 필요"
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
+      "specialNote": ""
     },
     "etc": {
-      "memo": "",
-      "author": "-",
-      "date": "-"
+      "memo": "[계약체결일] 19.08.07.\n[가맹계약서상 점주] 정수란\n[영업지역 설정 사항] 지도에 구획으로 표시\n[예상매출액 산정방식] 영업시간 (8) * 유동인구 (5367) \n내점율 (1.3%) 객단가 (3600) 365일",
+      "author": "엑셀 실사자료",
+      "date": "2026-09-08"
     }
   },
   {
@@ -9129,32 +9129,32 @@ let stores = [
     "manager": "-",
     "territory": {
       "status": "정상설정",
-      "scopeType": "구획지정",
-      "scopeText": "",
-      "noteType": "전대차",
+      "scopeType": "직접입력",
+      "scopeText": "계약서에 지도 들어있으나 첨부된 지도로는 육안상 확인이 어려움",
+      "noteType": "-",
       "noteText": "",
       "setDate": "2026-01-31"
     },
     "revenueMethod": {
-      "method": "예외산정(의사결정o)",
+      "method": "예외산정(임의)",
       "status": "정합성확인됨",
-      "calcDate": "2024-12-21",
-      "estimatedAmount": "월 1.59억"
+      "calcDate": "-",
+      "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 96,
-      "actualAmount": "1.63억",
-      "targetAmount": "1.7억",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        94,
-        91,
-        90,
-        93,
-        95,
-        96
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2025-07-02",
-      "periodEnd": "2026-05-22"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
       "hasDefect": false,
@@ -9166,18 +9166,18 @@ let stores = [
       "hasUnpaid": false,
       "amount": "0",
       "occurredDate": "-",
-      "note": "최근 12개월 연체 없음"
+      "note": ""
     },
     "hygiene": {
-      "result": "부적합",
-      "lastCheckDate": "2025-12-10",
-      "nextCheckDate": "2027-01-14",
-      "specialNote": "식품위생법 위반사항 적발, 시정명령 발부"
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
+      "specialNote": ""
     },
     "etc": {
-      "memo": "",
-      "author": "-",
-      "date": "-"
+      "memo": "[계약체결일] 19.09.17.\n[가맹계약서상 점주] 이명섭\n[영업지역 설정 사항] 계약서에 지도 들어있으나 첨부된 지도로는 육안상 확인이 어려움\n[예상매출액 산정방식] 유동인구 (14282) \n내점율 (1.3%)\n판매율 (85%) \n객단가 (3400) 365일",
+      "author": "엑셀 실사자료",
+      "date": "2026-09-08"
     }
   },
   {
@@ -9188,33 +9188,33 @@ let stores = [
     "address": "-",
     "manager": "-",
     "territory": {
-      "status": "미설정",
-      "scopeType": "-",
-      "scopeText": "",
+      "status": "정상설정",
+      "scopeType": "직접입력",
+      "scopeText": "첨부 지도 있으나 식별이\n어려움",
       "noteType": "-",
       "noteText": "",
       "setDate": "-"
     },
     "revenueMethod": {
-      "method": "-",
-      "status": "미산정",
+      "method": "예외산정(임의)",
+      "status": "정합성확인됨",
       "calcDate": "-",
       "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 60,
-      "actualAmount": "2,618만",
-      "targetAmount": "4,364만",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        69,
-        66,
-        67,
-        63,
-        60,
-        60
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2024-08-08",
-      "periodEnd": "2025-08-05"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
       "hasDefect": false,
@@ -9223,21 +9223,21 @@ let stores = [
       "status": "해당없음"
     },
     "unpaidStatus": {
-      "hasUnpaid": true,
-      "amount": "1,550만원",
-      "occurredDate": "2026-04-27",
-      "note": "2개월 이상 연체, 내용증명 발송 완료"
+      "hasUnpaid": false,
+      "amount": "0",
+      "occurredDate": "-",
+      "note": ""
     },
     "hygiene": {
-      "result": "점검예정",
-      "lastCheckDate": "2025-12-19",
-      "nextCheckDate": "2027-01-05",
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
       "specialNote": ""
     },
     "etc": {
-      "memo": "",
-      "author": "-",
-      "date": "-"
+      "memo": "[계약체결일] 20.01.17.\n[가맹계약서상 점주] 박순희\n[영업지역 설정 사항] 첨부 지도 있으나 식별이\n어려움\n[예상매출액 산정방식] 유동인구 (21124) * \n내점율 (1.5%) \n구매율 (80%) 객단가 (3200) 판매율 (85%) 264일",
+      "author": "엑셀 실사자료",
+      "date": "2026-09-08"
     }
   },
   {
@@ -9248,56 +9248,56 @@ let stores = [
     "address": "-",
     "manager": "-",
     "territory": {
-      "status": "미설정",
-      "scopeType": "-",
-      "scopeText": "",
+      "status": "정상설정",
+      "scopeType": "직접입력",
+      "scopeText": "계약서상 영업지역 설정 내용 확인 안됨",
       "noteType": "-",
       "noteText": "",
       "setDate": "-"
     },
     "revenueMethod": {
-      "method": "인근가맹점 5곳",
-      "status": "재검토필요",
-      "calcDate": "2024-08-04",
-      "estimatedAmount": "월 4,811만"
+      "method": "예외산정(임의)",
+      "status": "정합성확인됨",
+      "calcDate": "-",
+      "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 62,
-      "actualAmount": "6,535만",
-      "targetAmount": "1.05억",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        75,
-        71,
-        69,
-        65,
-        59,
-        62
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2025-01-25",
-      "periodEnd": "2025-11-24"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
-      "hasDefect": true,
-      "detailType": "숙고기간 위반",
+      "hasDefect": false,
+      "detailType": "-",
       "detailText": "",
-      "status": "해결완료"
+      "status": "해당없음"
     },
     "unpaidStatus": {
-      "hasUnpaid": true,
-      "amount": "1,061만원",
-      "occurredDate": "2026-06-15",
-      "note": "카드사 정산 오류로 장기 미입금 발생"
+      "hasUnpaid": false,
+      "amount": "0",
+      "occurredDate": "-",
+      "note": ""
     },
     "hygiene": {
-      "result": "적합",
-      "lastCheckDate": "2025-12-27",
-      "nextCheckDate": "2026-11-11",
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
       "specialNote": ""
     },
     "etc": {
-      "memo": "",
-      "author": "-",
-      "date": "-"
+      "memo": "[계약체결일] 19.08.05.\n[가맹계약서상 점주] 김미진\n[영업지역 설정 사항] 계약서상 영업지역 설정 내용 확인 안됨\n[예상매출액 산정방식] 영업시간 (12)동안의 유동인구 (15877) * 내점율 (1.5%) * 실구매율 (40%) 객단가 (3000) * 365",
+      "author": "엑셀 실사자료",
+      "date": "2026-09-08"
     }
   },
   {
@@ -9309,55 +9309,55 @@ let stores = [
     "manager": "-",
     "territory": {
       "status": "정상설정",
-      "scopeType": "구획지정",
-      "scopeText": "",
-      "noteType": "전대차",
+      "scopeType": "직접입력",
+      "scopeText": "롯데마트 영종도점 내",
+      "noteType": "-",
       "noteText": "",
       "setDate": "2025-05-01"
     },
     "revenueMethod": {
       "method": "인근가맹점 5곳",
-      "status": "재검토필요",
-      "calcDate": "2024-10-02",
-      "estimatedAmount": "월 9,995만"
+      "status": "정합성확인됨",
+      "calcDate": "-",
+      "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 70,
-      "actualAmount": "7,790만",
-      "targetAmount": "1.11억",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        81,
-        77,
-        77,
-        78,
-        78,
-        70
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2025-06-28",
-      "periodEnd": "2026-06-18"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
-      "hasDefect": true,
-      "detailType": "숙고기간 위반",
+      "hasDefect": false,
+      "detailType": "-",
       "detailText": "",
-      "status": "처리중"
+      "status": "해당없음"
     },
     "unpaidStatus": {
-      "hasUnpaid": true,
-      "amount": "1,689만원",
-      "occurredDate": "2026-08-13",
-      "note": "카드 매출 정산 지연으로 인한 일시 미입금"
+      "hasUnpaid": false,
+      "amount": "0",
+      "occurredDate": "-",
+      "note": ""
     },
     "hygiene": {
-      "result": "부적합",
-      "lastCheckDate": "2026-05-22",
-      "nextCheckDate": "2027-02-19",
-      "specialNote": "조리기구 위생관리 기준 미달로 재점검 필요"
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
+      "specialNote": ""
     },
     "etc": {
-      "memo": "",
-      "author": "-",
-      "date": "-"
+      "memo": "[특이사항] *사입 규제 공문 있음\n[계약체결일] 20.05.14.\n[가맹계약서상 점주] 남순덕\n[영업지역 설정 사항] 롯데마트 영종도점 내\n[예상매출액 산정방식] 유사 5개 점포 pos 1년간 매출",
+      "author": "엑셀 실사자료",
+      "date": "2026-09-08"
     }
   },
   {
@@ -9369,55 +9369,55 @@ let stores = [
     "manager": "-",
     "territory": {
       "status": "정상설정",
-      "scopeType": "구획지정",
-      "scopeText": "",
-      "noteType": "자사유통입점",
+      "scopeType": "직접입력",
+      "scopeText": "엔터식스 안양역점 내",
+      "noteType": "-",
       "noteText": "",
       "setDate": "2022-12-23"
     },
     "revenueMethod": {
-      "method": "인근가맹점 5곳",
+      "method": "예외산정(임의)",
       "status": "정합성확인됨",
-      "calcDate": "2024-07-17",
-      "estimatedAmount": "월 8,885만"
+      "calcDate": "-",
+      "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 47,
-      "actualAmount": "8,902만",
-      "targetAmount": "1.89억",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        48,
-        44,
-        45,
-        43,
-        41,
-        47
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2025-10-02",
-      "periodEnd": "2026-04-21"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
-      "hasDefect": true,
-      "detailType": "기타",
-      "detailText": "보증금 조항 불일치",
-      "status": "미해결"
+      "hasDefect": false,
+      "detailType": "-",
+      "detailText": "",
+      "status": "해당없음"
     },
     "unpaidStatus": {
-      "hasUnpaid": true,
-      "amount": "1,397만원",
-      "occurredDate": "2026-06-04",
-      "note": "본사 정산 시스템 오류로 미입금 장기화"
+      "hasUnpaid": false,
+      "amount": "0",
+      "occurredDate": "-",
+      "note": ""
     },
     "hygiene": {
-      "result": "적합",
-      "lastCheckDate": "2026-05-05",
-      "nextCheckDate": "2027-03-12",
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
       "specialNote": ""
     },
     "etc": {
-      "memo": "",
-      "author": "-",
-      "date": "-"
+      "memo": "[계약체결일] 20.11.20. (계약서 표지 기재)\n[가맹계약서상 점주] 박아란\n[영업지역 설정 사항] 엔터식스 안양역점 내\n[예상매출액 산정방식] 영업시간 (12) * \n1일 유동인구 (31210 ) * 내점율 (0.7% ) * 실구매율 (100%) * 객단가 (4400) * 365",
+      "author": "엑셀 실사자료",
+      "date": "2026-09-08"
     }
   },
   {
@@ -9428,56 +9428,56 @@ let stores = [
     "address": "-",
     "manager": "-",
     "territory": {
-      "status": "미설정",
-      "scopeType": "-",
+      "status": "정상설정",
+      "scopeType": "반경지정",
       "scopeText": "",
       "noteType": "-",
       "noteText": "",
       "setDate": "-"
     },
     "revenueMethod": {
-      "method": "인근가맹점 5곳",
-      "status": "재검토필요",
-      "calcDate": "2024-07-03",
-      "estimatedAmount": "월 1.6억"
+      "method": "예외산정(임의)",
+      "status": "정합성확인됨",
+      "calcDate": "-",
+      "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 74,
-      "actualAmount": "1,513만",
-      "targetAmount": "2,044만",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        65,
-        64,
-        69,
-        72,
-        74,
-        74
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2024-10-02",
-      "periodEnd": "2025-04-14"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
-      "hasDefect": true,
-      "detailType": "서류 미교부",
+      "hasDefect": false,
+      "detailType": "-",
       "detailText": "",
-      "status": "처리중"
+      "status": "해당없음"
     },
     "unpaidStatus": {
-      "hasUnpaid": true,
-      "amount": "351만원",
-      "occurredDate": "2026-08-02",
-      "note": "월말 정산 일정 조정 중"
+      "hasUnpaid": false,
+      "amount": "0",
+      "occurredDate": "-",
+      "note": ""
     },
     "hygiene": {
-      "result": "시정요구",
-      "lastCheckDate": "2026-05-19",
-      "nextCheckDate": "2027-02-23",
-      "specialNote": "위생모 미착용 적발, 현장 시정 완료"
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
+      "specialNote": ""
     },
     "etc": {
-      "memo": "",
-      "author": "-",
-      "date": "-"
+      "memo": "[계약체결일] 20.08.06.\n[가맹계약서상 점주] 허정화\n[영업지역 설정 사항] 점포중심 반경 500미터 원\n[예상매출액 산정방식] 시간당 유동인구 (18529) *\n내점율 (1.3% ) *실구매율 (65%) * 객단가 (3400) * 365일",
+      "author": "엑셀 실사자료",
+      "date": "2026-09-08"
     }
   },
   {
@@ -9488,33 +9488,33 @@ let stores = [
     "address": "-",
     "manager": "-",
     "territory": {
-      "status": "미설정",
-      "scopeType": "-",
-      "scopeText": "",
-      "noteType": "-",
-      "noteText": "",
+      "status": "정상설정",
+      "scopeType": "직접입력",
+      "scopeText": "특수상권 유통점 내",
+      "noteType": "영업지역 침해 있음",
+      "noteText": "특수상권 유통점 내",
       "setDate": "-"
     },
     "revenueMethod": {
-      "method": "예외산정(의사결정o)",
-      "status": "재검토필요",
-      "calcDate": "2026-04-21",
-      "estimatedAmount": "월 1,527만"
+      "method": "-",
+      "status": "미산정",
+      "calcDate": "-",
+      "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 75,
-      "actualAmount": "3,695만",
-      "targetAmount": "4,926만",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        86,
-        80,
-        75,
-        76,
-        74,
-        75
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2025-08-22",
-      "periodEnd": "2026-04-30"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
       "hasDefect": true,
@@ -9523,21 +9523,21 @@ let stores = [
       "status": "미해결"
     },
     "unpaidStatus": {
-      "hasUnpaid": true,
-      "amount": "336만원",
-      "occurredDate": "2025-11-13",
-      "note": "카드사 정산 오류로 장기 미입금 발생"
+      "hasUnpaid": false,
+      "amount": "0",
+      "occurredDate": "-",
+      "note": ""
     },
     "hygiene": {
-      "result": "부적합",
-      "lastCheckDate": "2025-08-21",
-      "nextCheckDate": "2027-03-13",
-      "specialNote": "식품위생법 위반사항 적발, 시정명령 발부"
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
+      "specialNote": ""
     },
     "etc": {
-      "memo": "",
-      "author": "-",
-      "date": "-"
+      "memo": "[계약체결단계/하자유무] 사전 서류 제공내역 없음\n[특이사항] *불광 7층\n 오픈 동의서 (20.02.26) - 영업지역 침해 법위반 \n*영업이행서 있음 - 판매목표 강제 법위반\n*불광 7층 최용수 2007년 계약서 있음\n[계약체결일] *최초 계약일 08.03. 01.\n*재계약일 15.03.03\n[가맹계약서상 점주] 김복자\n*명의변경 신청서 있음\n[영업지역 설정 사항] 특수상권 유통점 내",
+      "author": "엑셀 실사자료",
+      "date": "2026-09-08"
     }
   },
   {
@@ -9548,56 +9548,56 @@ let stores = [
     "address": "-",
     "manager": "-",
     "territory": {
-      "status": "미설정",
-      "scopeType": "-",
-      "scopeText": "",
+      "status": "정상설정",
+      "scopeType": "직접입력",
+      "scopeText": "특수상권 유통점 내 입점 뉴코아 강남점 2관 3층 전체",
       "noteType": "-",
       "noteText": "",
       "setDate": "-"
     },
     "revenueMethod": {
-      "method": "인근가맹점 5곳",
-      "status": "재검토필요",
-      "calcDate": "2024-11-12",
-      "estimatedAmount": "월 7,237만"
+      "method": "예외산정(임의)",
+      "status": "정합성확인됨",
+      "calcDate": "-",
+      "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 53,
-      "actualAmount": "1,233만",
-      "targetAmount": "2,327만",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        55,
-        53,
-        53,
-        53,
-        51,
-        53
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2025-04-30",
-      "periodEnd": "2026-04-04"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
       "hasDefect": true,
-      "detailType": "서류 미교부",
+      "detailType": "숙고기간 위반",
       "detailText": "",
       "status": "미해결"
     },
     "unpaidStatus": {
-      "hasUnpaid": true,
-      "amount": "613만원",
-      "occurredDate": "2025-12-25",
-      "note": "2개월 이상 연체, 내용증명 발송 완료"
+      "hasUnpaid": false,
+      "amount": "0",
+      "occurredDate": "-",
+      "note": ""
     },
     "hygiene": {
-      "result": "부적합",
-      "lastCheckDate": "2025-11-11",
-      "nextCheckDate": "2026-11-25",
-      "specialNote": "방역 소독 미실시로 시정 요구"
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
+      "specialNote": ""
     },
     "etc": {
-      "memo": "연속 위험 신호 확인됨, 우선 관리 대상 지정.",
+      "memo": "연속 위험 신호 확인됨, 우선 관리 대상 지정.\n\n---\n[계약체결단계/하자유무] 숙고기간 위반\n[특이사항] *직영 -> 가맹 전환건,양수도 계약서 20.10.23. 체결\n[계약체결일] 계약서상 체결일자 누락\n[가맹계약서상 점주] 이연수\n[영업지역 설정 사항] 특수상권 유통점 내 입점 뉴코아 강남점 2관 3층 전체\n[예상매출액 산정방식] 양수도 매장\n1년 pos매출",
       "author": "이수민",
-      "date": "2026-08-20"
+      "date": "2026-09-08"
     }
   },
   {
@@ -9617,24 +9617,24 @@ let stores = [
     },
     "revenueMethod": {
       "method": "예외산정(임의)",
-      "status": "재검토필요",
-      "calcDate": "2025-09-20",
-      "estimatedAmount": "월 1.6억"
+      "status": "정합성확인됨",
+      "calcDate": "-",
+      "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 37,
-      "actualAmount": "1,740만",
-      "targetAmount": "4,704만",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        37,
-        37,
-        33,
-        35,
-        40,
-        37
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2025-08-10",
-      "periodEnd": "2026-06-13"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
       "hasDefect": false,
@@ -9643,16 +9643,16 @@ let stores = [
       "status": "해당없음"
     },
     "unpaidStatus": {
-      "hasUnpaid": true,
-      "amount": "774만원",
-      "occurredDate": "2026-08-24",
-      "note": "카드 매출 정산 지연으로 인한 일시 미입금"
+      "hasUnpaid": false,
+      "amount": "0",
+      "occurredDate": "-",
+      "note": ""
     },
     "hygiene": {
-      "result": "부적합",
-      "lastCheckDate": "2026-07-10",
-      "nextCheckDate": "2026-12-24",
-      "specialNote": "유통기한 경과 식자재 발견, 즉시 폐기 조치"
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
+      "specialNote": ""
     },
     "etc": {
       "memo": "",
@@ -9678,23 +9678,23 @@ let stores = [
     "revenueMethod": {
       "method": "인근가맹점 5곳",
       "status": "정합성확인됨",
-      "calcDate": "2025-10-18",
-      "estimatedAmount": "월 1.38억"
+      "calcDate": "-",
+      "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 91,
-      "actualAmount": "1.49억",
-      "targetAmount": "1.64억",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        79,
-        84,
-        83,
-        83,
-        83,
-        91
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2025-08-06",
-      "periodEnd": "2026-08-02"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
       "hasDefect": false,
@@ -9703,16 +9703,16 @@ let stores = [
       "status": "해당없음"
     },
     "unpaidStatus": {
-      "hasUnpaid": true,
-      "amount": "697만원",
-      "occurredDate": "2026-07-19",
-      "note": "본사 정산 시스템 오류로 미입금 장기화"
+      "hasUnpaid": false,
+      "amount": "0",
+      "occurredDate": "-",
+      "note": ""
     },
     "hygiene": {
-      "result": "부적합",
-      "lastCheckDate": "2026-07-31",
-      "nextCheckDate": "2027-02-05",
-      "specialNote": "조리기구 위생관리 기준 미달로 재점검 필요"
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
+      "specialNote": ""
     },
     "etc": {
       "memo": "",
@@ -9742,19 +9742,19 @@ let stores = [
       "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 44,
-      "actualAmount": "2,958만",
-      "targetAmount": "6,723만",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        52,
-        52,
-        46,
-        43,
-        46,
-        44
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2025-01-20",
-      "periodEnd": "2025-07-27"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
       "hasDefect": true,
@@ -9763,15 +9763,15 @@ let stores = [
       "status": "미해결"
     },
     "unpaidStatus": {
-      "hasUnpaid": true,
-      "amount": "1,521만원",
-      "occurredDate": "2026-08-24",
-      "note": "카드 매출 정산 지연으로 인한 일시 미입금"
+      "hasUnpaid": false,
+      "amount": "0",
+      "occurredDate": "-",
+      "note": ""
     },
     "hygiene": {
-      "result": "점검예정",
-      "lastCheckDate": "2025-12-25",
-      "nextCheckDate": "2027-02-17",
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
       "specialNote": ""
     },
     "etc": {
@@ -9796,48 +9796,48 @@ let stores = [
       "setDate": "2025-03-22"
     },
     "revenueMethod": {
-      "method": "인근가맹점 5곳",
-      "status": "재검토필요",
-      "calcDate": "2025-10-23",
-      "estimatedAmount": "월 1.66억"
+      "method": "예외산정(임의)",
+      "status": "정합성확인됨",
+      "calcDate": "-",
+      "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 86,
-      "actualAmount": "6,119만",
-      "targetAmount": "7,115만",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        76,
-        80,
-        84,
-        87,
-        90,
-        86
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2025-01-18",
-      "periodEnd": "2025-11-21"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
       "hasDefect": true,
       "detailType": "숙고기간 위반",
       "detailText": "",
-      "status": "처리중"
+      "status": "미해결"
     },
     "unpaidStatus": {
-      "hasUnpaid": true,
-      "amount": "187만원",
-      "occurredDate": "2026-08-10",
-      "note": "로열티 분할 협의 중"
+      "hasUnpaid": false,
+      "amount": "0",
+      "occurredDate": "-",
+      "note": ""
     },
     "hygiene": {
-      "result": "시정요구",
-      "lastCheckDate": "2025-11-18",
-      "nextCheckDate": "2026-10-07",
-      "specialNote": "냉장 보관 온도 기록 미흡, 시정 안내함"
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
+      "specialNote": ""
     },
     "etc": {
-      "memo": "",
-      "author": "-",
-      "date": "-"
+      "memo": "[계약체결단계/하자유무] 숙고기간 위반\n[특이사항] *수익과\n 운영 방식에의 마찰로 인한 스트레스로 명의변경 신청 (이종한)\n\n*이포인트 마일리지 합의서 있음 (권, 16.04.01. )\n[가맹계약서상 점주] 이종한\n권광우\n김지예\n* 파일상 최종 점주 김지예이나 관련 일체 서류 없음\n[예상매출액 산정방식] 영업시간 (14) * \n1일 유동인구 (33719) * 내점율 (1%) * 실구매율 (90%) * 객단가 (3500) * 365\n\n* 예상 매출액 산정 근거 있으나 누구한테 언제 준건지 일체 서류 없음 위의 수식 작성된 낱장만 있음",
+      "author": "엑셀 실사자료",
+      "date": "2026-09-08"
     }
   },
   {
@@ -9862,19 +9862,19 @@ let stores = [
       "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 120,
-      "actualAmount": "2.1억",
-      "targetAmount": "1.75억",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        131,
-        129,
-        123,
-        122,
-        119,
-        120
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2025-03-24",
-      "periodEnd": "2025-12-29"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
       "hasDefect": true,
@@ -9883,16 +9883,16 @@ let stores = [
       "status": "미해결"
     },
     "unpaidStatus": {
-      "hasUnpaid": true,
-      "amount": "1,411만원",
-      "occurredDate": "2026-01-24",
-      "note": "가맹점주 사정으로 로열티 미입금 지속"
+      "hasUnpaid": false,
+      "amount": "0",
+      "occurredDate": "-",
+      "note": ""
     },
     "hygiene": {
-      "result": "부적합",
-      "lastCheckDate": "2025-09-15",
-      "nextCheckDate": "2027-02-17",
-      "specialNote": "방역 소독 미실시로 시정 요구"
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
+      "specialNote": ""
     },
     "etc": {
       "memo": "",
@@ -9917,24 +9917,24 @@ let stores = [
     },
     "revenueMethod": {
       "method": "인근가맹점 5곳",
-      "status": "재검토필요",
-      "calcDate": "2024-10-27",
-      "estimatedAmount": "월 1.32억"
+      "status": "정합성확인됨",
+      "calcDate": "-",
+      "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 85,
-      "actualAmount": "1.19억",
-      "targetAmount": "1.4억",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        89,
-        87,
-        83,
-        83,
-        83,
-        85
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2025-01-07",
-      "periodEnd": "2025-12-21"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
       "hasDefect": true,
@@ -9943,16 +9943,16 @@ let stores = [
       "status": "처리중"
     },
     "unpaidStatus": {
-      "hasUnpaid": true,
-      "amount": "1,587만원",
-      "occurredDate": "2026-08-06",
-      "note": "카드 매출 정산 지연으로 인한 일시 미입금"
+      "hasUnpaid": false,
+      "amount": "0",
+      "occurredDate": "-",
+      "note": ""
     },
     "hygiene": {
-      "result": "시정요구",
-      "lastCheckDate": "2025-11-01",
-      "nextCheckDate": "2026-10-25",
-      "specialNote": "냉장 보관 온도 기록 미흡, 시정 안내함"
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
+      "specialNote": ""
     },
     "etc": {
       "memo": "",
@@ -9982,19 +9982,19 @@ let stores = [
       "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 26,
-      "actualAmount": "2,742만",
-      "targetAmount": "1.05억",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        32,
-        33,
-        30,
-        28,
-        24,
-        26
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2025-09-27",
-      "periodEnd": "2026-07-14"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
       "hasDefect": true,
@@ -10003,16 +10003,16 @@ let stores = [
       "status": "처리중"
     },
     "unpaidStatus": {
-      "hasUnpaid": true,
-      "amount": "828만원",
-      "occurredDate": "2026-02-23",
-      "note": "본사 정산 시스템 오류로 미입금 장기화"
+      "hasUnpaid": false,
+      "amount": "0",
+      "occurredDate": "-",
+      "note": ""
     },
     "hygiene": {
-      "result": "시정요구",
-      "lastCheckDate": "2025-10-29",
-      "nextCheckDate": "2027-02-20",
-      "specialNote": "냉장 보관 온도 기록 미흡, 시정 안내함"
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
+      "specialNote": ""
     },
     "etc": {
       "memo": "연속 위험 신호 확인됨, 우선 관리 대상 지정.",
@@ -10028,56 +10028,56 @@ let stores = [
     "address": "-",
     "manager": "-",
     "territory": {
-      "status": "분쟁중",
-      "scopeType": "구획지정",
-      "scopeText": "",
-      "noteType": "영업지역 침해 있음",
+      "status": "정상설정",
+      "scopeType": "직접입력",
+      "scopeText": "확인불가 (계약서에 지도 없음)",
+      "noteType": "-",
       "noteText": "",
       "setDate": "2025-07-22"
     },
     "revenueMethod": {
-      "method": "예외산정(의사결정o)",
-      "status": "재검토필요",
-      "calcDate": "2025-04-01",
-      "estimatedAmount": "월 2,204만"
+      "method": "예외산정(임의)",
+      "status": "정합성확인됨",
+      "calcDate": "-",
+      "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 72,
-      "actualAmount": "6,546만",
-      "targetAmount": "9,092만",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        63,
-        67,
-        71,
-        74,
-        71,
-        72
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2024-07-10",
-      "periodEnd": "2025-05-24"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
       "hasDefect": true,
-      "detailType": "서류 미교부",
+      "detailType": "숙고기간 위반",
       "detailText": "",
-      "status": "처리중"
+      "status": "미해결"
     },
     "unpaidStatus": {
-      "hasUnpaid": true,
-      "amount": "456만원",
-      "occurredDate": "2026-07-29",
-      "note": "로열티 분할 협의 중"
+      "hasUnpaid": false,
+      "amount": "0",
+      "occurredDate": "-",
+      "note": ""
     },
     "hygiene": {
-      "result": "시정요구",
-      "lastCheckDate": "2025-12-28",
-      "nextCheckDate": "2026-12-18",
-      "specialNote": "조리대 정리정돈 미흡"
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
+      "specialNote": ""
     },
     "etc": {
-      "memo": "",
-      "author": "-",
-      "date": "-"
+      "memo": "[계약체결단계/하자유무] 숙고기간 위반\n[특이사항] *계약 체결일자 확인 불가\n[계약체결일] 계약서에 \n가맹계약 체결일이 없음\n[가맹계약서상 점주] 박소현\n[영업지역 설정 사항] 확인불가 (계약서에 지도 없음)\n[예상매출액 산정방식] 유사 가맹점  평균 매출액 (158434000) \n입지여건 가중치 (10%) 경쟁강도 가중치 (-5%)",
+      "author": "엑셀 실사자료",
+      "date": "2026-09-08"
     }
   },
   {
@@ -10097,24 +10097,24 @@ let stores = [
     },
     "revenueMethod": {
       "method": "인근가맹점 5곳",
-      "status": "재검토필요",
-      "calcDate": "2026-01-28",
-      "estimatedAmount": "월 8,963만"
+      "status": "정합성확인됨",
+      "calcDate": "-",
+      "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 79,
-      "actualAmount": "5,822만",
-      "targetAmount": "7,369만",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        64,
-        63,
-        63,
-        71,
-        77,
-        79
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2025-07-06",
-      "periodEnd": "2026-03-08"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
       "hasDefect": true,
@@ -10123,16 +10123,16 @@ let stores = [
       "status": "해결완료"
     },
     "unpaidStatus": {
-      "hasUnpaid": true,
-      "amount": "822만원",
-      "occurredDate": "2026-08-22",
-      "note": "카드 매출 정산 지연으로 인한 일시 미입금"
+      "hasUnpaid": false,
+      "amount": "0",
+      "occurredDate": "-",
+      "note": ""
     },
     "hygiene": {
-      "result": "시정요구",
-      "lastCheckDate": "2025-12-25",
-      "nextCheckDate": "2026-11-13",
-      "specialNote": "위생모 미착용 적발, 현장 시정 완료"
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
+      "specialNote": ""
     },
     "etc": {
       "memo": "",
@@ -10162,19 +10162,19 @@ let stores = [
       "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 55,
-      "actualAmount": "3,011만",
-      "targetAmount": "5,475만",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        69,
-        68,
-        62,
-        60,
-        56,
-        55
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2025-08-28",
-      "periodEnd": "2026-06-24"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
       "hasDefect": false,
@@ -10183,15 +10183,15 @@ let stores = [
       "status": "해당없음"
     },
     "unpaidStatus": {
-      "hasUnpaid": true,
-      "amount": "1,178만원",
-      "occurredDate": "2026-05-06",
-      "note": "2개월 이상 연체, 내용증명 발송 완료"
+      "hasUnpaid": false,
+      "amount": "0",
+      "occurredDate": "-",
+      "note": ""
     },
     "hygiene": {
-      "result": "점검예정",
-      "lastCheckDate": "2026-01-01",
-      "nextCheckDate": "2026-10-30",
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
       "specialNote": ""
     },
     "etc": {
@@ -10208,56 +10208,56 @@ let stores = [
     "address": "-",
     "manager": "-",
     "territory": {
-      "status": "분쟁중",
-      "scopeType": "반경지정",
+      "status": "정상설정",
+      "scopeType": "구획지정",
       "scopeText": "",
-      "noteType": "영업지역 중복 있음",
+      "noteType": "-",
       "noteText": "",
       "setDate": "2025-04-14"
     },
     "revenueMethod": {
       "method": "예외산정(임의)",
-      "status": "재검토필요",
-      "calcDate": "2026-02-15",
-      "estimatedAmount": "월 1.3억"
+      "status": "정합성확인됨",
+      "calcDate": "-",
+      "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 70,
-      "actualAmount": "1.15억",
-      "targetAmount": "1.64억",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        74,
-        69,
-        70,
-        67,
-        67,
-        70
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2025-05-26",
-      "periodEnd": "2026-04-25"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
-      "hasDefect": true,
-      "detailType": "서류 미교부",
+      "hasDefect": false,
+      "detailType": "-",
       "detailText": "",
-      "status": "처리중"
+      "status": "해당없음"
     },
     "unpaidStatus": {
-      "hasUnpaid": true,
-      "amount": "1,047만원",
-      "occurredDate": "2026-08-06",
-      "note": "카드 매출 정산 지연으로 인한 일시 미입금"
+      "hasUnpaid": false,
+      "amount": "0",
+      "occurredDate": "-",
+      "note": ""
     },
     "hygiene": {
-      "result": "점검예정",
-      "lastCheckDate": "2025-11-16",
-      "nextCheckDate": "2026-12-05",
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
       "specialNote": ""
     },
     "etc": {
-      "memo": "",
-      "author": "-",
-      "date": "-"
+      "memo": "[특이사항] *계약 일부 내용 유실\n[계약체결일] 16.01.29.\n17.-09.14. (양수도 계약일), 가맹 계약 체결일\n[가맹계약서상 점주] 지명훈\n황지원\n[영업지역 설정 사항] 지도에 구획 표시\n[예상매출액 산정방식] *영업시간 (14) \n유동인구 (-) 내점율 (1프로) 실구매율 (90프로) 객단가 (3200) 264",
+      "author": "엑셀 실사자료",
+      "date": "2026-09-08"
     }
   },
   {
@@ -10277,24 +10277,24 @@ let stores = [
     },
     "revenueMethod": {
       "method": "인근가맹점 5곳",
-      "status": "재검토필요",
-      "calcDate": "2025-11-12",
-      "estimatedAmount": "월 7,166만"
+      "status": "정합성확인됨",
+      "calcDate": "-",
+      "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 77,
-      "actualAmount": "1.64억",
-      "targetAmount": "2.14억",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        78,
-        75,
-        73,
-        77,
-        75,
-        77
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2025-07-18",
-      "periodEnd": "2026-07-16"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
       "hasDefect": true,
@@ -10306,12 +10306,12 @@ let stores = [
       "hasUnpaid": false,
       "amount": "0",
       "occurredDate": "-",
-      "note": "최근 12개월 연체 없음"
+      "note": ""
     },
     "hygiene": {
-      "result": "적합",
-      "lastCheckDate": "2026-07-03",
-      "nextCheckDate": "2027-01-04",
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
       "specialNote": ""
     },
     "etc": {
@@ -10328,56 +10328,56 @@ let stores = [
     "address": "-",
     "manager": "-",
     "territory": {
-      "status": "분쟁중",
-      "scopeType": "구획지정",
+      "status": "정상설정",
+      "scopeType": "반경지정",
       "scopeText": "",
-      "noteType": "영업지역 중복 있음",
+      "noteType": "-",
       "noteText": "",
       "setDate": "2025-11-06"
     },
     "revenueMethod": {
-      "method": "예외산정(임의)",
-      "status": "재검토필요",
-      "calcDate": "2024-11-11",
-      "estimatedAmount": "월 1.23억"
+      "method": "-",
+      "status": "미산정",
+      "calcDate": "-",
+      "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 86,
-      "actualAmount": "1억",
-      "targetAmount": "1.16억",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        83,
-        80,
-        81,
-        86,
-        86,
-        86
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2025-11-20",
-      "periodEnd": "2026-07-22"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
       "hasDefect": true,
-      "detailType": "숙고기간 위반",
+      "detailType": "서류 미교부",
       "detailText": "",
-      "status": "처리중"
+      "status": "미해결"
     },
     "unpaidStatus": {
-      "hasUnpaid": true,
-      "amount": "772만원",
-      "occurredDate": "2026-08-15",
-      "note": "월말 정산 일정 조정 중"
+      "hasUnpaid": false,
+      "amount": "0",
+      "occurredDate": "-",
+      "note": ""
     },
     "hygiene": {
-      "result": "시정요구",
-      "lastCheckDate": "2026-07-27",
-      "nextCheckDate": "2027-01-12",
-      "specialNote": "조리대 정리정돈 미흡"
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
+      "specialNote": ""
     },
     "etc": {
-      "memo": "",
-      "author": "-",
-      "date": "-"
+      "memo": "[계약체결단계/하자유무] 사전 서류 제공내역 없음\n[특이사항] *오픈 임박 요청서 있음 (11.03.31.)-실질과 다르다면 법위반\n\n*영업 이행서 있음-목표매출강제행위 법위반\n[계약체결일] *최초계약일: 11.03.31\n.\n\n*재계약일 :15.01.22.\n[가맹계약서상 점주] 문민욱\n[영업지역 설정 사항] 반경 500미터 원",
+      "author": "엑셀 실사자료",
+      "date": "2026-09-08"
     }
   },
   {
@@ -10402,19 +10402,19 @@ let stores = [
       "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 100,
-      "actualAmount": "1.1억",
-      "targetAmount": "1.1억",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        103,
-        99,
-        96,
-        99,
-        104,
-        100
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2025-04-21",
-      "periodEnd": "2026-01-06"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
       "hasDefect": true,
@@ -10423,16 +10423,16 @@ let stores = [
       "status": "미해결"
     },
     "unpaidStatus": {
-      "hasUnpaid": true,
-      "amount": "300만원",
-      "occurredDate": "2026-01-02",
-      "note": "카드사 정산 오류로 장기 미입금 발생"
+      "hasUnpaid": false,
+      "amount": "0",
+      "occurredDate": "-",
+      "note": ""
     },
     "hygiene": {
-      "result": "시정요구",
-      "lastCheckDate": "2025-11-23",
-      "nextCheckDate": "2027-01-25",
-      "specialNote": "조리대 정리정돈 미흡"
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
+      "specialNote": ""
     },
     "etc": {
       "memo": "",
@@ -10462,19 +10462,19 @@ let stores = [
       "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 60,
-      "actualAmount": "1.18억",
-      "targetAmount": "1.97억",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        65,
-        66,
-        67,
-        63,
-        60,
-        60
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2025-03-18",
-      "periodEnd": "2026-03-14"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
       "hasDefect": true,
@@ -10483,16 +10483,16 @@ let stores = [
       "status": "미해결"
     },
     "unpaidStatus": {
-      "hasUnpaid": true,
-      "amount": "283만원",
-      "occurredDate": "2026-08-10",
-      "note": "카드 매출 정산 지연으로 인한 일시 미입금"
+      "hasUnpaid": false,
+      "amount": "0",
+      "occurredDate": "-",
+      "note": ""
     },
     "hygiene": {
-      "result": "부적합",
-      "lastCheckDate": "2025-08-10",
-      "nextCheckDate": "2026-10-18",
-      "specialNote": "방역 소독 미실시로 시정 요구"
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
+      "specialNote": ""
     },
     "etc": {
       "memo": "연속 위험 신호 확인됨, 우선 관리 대상 지정.",
@@ -10517,24 +10517,24 @@ let stores = [
     },
     "revenueMethod": {
       "method": "예외산정(임의)",
-      "status": "재검토필요",
-      "calcDate": "2024-06-26",
-      "estimatedAmount": "월 7,970만"
+      "status": "정합성확인됨",
+      "calcDate": "-",
+      "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 74,
-      "actualAmount": "5,570만",
-      "targetAmount": "7,527만",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        62,
-        60,
-        67,
-        67,
-        72,
-        74
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2025-03-08",
-      "periodEnd": "2025-09-29"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
       "hasDefect": true,
@@ -10543,16 +10543,16 @@ let stores = [
       "status": "처리중"
     },
     "unpaidStatus": {
-      "hasUnpaid": true,
-      "amount": "1,046만원",
-      "occurredDate": "2026-08-09",
-      "note": "로열티 분할 협의 중"
+      "hasUnpaid": false,
+      "amount": "0",
+      "occurredDate": "-",
+      "note": ""
     },
     "hygiene": {
-      "result": "시정요구",
-      "lastCheckDate": "2026-01-01",
-      "nextCheckDate": "2026-11-07",
-      "specialNote": "냉장 보관 온도 기록 미흡, 시정 안내함"
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
+      "specialNote": ""
     },
     "etc": {
       "memo": "",
@@ -10571,53 +10571,53 @@ let stores = [
       "status": "정상설정",
       "scopeType": "반경지정",
       "scopeText": "",
-      "noteType": "전대차",
+      "noteType": "-",
       "noteText": "",
       "setDate": "2024-12-28"
     },
     "revenueMethod": {
-      "method": "-",
-      "status": "미산정",
+      "method": "예외산정(임의)",
+      "status": "정합성확인됨",
       "calcDate": "-",
       "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 116,
-      "actualAmount": "1.98억",
-      "targetAmount": "1.71억",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        123,
-        120,
-        123,
-        120,
-        118,
-        116
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2025-01-16",
-      "periodEnd": "2026-01-15"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
-      "hasDefect": true,
-      "detailType": "숙고기간 위반",
+      "hasDefect": false,
+      "detailType": "-",
       "detailText": "",
-      "status": "해결완료"
+      "status": "해당없음"
     },
     "unpaidStatus": {
       "hasUnpaid": false,
       "amount": "0",
       "occurredDate": "-",
-      "note": "최근 12개월 연체 없음"
+      "note": ""
     },
     "hygiene": {
-      "result": "부적합",
-      "lastCheckDate": "2025-08-28",
-      "nextCheckDate": "2026-10-14",
-      "specialNote": "방역 소독 미실시로 시정 요구"
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
+      "specialNote": ""
     },
     "etc": {
-      "memo": "",
-      "author": "-",
-      "date": "-"
+      "memo": "[특이사항] *계약 일부 내용 유실\n[계약체결일] 16.04.11.\n[가맹계약서상 점주] 정주희\n[영업지역 설정 사항] 점포중심 반경 500미터 원\n[예상매출액 산정방식] *예상 매출액 산정 \n근거 자료 있음 (일부 미일치 )\n* 영업시간 (14) * 유동인구 () * 내점율 (0.01) * 실구매율 (0.9) * 객단가 (3200) * 264",
+      "author": "엑셀 실사자료",
+      "date": "2026-09-08"
     }
   },
   {
@@ -10642,19 +10642,19 @@ let stores = [
       "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 73,
-      "actualAmount": "1.39억",
-      "targetAmount": "1.91억",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        65,
-        71,
-        75,
-        71,
-        68,
-        73
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2024-08-17",
-      "periodEnd": "2025-04-24"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
       "hasDefect": true,
@@ -10663,15 +10663,15 @@ let stores = [
       "status": "미해결"
     },
     "unpaidStatus": {
-      "hasUnpaid": true,
-      "amount": "1,272만원",
-      "occurredDate": "2026-06-17",
-      "note": "카드사 정산 오류로 장기 미입금 발생"
+      "hasUnpaid": false,
+      "amount": "0",
+      "occurredDate": "-",
+      "note": ""
     },
     "hygiene": {
-      "result": "적합",
-      "lastCheckDate": "2026-06-30",
-      "nextCheckDate": "2027-01-25",
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
       "specialNote": ""
     },
     "etc": {
@@ -10702,19 +10702,19 @@ let stores = [
       "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 57,
-      "actualAmount": "1.2억",
-      "targetAmount": "2.1억",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        68,
-        65,
-        59,
-        55,
-        56,
-        57
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2026-01-08",
-      "periodEnd": "2026-08-10"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
       "hasDefect": true,
@@ -10723,16 +10723,16 @@ let stores = [
       "status": "미해결"
     },
     "unpaidStatus": {
-      "hasUnpaid": true,
-      "amount": "1,624만원",
-      "occurredDate": "2026-04-24",
-      "note": "본사 정산 시스템 오류로 미입금 장기화"
+      "hasUnpaid": false,
+      "amount": "0",
+      "occurredDate": "-",
+      "note": ""
     },
     "hygiene": {
-      "result": "부적합",
-      "lastCheckDate": "2025-12-29",
-      "nextCheckDate": "2027-02-25",
-      "specialNote": "식품위생법 위반사항 적발, 시정명령 발부"
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
+      "specialNote": ""
     },
     "etc": {
       "memo": "",
@@ -10758,23 +10758,23 @@ let stores = [
     "revenueMethod": {
       "method": "예외산정(의사결정o)",
       "status": "정합성확인됨",
-      "calcDate": "2024-11-10",
-      "estimatedAmount": "월 3,768만"
+      "calcDate": "-",
+      "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 92,
-      "actualAmount": "1.23억",
-      "targetAmount": "1.33억",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        92,
-        88,
-        93,
-        91,
-        93,
-        92
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2024-08-24",
-      "periodEnd": "2025-04-20"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
       "hasDefect": true,
@@ -10783,16 +10783,16 @@ let stores = [
       "status": "처리중"
     },
     "unpaidStatus": {
-      "hasUnpaid": true,
-      "amount": "202만원",
-      "occurredDate": "2026-06-13",
-      "note": "가맹점주 사정으로 로열티 미입금 지속"
+      "hasUnpaid": false,
+      "amount": "0",
+      "occurredDate": "-",
+      "note": ""
     },
     "hygiene": {
-      "result": "부적합",
-      "lastCheckDate": "2026-03-01",
-      "nextCheckDate": "2027-03-14",
-      "specialNote": "식품위생법 위반사항 적발, 시정명령 발부"
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
+      "specialNote": ""
     },
     "etc": {
       "memo": "",
@@ -10818,23 +10818,23 @@ let stores = [
     "revenueMethod": {
       "method": "인근가맹점 5곳",
       "status": "정합성확인됨",
-      "calcDate": "2024-03-23",
-      "estimatedAmount": "월 1.15억"
+      "calcDate": "-",
+      "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 50,
-      "actualAmount": "9,030만",
-      "targetAmount": "1.81억",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        42,
-        48,
-        52,
-        48,
-        49,
-        50
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2024-07-12",
-      "periodEnd": "2025-06-13"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
       "hasDefect": true,
@@ -10843,16 +10843,16 @@ let stores = [
       "status": "미해결"
     },
     "unpaidStatus": {
-      "hasUnpaid": true,
-      "amount": "1,359만원",
-      "occurredDate": "2026-02-03",
-      "note": "가맹점주 사정으로 로열티 미입금 지속"
+      "hasUnpaid": false,
+      "amount": "0",
+      "occurredDate": "-",
+      "note": ""
     },
     "hygiene": {
-      "result": "부적합",
-      "lastCheckDate": "2026-01-28",
-      "nextCheckDate": "2027-01-04",
-      "specialNote": "조리기구 위생관리 기준 미달로 재점검 필요"
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
+      "specialNote": ""
     },
     "etc": {
       "memo": "",
@@ -10869,9 +10869,9 @@ let stores = [
     "manager": "-",
     "territory": {
       "status": "정상설정",
-      "scopeType": "반경지정",
-      "scopeText": "",
-      "noteType": "자사유통입점",
+      "scopeType": "직접입력",
+      "scopeText": "특수상권 입점",
+      "noteType": "-",
       "noteText": "",
       "setDate": "2024-11-10"
     },
@@ -10882,19 +10882,19 @@ let stores = [
       "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 113,
-      "actualAmount": "7,056만",
-      "targetAmount": "6,244만",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        124,
-        118,
-        116,
-        119,
-        112,
-        113
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2024-06-17",
-      "periodEnd": "2025-04-19"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
       "hasDefect": false,
@@ -10903,21 +10903,21 @@ let stores = [
       "status": "해당없음"
     },
     "unpaidStatus": {
-      "hasUnpaid": true,
-      "amount": "800만원",
-      "occurredDate": "2026-01-03",
-      "note": "2개월 이상 연체, 내용증명 발송 완료"
+      "hasUnpaid": false,
+      "amount": "0",
+      "occurredDate": "-",
+      "note": ""
     },
     "hygiene": {
-      "result": "부적합",
-      "lastCheckDate": "2026-03-07",
-      "nextCheckDate": "2027-01-28",
-      "specialNote": "방역 소독 미실시로 시정 요구"
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
+      "specialNote": ""
     },
     "etc": {
-      "memo": "",
-      "author": "-",
-      "date": "-"
+      "memo": "[계약체결일] *최초 계약일:\n13.08.28.\n\n*재계약일:\n15.02.05.\n[가맹계약서상 점주] 이월드 조만호\n[영업지역 설정 사항] 특수상권 입점",
+      "author": "엑셀 실사자료",
+      "date": "2026-09-08"
     }
   },
   {
@@ -10928,8 +10928,8 @@ let stores = [
     "address": "-",
     "manager": "-",
     "territory": {
-      "status": "미설정",
-      "scopeType": "-",
+      "status": "정상설정",
+      "scopeType": "반경지정",
       "scopeText": "",
       "noteType": "-",
       "noteText": "",
@@ -10942,42 +10942,42 @@ let stores = [
       "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 45,
-      "actualAmount": "4,687만",
-      "targetAmount": "1.04억",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        48,
-        49,
-        47,
-        45,
-        46,
-        45
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2025-08-30",
-      "periodEnd": "2026-04-09"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
-      "hasDefect": true,
-      "detailType": "숙고기간 위반",
+      "hasDefect": false,
+      "detailType": "-",
       "detailText": "",
-      "status": "미해결"
+      "status": "해당없음"
     },
     "unpaidStatus": {
-      "hasUnpaid": true,
-      "amount": "1,055만원",
-      "occurredDate": "2025-10-13",
-      "note": "본사 정산 시스템 오류로 미입금 장기화"
+      "hasUnpaid": false,
+      "amount": "0",
+      "occurredDate": "-",
+      "note": ""
     },
     "hygiene": {
-      "result": "부적합",
-      "lastCheckDate": "2026-01-28",
-      "nextCheckDate": "2026-12-08",
-      "specialNote": "방역 소독 미실시로 시정 요구"
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
+      "specialNote": ""
     },
     "etc": {
-      "memo": "",
-      "author": "-",
-      "date": "-"
+      "memo": "[특이사항] *권리 양도 계약서 있음\n[계약체결일] 16.10.04.\n[가맹계약서상 점주] 유선애\n허미숙\n[영업지역 설정 사항] 점포 중심 반경 500미터 원",
+      "author": "엑셀 실사자료",
+      "date": "2026-09-08"
     }
   },
   {
@@ -11002,19 +11002,19 @@ let stores = [
       "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 70,
-      "actualAmount": "2,661만",
-      "targetAmount": "3,802만",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        85,
-        86,
-        79,
-        80,
-        73,
-        70
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2025-07-27",
-      "periodEnd": "2026-02-04"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
       "hasDefect": false,
@@ -11023,16 +11023,16 @@ let stores = [
       "status": "해당없음"
     },
     "unpaidStatus": {
-      "hasUnpaid": true,
-      "amount": "1,271만원",
-      "occurredDate": "2026-02-12",
-      "note": "2개월 이상 연체, 내용증명 발송 완료"
+      "hasUnpaid": false,
+      "amount": "0",
+      "occurredDate": "-",
+      "note": ""
     },
     "hygiene": {
-      "result": "부적합",
-      "lastCheckDate": "2025-07-31",
-      "nextCheckDate": "2027-03-10",
-      "specialNote": "방역 소독 미실시로 시정 요구"
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
+      "specialNote": ""
     },
     "etc": {
       "memo": "",
@@ -11048,33 +11048,33 @@ let stores = [
     "address": "-",
     "manager": "-",
     "territory": {
-      "status": "미설정",
-      "scopeType": "-",
+      "status": "정상설정",
+      "scopeType": "반경지정",
       "scopeText": "",
       "noteType": "-",
       "noteText": "",
       "setDate": "-"
     },
     "revenueMethod": {
-      "method": "인근가맹점 5곳",
-      "status": "재검토필요",
-      "calcDate": "2026-03-06",
-      "estimatedAmount": "월 1.22억"
+      "method": "예외산정(임의)",
+      "status": "정합성확인됨",
+      "calcDate": "-",
+      "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 68,
-      "actualAmount": "1.12억",
-      "targetAmount": "1.65억",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        81,
-        79,
-        74,
-        74,
-        71,
-        68
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2024-12-14",
-      "periodEnd": "2025-08-06"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
       "hasDefect": false,
@@ -11083,21 +11083,21 @@ let stores = [
       "status": "해당없음"
     },
     "unpaidStatus": {
-      "hasUnpaid": true,
-      "amount": "245만원",
-      "occurredDate": "2026-07-10",
-      "note": "카드사 정산 오류로 장기 미입금 발생"
+      "hasUnpaid": false,
+      "amount": "0",
+      "occurredDate": "-",
+      "note": ""
     },
     "hygiene": {
-      "result": "부적합",
-      "lastCheckDate": "2025-08-05",
-      "nextCheckDate": "2026-11-25",
-      "specialNote": "유통기한 경과 식자재 발견, 즉시 폐기 조치"
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
+      "specialNote": ""
     },
     "etc": {
-      "memo": "",
-      "author": "-",
-      "date": "-"
+      "memo": "[특이사항] *인테리어 견적서 있음 - 당사 강제인지 여부 확인필요\n[계약체결일] 17.03.03.(석)\n18.05.04. (김)\n[가맹계약서상 점주] 석정수\n김금옥\n[영업지역 설정 사항] 점포중심 반경 500미터 원(예상매출액 산정서에만 기재되어 있고 계약서에는 미기재\n[예상매출액 산정방식] 영업시간 (12) \n유동인구 (5876) 내점율 (1.5%) 실구매율 (85%) 객단가 (3200) 90일",
+      "author": "엑셀 실사자료",
+      "date": "2026-09-08"
     }
   },
   {
@@ -11122,19 +11122,19 @@ let stores = [
       "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 86,
-      "actualAmount": "7,184만",
-      "targetAmount": "8,354만",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        99,
-        94,
-        96,
-        90,
-        89,
-        86
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2025-09-23",
-      "periodEnd": "2026-04-30"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
       "hasDefect": true,
@@ -11143,16 +11143,16 @@ let stores = [
       "status": "미해결"
     },
     "unpaidStatus": {
-      "hasUnpaid": true,
-      "amount": "1,550만원",
-      "occurredDate": "2026-08-16",
-      "note": "로열티 분할 협의 중"
+      "hasUnpaid": false,
+      "amount": "0",
+      "occurredDate": "-",
+      "note": ""
     },
     "hygiene": {
-      "result": "시정요구",
-      "lastCheckDate": "2025-12-03",
-      "nextCheckDate": "2027-03-07",
-      "specialNote": "냉장 보관 온도 기록 미흡, 시정 안내함"
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
+      "specialNote": ""
     },
     "etc": {
       "memo": "",
@@ -11168,56 +11168,56 @@ let stores = [
     "address": "-",
     "manager": "-",
     "territory": {
-      "status": "분쟁중",
-      "scopeType": "구획지정",
+      "status": "정상설정",
+      "scopeType": "반경지정",
       "scopeText": "",
-      "noteType": "영업지역 중복 있음",
+      "noteType": "-",
       "noteText": "",
       "setDate": "2026-03-16"
     },
     "revenueMethod": {
-      "method": "인근가맹점 5곳",
-      "status": "재검토필요",
-      "calcDate": "2025-10-09",
-      "estimatedAmount": "월 1.74억"
+      "method": "예외산정(임의)",
+      "status": "정합성확인됨",
+      "calcDate": "-",
+      "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 75,
-      "actualAmount": "7,463만",
-      "targetAmount": "9,950만",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        70,
-        73,
-        76,
-        77,
-        73,
-        75
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2025-04-17",
-      "periodEnd": "2026-01-22"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
-      "hasDefect": true,
-      "detailType": "서류 미교부",
+      "hasDefect": false,
+      "detailType": "-",
       "detailText": "",
-      "status": "처리중"
+      "status": "해당없음"
     },
     "unpaidStatus": {
-      "hasUnpaid": true,
-      "amount": "429만원",
-      "occurredDate": "2026-08-24",
-      "note": "로열티 분할 협의 중"
+      "hasUnpaid": false,
+      "amount": "0",
+      "occurredDate": "-",
+      "note": ""
     },
     "hygiene": {
-      "result": "시정요구",
-      "lastCheckDate": "2026-04-22",
-      "nextCheckDate": "2026-12-22",
-      "specialNote": "냉장 보관 온도 기록 미흡, 시정 안내함"
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
+      "specialNote": ""
     },
     "etc": {
-      "memo": "",
-      "author": "-",
-      "date": "-"
+      "memo": "[특이사항] *무상지원 합의서있음\n*마일리지 제도 합의서 있음\n[계약체결일] 16.12.16.\n[가맹계약서상 점주] 한운희\n[영업지역 설정 사항] 점포중신 반경 500미터 원\n기재되어 있으나 일부 잘린 원으로 구획 표기되어 있음\n[예상매출액 산정방식] 영업시간 (15) *유동인구 \n(49662) * 내점율 (25%) * 실구매율 (2.4%) * 객단가 (3000) * 22일",
+      "author": "엑셀 실사자료",
+      "date": "2026-09-08"
     }
   },
   {
@@ -11228,56 +11228,56 @@ let stores = [
     "address": "-",
     "manager": "-",
     "territory": {
-      "status": "미설정",
-      "scopeType": "-",
+      "status": "정상설정",
+      "scopeType": "구획지정",
       "scopeText": "",
       "noteType": "-",
       "noteText": "",
       "setDate": "-"
     },
     "revenueMethod": {
-      "method": "-",
-      "status": "미산정",
+      "method": "예외산정(임의)",
+      "status": "정합성확인됨",
       "calcDate": "-",
       "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 31,
-      "actualAmount": "4,930만",
-      "targetAmount": "1.59억",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        19,
-        19,
-        23,
-        22,
-        22,
-        31
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2024-12-15",
-      "periodEnd": "2025-12-10"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
       "hasDefect": true,
-      "detailType": "서류 미교부",
+      "detailType": "숙고기간 위반",
       "detailText": "",
       "status": "미해결"
     },
     "unpaidStatus": {
-      "hasUnpaid": true,
-      "amount": "1,009만원",
-      "occurredDate": "2025-10-31",
-      "note": "본사 정산 시스템 오류로 미입금 장기화"
+      "hasUnpaid": false,
+      "amount": "0",
+      "occurredDate": "-",
+      "note": ""
     },
     "hygiene": {
-      "result": "부적합",
-      "lastCheckDate": "2026-01-08",
-      "nextCheckDate": "2026-10-24",
-      "specialNote": "방역 소독 미실시로 시정 요구"
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
+      "specialNote": ""
     },
     "etc": {
-      "memo": "",
-      "author": "-",
-      "date": "-"
+      "memo": "[계약체결단계/하자유무] 숙고기간 위반\n[계약체결일] 계약 체결일자 누락\n[가맹계약서상 점주] 김은규\n[영업지역 설정 사항] 지도에 구획으로 표시\n[예상매출액 산정방식] *영업시간 내 유동인구 (27918) * \n내점율 (0.6% ) * 실구매율 (95%) * 객단가 (3070) * 365일",
+      "author": "엑셀 실사자료",
+      "date": "2026-09-08"
     }
   },
   {
@@ -11298,23 +11298,23 @@ let stores = [
     "revenueMethod": {
       "method": "인근가맹점 5곳",
       "status": "정합성확인됨",
-      "calcDate": "2024-07-22",
-      "estimatedAmount": "월 1.63억"
+      "calcDate": "-",
+      "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 101,
-      "actualAmount": "1.3억",
-      "targetAmount": "1.29억",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        105,
-        105,
-        103,
-        104,
-        103,
-        101
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2025-11-06",
-      "periodEnd": "2026-08-09"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
       "hasDefect": true,
@@ -11323,16 +11323,16 @@ let stores = [
       "status": "미해결"
     },
     "unpaidStatus": {
-      "hasUnpaid": true,
-      "amount": "828만원",
-      "occurredDate": "2026-08-24",
-      "note": "로열티 분할 협의 중"
+      "hasUnpaid": false,
+      "amount": "0",
+      "occurredDate": "-",
+      "note": ""
     },
     "hygiene": {
-      "result": "부적합",
-      "lastCheckDate": "2025-08-24",
-      "nextCheckDate": "2027-01-17",
-      "specialNote": "식품위생법 위반사항 적발, 시정명령 발부"
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
+      "specialNote": ""
     },
     "etc": {
       "memo": "",
@@ -11357,24 +11357,24 @@ let stores = [
     },
     "revenueMethod": {
       "method": "예외산정(임의)",
-      "status": "재검토필요",
-      "calcDate": "2024-08-09",
-      "estimatedAmount": "월 7,108만"
+      "status": "정합성확인됨",
+      "calcDate": "-",
+      "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 96,
-      "actualAmount": "1.86억",
-      "targetAmount": "1.94억",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        105,
-        102,
-        103,
-        99,
-        99,
-        96
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2024-10-27",
-      "periodEnd": "2025-05-09"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
       "hasDefect": false,
@@ -11383,16 +11383,16 @@ let stores = [
       "status": "해당없음"
     },
     "unpaidStatus": {
-      "hasUnpaid": true,
-      "amount": "1,251만원",
-      "occurredDate": "2026-08-03",
-      "note": "로열티 분할 협의 중"
+      "hasUnpaid": false,
+      "amount": "0",
+      "occurredDate": "-",
+      "note": ""
     },
     "hygiene": {
-      "result": "시정요구",
-      "lastCheckDate": "2026-01-20",
-      "nextCheckDate": "2026-11-14",
-      "specialNote": "냉장 보관 온도 기록 미흡, 시정 안내함"
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
+      "specialNote": ""
     },
     "etc": {
       "memo": "",
@@ -11417,24 +11417,24 @@ let stores = [
     },
     "revenueMethod": {
       "method": "인근가맹점 5곳",
-      "status": "재검토필요",
-      "calcDate": "2024-07-28",
-      "estimatedAmount": "월 3,812만"
+      "status": "정합성확인됨",
+      "calcDate": "-",
+      "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 55,
-      "actualAmount": "1,139만",
-      "targetAmount": "2,070만",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        58,
-        60,
-        59,
-        55,
-        56,
-        55
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2024-10-13",
-      "periodEnd": "2025-10-05"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
       "hasDefect": true,
@@ -11443,15 +11443,15 @@ let stores = [
       "status": "미해결"
     },
     "unpaidStatus": {
-      "hasUnpaid": true,
-      "amount": "1,398만원",
-      "occurredDate": "2026-01-27",
-      "note": "카드사 정산 오류로 장기 미입금 발생"
+      "hasUnpaid": false,
+      "amount": "0",
+      "occurredDate": "-",
+      "note": ""
     },
     "hygiene": {
-      "result": "적합",
-      "lastCheckDate": "2026-03-12",
-      "nextCheckDate": "2027-01-08",
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
       "specialNote": ""
     },
     "etc": {
@@ -11478,23 +11478,23 @@ let stores = [
     "revenueMethod": {
       "method": "인근가맹점 5곳",
       "status": "정합성확인됨",
-      "calcDate": "2025-04-04",
-      "estimatedAmount": "월 9,313만"
+      "calcDate": "-",
+      "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 76,
-      "actualAmount": "4,539만",
-      "targetAmount": "5,972만",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        69,
-        67,
-        66,
-        67,
-        74,
-        76
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2025-03-19",
-      "periodEnd": "2026-01-09"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
       "hasDefect": true,
@@ -11503,16 +11503,16 @@ let stores = [
       "status": "처리중"
     },
     "unpaidStatus": {
-      "hasUnpaid": true,
-      "amount": "187만원",
-      "occurredDate": "2026-07-23",
-      "note": "2개월 이상 연체, 내용증명 발송 완료"
+      "hasUnpaid": false,
+      "amount": "0",
+      "occurredDate": "-",
+      "note": ""
     },
     "hygiene": {
-      "result": "시정요구",
-      "lastCheckDate": "2025-08-01",
-      "nextCheckDate": "2026-12-30",
-      "specialNote": "위생모 미착용 적발, 현장 시정 완료"
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
+      "specialNote": ""
     },
     "etc": {
       "memo": "",
@@ -11542,19 +11542,19 @@ let stores = [
       "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 47,
-      "actualAmount": "7,760만",
-      "targetAmount": "1.65억",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        32,
-        37,
-        38,
-        37,
-        40,
-        47
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2025-04-07",
-      "periodEnd": "2026-02-04"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
       "hasDefect": false,
@@ -11566,13 +11566,13 @@ let stores = [
       "hasUnpaid": false,
       "amount": "0",
       "occurredDate": "-",
-      "note": "최근 12개월 연체 없음"
+      "note": ""
     },
     "hygiene": {
-      "result": "부적합",
-      "lastCheckDate": "2025-10-31",
-      "nextCheckDate": "2027-02-21",
-      "specialNote": "방역 소독 미실시로 시정 요구"
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
+      "specialNote": ""
     },
     "etc": {
       "memo": "",
@@ -11602,19 +11602,19 @@ let stores = [
       "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 72,
-      "actualAmount": "1.15억",
-      "targetAmount": "1.6억",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        82,
-        77,
-        73,
-        71,
-        72,
-        72
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2025-01-31",
-      "periodEnd": "2025-12-05"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
       "hasDefect": true,
@@ -11623,16 +11623,16 @@ let stores = [
       "status": "처리중"
     },
     "unpaidStatus": {
-      "hasUnpaid": true,
-      "amount": "1,762만원",
-      "occurredDate": "2026-07-30",
-      "note": "로열티 분할 협의 중"
+      "hasUnpaid": false,
+      "amount": "0",
+      "occurredDate": "-",
+      "note": ""
     },
     "hygiene": {
-      "result": "시정요구",
-      "lastCheckDate": "2026-04-16",
-      "nextCheckDate": "2026-12-27",
-      "specialNote": "조리대 정리정돈 미흡"
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
+      "specialNote": ""
     },
     "etc": {
       "memo": "",
@@ -11662,19 +11662,19 @@ let stores = [
       "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 49,
-      "actualAmount": "783만",
-      "targetAmount": "1,597만",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        40,
-        45,
-        48,
-        46,
-        52,
-        49
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2025-05-02",
-      "periodEnd": "2026-03-11"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
       "hasDefect": true,
@@ -11683,16 +11683,16 @@ let stores = [
       "status": "미해결"
     },
     "unpaidStatus": {
-      "hasUnpaid": true,
-      "amount": "1,170만원",
-      "occurredDate": "2026-04-01",
-      "note": "본사 정산 시스템 오류로 미입금 장기화"
+      "hasUnpaid": false,
+      "amount": "0",
+      "occurredDate": "-",
+      "note": ""
     },
     "hygiene": {
-      "result": "부적합",
-      "lastCheckDate": "2026-03-19",
-      "nextCheckDate": "2027-03-07",
-      "specialNote": "유통기한 경과 식자재 발견, 즉시 폐기 조치"
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
+      "specialNote": ""
     },
     "etc": {
       "memo": "",
@@ -11709,10 +11709,10 @@ let stores = [
     "manager": "-",
     "territory": {
       "status": "정상설정",
-      "scopeType": "구획지정",
-      "scopeText": "",
-      "noteType": "자사유통입점",
-      "noteText": "",
+      "scopeType": "직접입력",
+      "scopeText": "유통점 내 (특수상권)",
+      "noteType": "영업지역 침해 있음",
+      "noteText": "유통점 내 (특수상권)",
       "setDate": "2023-04-05"
     },
     "revenueMethod": {
@@ -11722,42 +11722,42 @@ let stores = [
       "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 68,
-      "actualAmount": "8,897만",
-      "targetAmount": "1.31억",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        63,
-        66,
-        71,
-        66,
-        71,
-        68
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2025-04-13",
-      "periodEnd": "2026-02-23"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
       "hasDefect": true,
-      "detailType": "기타",
-      "detailText": "임대차계약 갱신일 표기 오류",
+      "detailType": "서류 미교부",
+      "detailText": "",
       "status": "미해결"
     },
     "unpaidStatus": {
       "hasUnpaid": false,
       "amount": "0",
       "occurredDate": "-",
-      "note": "최근 12개월 연체 없음"
+      "note": ""
     },
     "hygiene": {
-      "result": "적합",
-      "lastCheckDate": "2026-06-23",
-      "nextCheckDate": "2026-12-25",
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
       "specialNote": ""
     },
     "etc": {
-      "memo": "",
-      "author": "-",
-      "date": "-"
+      "memo": "[계약체결단계/하자유무] 사전 서류 제공내역 없음\n[특이사항] *7층 매장 오픈\n동의서 있음(20.03.03.) - 법위반(영업지역 침해)\n[계약체결일] *최초계약일:\n계약서 없음\n\n*재계약일:\n15.02.11.\n[가맹계약서상 점주] 정선희\n[영업지역 설정 사항] 유통점 내 (특수상권)",
+      "author": "엑셀 실사자료",
+      "date": "2026-09-08"
     }
   },
   {
@@ -11777,24 +11777,24 @@ let stores = [
     },
     "revenueMethod": {
       "method": "인근가맹점 5곳",
-      "status": "재검토필요",
-      "calcDate": "2024-08-17",
-      "estimatedAmount": "월 4,989만"
+      "status": "정합성확인됨",
+      "calcDate": "-",
+      "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 70,
-      "actualAmount": "1.4억",
-      "targetAmount": "2억",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        63,
-        60,
-        62,
-        69,
-        70,
-        70
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2025-05-23",
-      "periodEnd": "2026-01-18"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
       "hasDefect": true,
@@ -11803,16 +11803,16 @@ let stores = [
       "status": "처리중"
     },
     "unpaidStatus": {
-      "hasUnpaid": true,
-      "amount": "1,398만원",
-      "occurredDate": "2026-08-02",
-      "note": "월말 정산 일정 조정 중"
+      "hasUnpaid": false,
+      "amount": "0",
+      "occurredDate": "-",
+      "note": ""
     },
     "hygiene": {
-      "result": "시정요구",
-      "lastCheckDate": "2026-06-09",
-      "nextCheckDate": "2026-11-01",
-      "specialNote": "위생모 미착용 적발, 현장 시정 완료"
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
+      "specialNote": ""
     },
     "etc": {
       "memo": "",
@@ -11842,42 +11842,42 @@ let stores = [
       "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 77,
-      "actualAmount": "1,887만",
-      "targetAmount": "2,451만",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        79,
-        82,
-        81,
-        84,
-        81,
-        77
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2025-02-26",
-      "periodEnd": "2025-09-24"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
       "hasDefect": true,
-      "detailType": "숙고기간 위반",
+      "detailType": "서류 미교부",
       "detailText": "",
-      "status": "처리중"
+      "status": "미해결"
     },
     "unpaidStatus": {
-      "hasUnpaid": true,
-      "amount": "623만원",
-      "occurredDate": "2026-05-07",
-      "note": "본사 정산 시스템 오류로 미입금 장기화"
+      "hasUnpaid": false,
+      "amount": "0",
+      "occurredDate": "-",
+      "note": ""
     },
     "hygiene": {
-      "result": "부적합",
-      "lastCheckDate": "2026-06-19",
-      "nextCheckDate": "2026-11-13",
-      "specialNote": "식품위생법 위반사항 적발, 시정명령 발부"
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
+      "specialNote": ""
     },
     "etc": {
-      "memo": "",
-      "author": "-",
-      "date": "-"
+      "memo": "[계약체결단계/하자유무] 사전 서류 제공내역 없음\n[특이사항] *공사 실시 견적서 있음 - 당사 거래 강제인지 여부 확인 필요",
+      "author": "엑셀 실사자료",
+      "date": "2026-09-08"
     }
   },
   {
@@ -11902,19 +11902,19 @@ let stores = [
       "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 77,
-      "actualAmount": "9,526만",
-      "targetAmount": "1.24억",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        85,
-        84,
-        85,
-        83,
-        78,
-        77
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2025-08-28",
-      "periodEnd": "2026-02-26"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
       "hasDefect": true,
@@ -11923,16 +11923,16 @@ let stores = [
       "status": "미해결"
     },
     "unpaidStatus": {
-      "hasUnpaid": true,
-      "amount": "1,632만원",
-      "occurredDate": "2026-01-04",
-      "note": "카드사 정산 오류로 장기 미입금 발생"
+      "hasUnpaid": false,
+      "amount": "0",
+      "occurredDate": "-",
+      "note": ""
     },
     "hygiene": {
-      "result": "부적합",
-      "lastCheckDate": "2026-06-24",
-      "nextCheckDate": "2027-01-23",
-      "specialNote": "식품위생법 위반사항 적발, 시정명령 발부"
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
+      "specialNote": ""
     },
     "etc": {
       "memo": "연속 위험 신호 확인됨, 우선 관리 대상 지정.",
@@ -11948,129 +11948,9 @@ let stores = [
     "address": "-",
     "manager": "-",
     "territory": {
-      "status": "미설정",
-      "scopeType": "-",
-      "scopeText": "",
-      "noteType": "-",
-      "noteText": "",
-      "setDate": "-"
-    },
-    "revenueMethod": {
-      "method": "예외산정(의사결정o)",
-      "status": "재검토필요",
-      "calcDate": "2025-06-14",
-      "estimatedAmount": "월 1.2억"
-    },
-    "revenueAchievement": {
-      "ratio": 67,
-      "actualAmount": "6,760만",
-      "targetAmount": "1.01억",
-      "trend": [
-        52,
-        51,
-        57,
-        63,
-        67,
-        67
-      ],
-      "periodStart": "2025-09-28",
-      "periodEnd": "2026-04-24"
-    },
-    "contractDefect": {
-      "hasDefect": true,
-      "detailType": "서류 미교부",
-      "detailText": "",
-      "status": "처리중"
-    },
-    "unpaidStatus": {
-      "hasUnpaid": true,
-      "amount": "821만원",
-      "occurredDate": "2026-08-22",
-      "note": "월말 정산 일정 조정 중"
-    },
-    "hygiene": {
-      "result": "시정요구",
-      "lastCheckDate": "2025-11-05",
-      "nextCheckDate": "2026-11-06",
-      "specialNote": "위생모 미착용 적발, 현장 시정 완료"
-    },
-    "etc": {
-      "memo": "",
-      "author": "-",
-      "date": "-"
-    }
-  },
-  {
-    "id": "CAFE124",
-    "name": "더카페 서현LG에클라트점",
-    "brand": "더카페",
-    "code": "CAFE-124",
-    "address": "-",
-    "manager": "-",
-    "territory": {
-      "status": "미설정",
-      "scopeType": "-",
-      "scopeText": "",
-      "noteType": "-",
-      "noteText": "",
-      "setDate": "-"
-    },
-    "revenueMethod": {
-      "method": "예외산정(임의)",
-      "status": "재검토필요",
-      "calcDate": "2024-10-28",
-      "estimatedAmount": "월 1.28억"
-    },
-    "revenueAchievement": {
-      "ratio": 40,
-      "actualAmount": "4,347만",
-      "targetAmount": "1.09억",
-      "trend": [
-        27,
-        33,
-        36,
-        42,
-        39,
-        40
-      ],
-      "periodStart": "2025-10-20",
-      "periodEnd": "2026-06-04"
-    },
-    "contractDefect": {
-      "hasDefect": true,
-      "detailType": "숙고기간 위반",
-      "detailText": "",
-      "status": "미해결"
-    },
-    "unpaidStatus": {
-      "hasUnpaid": true,
-      "amount": "131만원",
-      "occurredDate": "2026-06-14",
-      "note": "가맹점주 사정으로 로열티 미입금 지속"
-    },
-    "hygiene": {
-      "result": "부적합",
-      "lastCheckDate": "2026-01-23",
-      "nextCheckDate": "2026-11-18",
-      "specialNote": "조리기구 위생관리 기준 미달로 재점검 필요"
-    },
-    "etc": {
-      "memo": "",
-      "author": "-",
-      "date": "-"
-    }
-  },
-  {
-    "id": "CAFE126",
-    "name": "더카페 상도점",
-    "brand": "더카페",
-    "code": "CAFE-126",
-    "address": "-",
-    "manager": "-",
-    "territory": {
-      "status": "미설정",
-      "scopeType": "-",
-      "scopeText": "",
+      "status": "정상설정",
+      "scopeType": "직접입력",
+      "scopeText": "특수상권 덕천 뉴코아내",
       "noteType": "-",
       "noteText": "",
       "setDate": "-"
@@ -12082,42 +11962,162 @@ let stores = [
       "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 37,
-      "actualAmount": "6,180만",
-      "targetAmount": "1.67억",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        46,
-        42,
-        42,
-        44,
-        44,
-        37
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2025-02-04",
-      "periodEnd": "2025-08-16"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
       "hasDefect": true,
       "detailType": "기타",
-      "detailText": "위약금 조항 누락",
+      "detailText": "",
       "status": "미해결"
     },
     "unpaidStatus": {
-      "hasUnpaid": true,
-      "amount": "155만원",
-      "occurredDate": "2025-12-13",
-      "note": "2개월 이상 연체, 내용증명 발송 완료"
+      "hasUnpaid": false,
+      "amount": "0",
+      "occurredDate": "-",
+      "note": ""
     },
     "hygiene": {
-      "result": "부적합",
-      "lastCheckDate": "2026-08-02",
-      "nextCheckDate": "2027-01-06",
-      "specialNote": "방역 소독 미실시로 시정 요구"
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
+      "specialNote": ""
     },
     "etc": {
-      "memo": "",
-      "author": "-",
-      "date": "-"
+      "memo": "[특이사항] *영업 이행서 - 판매목표강제 법위반\n*오픈임박요청서(10.04.28.) - 실질과 다르다면 법위반\n[계약체결일] 10.04.28. \n*갱신 계약서 있으나 갱신 계약 체결일 없음\n[가맹계약서상 점주] 김희정\n[영업지역 설정 사항] 특수상권 덕천 뉴코아내",
+      "author": "엑셀 실사자료",
+      "date": "2026-09-08"
+    }
+  },
+  {
+    "id": "CAFE124",
+    "name": "더카페 서현LG에클라트점",
+    "brand": "더카페",
+    "code": "CAFE-124",
+    "address": "-",
+    "manager": "-",
+    "territory": {
+      "status": "정상설정",
+      "scopeType": "반경지정",
+      "scopeText": "",
+      "noteType": "-",
+      "noteText": "",
+      "setDate": "-"
+    },
+    "revenueMethod": {
+      "method": "예외산정(임의)",
+      "status": "정합성확인됨",
+      "calcDate": "-",
+      "estimatedAmount": "-"
+    },
+    "revenueAchievement": {
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
+      "trend": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "periodStart": "-",
+      "periodEnd": "-"
+    },
+    "contractDefect": {
+      "hasDefect": false,
+      "detailType": "-",
+      "detailText": "",
+      "status": "해당없음"
+    },
+    "unpaidStatus": {
+      "hasUnpaid": false,
+      "amount": "0",
+      "occurredDate": "-",
+      "note": ""
+    },
+    "hygiene": {
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
+      "specialNote": ""
+    },
+    "etc": {
+      "memo": "[계약체결일] 17.04.28. (조) \n18.11.30. (김)\n20.04.02. (하, 워드기재 )\n[가맹계약서상 점주] 조은아\n김현웅 (18년 몇일인지는 확인 안됨 양수일)\n하성미 (20.03.18. 양수도 계약서 체결)\n[영업지역 설정 사항] 점포중심 반경 500 미터 원\n[예상매출액 산정방식] 영업시간 (14) 유동인구 (171922) \n내점율 (1.3%) 실구매율 (90%) 객단가 (3200) 365일",
+      "author": "엑셀 실사자료",
+      "date": "2026-09-08"
+    }
+  },
+  {
+    "id": "CAFE126",
+    "name": "더카페 상도점",
+    "brand": "더카페",
+    "code": "CAFE-126",
+    "address": "-",
+    "manager": "-",
+    "territory": {
+      "status": "정상설정",
+      "scopeType": "반경지정",
+      "scopeText": "",
+      "noteType": "-",
+      "noteText": "",
+      "setDate": "-"
+    },
+    "revenueMethod": {
+      "method": "예외산정(임의)",
+      "status": "정합성확인됨",
+      "calcDate": "-",
+      "estimatedAmount": "-"
+    },
+    "revenueAchievement": {
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
+      "trend": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "periodStart": "-",
+      "periodEnd": "-"
+    },
+    "contractDefect": {
+      "hasDefect": false,
+      "detailType": "-",
+      "detailText": "",
+      "status": "해당없음"
+    },
+    "unpaidStatus": {
+      "hasUnpaid": false,
+      "amount": "0",
+      "occurredDate": "-",
+      "note": ""
+    },
+    "hygiene": {
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
+      "specialNote": ""
+    },
+    "etc": {
+      "memo": "[특이사항] *인테리어 견적서\n있음 - 당사 거래 강제 인지 여부 확인 필요 \n*계약 일부 내용 유실\n[계약체결일] 17.05.11.\n[가맹계약서상 점주] 원세빈 (19.03.25. 양도양수 내용증명)\n*실제 점주 변경 사실은 확인되지 않음\n[영업지역 설정 사항] 점포중심 반경 500미터 원\n[예상매출액 산정방식] *예상매출액 산출 근거자료 있음\n*영업시간 (13) * 유동인구 (20257) * 내점율 (1.5 %) * 실구매율 (80%) * 객단가 (3200) * 365",
+      "author": "엑셀 실사자료",
+      "date": "2026-09-08"
     }
   },
   {
@@ -12188,56 +12188,56 @@ let stores = [
     "address": "-",
     "manager": "-",
     "territory": {
-      "status": "분쟁중",
-      "scopeType": "구획지정",
+      "status": "정상설정",
+      "scopeType": "반경지정",
       "scopeText": "",
-      "noteType": "영업지역 중복 있음",
+      "noteType": "-",
       "noteText": "",
       "setDate": "2025-01-24"
     },
     "revenueMethod": {
-      "method": "-",
-      "status": "미산정",
+      "method": "예외산정(임의)",
+      "status": "정합성확인됨",
       "calcDate": "-",
       "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 78,
-      "actualAmount": "1.22억",
-      "targetAmount": "1.57억",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        87,
-        82,
-        79,
-        79,
-        78,
-        78
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2024-12-24",
-      "periodEnd": "2025-09-07"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
-      "hasDefect": true,
-      "detailType": "기타",
-      "detailText": "보증금 조항 불일치",
-      "status": "미해결"
+      "hasDefect": false,
+      "detailType": "-",
+      "detailText": "",
+      "status": "해당없음"
     },
     "unpaidStatus": {
-      "hasUnpaid": true,
-      "amount": "306만원",
-      "occurredDate": "2026-02-20",
-      "note": "카드사 정산 오류로 장기 미입금 발생"
+      "hasUnpaid": false,
+      "amount": "0",
+      "occurredDate": "-",
+      "note": ""
     },
     "hygiene": {
-      "result": "시정요구",
-      "lastCheckDate": "2025-08-13",
-      "nextCheckDate": "2027-01-10",
-      "specialNote": "위생모 미착용 적발, 현장 시정 완료"
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
+      "specialNote": ""
     },
     "etc": {
-      "memo": "",
-      "author": "-",
-      "date": "-"
+      "memo": "[특이사항] *양수도 계약 체결일 20.07.09.\n[계약체결일] 19.02.15. (하)\n20.07.16. (임)\n[가맹계약서상 점주] 하성미\n[영업지역 설정 사항] 점포 중심 반경 500 미터 원\n[예상매출액 산정방식] 영업시간 (14)내의 1일 유동인구 12794*\n내점율 (1.5% ) * 실구매율 (55%) * 객단가 (3100) * 360 (하)",
+      "author": "엑셀 실사자료",
+      "date": "2026-09-08"
     }
   },
   {
@@ -12257,24 +12257,24 @@ let stores = [
     },
     "revenueMethod": {
       "method": "예외산정(임의)",
-      "status": "재검토필요",
-      "calcDate": "2025-02-06",
-      "estimatedAmount": "월 1.61억"
+      "status": "정합성확인됨",
+      "calcDate": "-",
+      "estimatedAmount": "-"
     },
     "revenueAchievement": {
-      "ratio": 100,
-      "actualAmount": "2.04억",
-      "targetAmount": "2.04억",
+      "ratio": null,
+      "actualAmount": "-",
+      "targetAmount": "-",
       "trend": [
-        86,
-        85,
-        86,
-        91,
-        98,
-        100
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "periodStart": "2025-04-23",
-      "periodEnd": "2026-02-16"
+      "periodStart": "-",
+      "periodEnd": "-"
     },
     "contractDefect": {
       "hasDefect": true,
@@ -12286,13 +12286,13 @@ let stores = [
       "hasUnpaid": false,
       "amount": "0",
       "occurredDate": "-",
-      "note": "최근 12개월 연체 없음"
+      "note": ""
     },
     "hygiene": {
-      "result": "부적합",
-      "lastCheckDate": "2026-02-15",
-      "nextCheckDate": "2027-01-05",
-      "specialNote": "조리기구 위생관리 기준 미달로 재점검 필요"
+      "result": "미입력",
+      "lastCheckDate": "-",
+      "nextCheckDate": "-",
+      "specialNote": ""
     },
     "etc": {
       "memo": "",
