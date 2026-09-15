@@ -21,7 +21,15 @@ const DB_CONFIGURED = !SUPABASE_URL.includes('YOUR-PROJECT-REF');
 
 let supabaseClient = null;
 if (DB_CONFIGURED && window.supabase) {
-  supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+    auth: {
+      persistSession: true,
+      autoRefreshToken: true,
+      detectSessionInUrl: false,
+      storage: window.localStorage,
+      storageKey: 'store-card-auth',
+    },
+  });
 }
 
 /* =================== ACCESS LOCK (Supabase Auth) =================== */
@@ -67,10 +75,13 @@ const ACCESS_LOCK_ENABLED = true; // 계정 준비 완료 후 활성화됨 (2026
     setTimeout(() => emailEl.focus(), 50);
   }
 
-  supabaseClient.auth.getSession().then(({ data }) => {
+  supabaseClient.auth.getSession().then(({ data, error }) => {
+    if(error) console.error('세션 확인 실패:', error.message);
+    console.log('[auth] 초기 세션 확인:', data.session ? '있음 ('+data.session.user.email+')' : '없음');
     if(data.session) showApp(); else showLogin();
   });
-  supabaseClient.auth.onAuthStateChange((_event, session) => {
+  supabaseClient.auth.onAuthStateChange((event, session) => {
+    console.log('[auth] 상태 변경:', event, session ? session.user.email : '(세션 없음)');
     if(session) showApp(); else showLogin();
   });
 
@@ -1066,10 +1077,7 @@ const EXCEL_GROUP_COLORS = {
   '계약하자':'FFFCE4E4', '미입금':'FFFCE4E4', '가맹사업법이슈':'FFFDEFD3', '기타':'FFE9E5F7',
 };
 
-async function downloadExcelTemplate(){
-  const wb = new ExcelJS.Workbook();
-
-  // --- 안내 시트: 각 컬럼의 필수여부·입력형식·허용값을 한눈에 정리 ---
+function addGuideSheet(wb){
   const guide = wb.addWorksheet('작성가이드');
   guide.columns = [
     {header:'구분', key:'group', width:12},
@@ -1091,8 +1099,10 @@ async function downloadExcelTemplate(){
     row.getCell('format').alignment = {wrapText:true, vertical:'top'};
   });
   guide.getColumn('group').eachCell({includeEmpty:false}, cell=>{ cell.alignment = {vertical:'top'}; });
+}
 
-  // --- 데이터 시트: 헤더는 카테고리별 색상 구분, 드롭다운/날짜 형식 검증 포함 ---
+// dataRows: EXCEL_HEADERS 키를 갖는 객체 배열. italicizeFirstRow: 템플릿의 예시행처럼 흐리게 표시할지 여부.
+function addStoreDataSheet(wb, dataRows, {italicizeFirstRow=false}={}){
   const ws = wb.addWorksheet('매장데이터');
   ws.columns = EXCEL_COLS.map(c=>({header:c.key, key:c.key, width: Math.max(14, c.key.length*1.3)}));
   const headerRow = ws.getRow(1);
@@ -1112,17 +1122,17 @@ async function downloadExcelTemplate(){
   });
   ws.views = [{state:'frozen', xSplit:2, ySplit:1}];
 
-  const example = {};
-  EXCEL_COLS.forEach(c=>{ example[c.key] = c.example; });
-  ws.addRow(example);
-  ws.getRow(2).eachCell(cell=>{ cell.font = {italic:true, color:{argb:'FF8A94A6'}}; });
+  dataRows.forEach(r=>ws.addRow(r));
+  if(italicizeFirstRow && ws.rowCount>=2){
+    ws.getRow(2).eachCell(cell=>{ cell.font = {italic:true, color:{argb:'FF8A94A6'}}; });
+  }
 
-  const VALIDATION_ROWS = 300;
+  const validationRows = Math.max(300, dataRows.length + 50);
   EXCEL_COLS.forEach((col, idx)=>{
     if(col.kind!=='select') return;
     const colLetter = ws.getColumn(idx+1).letter;
     const formula = `"${col.options.join(',')}"`;
-    for(let r=2; r<=VALIDATION_ROWS; r++){
+    for(let r=2; r<=validationRows; r++){
       ws.getCell(`${colLetter}${r}`).dataValidation = {
         type:'list', allowBlank:true, formulae:[formula],
         showErrorMessage:true, errorStyle:'warning',
@@ -1130,14 +1140,71 @@ async function downloadExcelTemplate(){
       };
     }
   });
+  return ws;
+}
 
+async function downloadWorkbook(wb, filename){
   const buffer = await wb.xlsx.writeBuffer();
   const blob = new Blob([buffer], {type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'});
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
-  a.href = url; a.download = '가맹점_데이터_업로드_템플릿.xlsx';
+  a.href = url; a.download = filename;
   document.body.appendChild(a); a.click(); a.remove();
   URL.revokeObjectURL(url);
+}
+
+async function downloadExcelTemplate(){
+  const wb = new ExcelJS.Workbook();
+  addGuideSheet(wb);
+  const example = {};
+  EXCEL_COLS.forEach(c=>{ example[c.key] = c.example; });
+  addStoreDataSheet(wb, [example], {italicizeFirstRow:true});
+  await downloadWorkbook(wb, '가맹점_데이터_업로드_템플릿.xlsx');
+}
+
+function storeToExcelRow(s){
+  return {
+    '매장코드': s.code,
+    '매장명': s.name,
+    '브랜드': s.brand,
+    '주소': s.address,
+    '담당자': s.manager,
+    '기타_운영상태': operationStatus(s),
+    '영업지역_설정범위': s.territory.scopeType,
+    '영업지역_설정범위상세': s.territory.scopeText,
+    '영업지역_비고유형': s.territory.noteType,
+    '영업지역_비고상세': s.territory.noteText,
+    '영업지역_설정일': s.territory.setDate,
+    '매출산정_방식': s.revenueMethod.method,
+    '매출산정_금액': s.revenueMethod.estimatedAmount,
+    '매출산정_산정일': s.revenueMethod.calcDate,
+    '매출달성_실매출': s.revenueAchievement.actualAmount,
+    '매출달성_목표매출': s.revenueAchievement.targetAmount,
+    '매출달성_달성률': s.revenueAchievement.ratio===null ? '' : s.revenueAchievement.ratio,
+    '매출달성_시작일': s.revenueAchievement.periodStart,
+    '매출달성_종료일': s.revenueAchievement.periodEnd,
+    '계약하자_유무': s.contractDefect.status,
+    '계약하자_유형': s.contractDefect.types.join(','),
+    '계약하자_상세': s.contractDefect.detailText,
+    '미입금_여부': s.unpaidStatus.status,
+    '미입금_금액(만원)': s.unpaidStatus.amount,
+    '미입금_발생일': s.unpaidStatus.occurredDate,
+    '미입금_비고': s.unpaidStatus.note,
+    '가맹사업법이슈_유무': s.hygiene.status,
+    '가맹사업법이슈_발생영역': s.hygiene.areas.join(','),
+    '가맹사업법이슈_비고': s.hygiene.note,
+    '기타_메모': s.etc.memo,
+    '기타_작성자': s.etc.author,
+  };
+}
+
+async function downloadAllDataExcel(){
+  const wb = new ExcelJS.Workbook();
+  addGuideSheet(wb);
+  const sorted = [...stores].sort((a,b)=> a.code.localeCompare(b.code));
+  addStoreDataSheet(wb, sorted.map(storeToExcelRow), {italicizeFirstRow:false});
+  const stamp = today();
+  await downloadWorkbook(wb, `가맹점_전체데이터_${stamp}.xlsx`);
 }
 
 function onExcelFileSelected(evt){
@@ -1300,6 +1367,14 @@ function renderUploadPage(){
       <div class="eyebrow" style="font-size:10.5px; letter-spacing:.14em; color:var(--text-3); text-transform:uppercase; font-weight:600; cursor:pointer;" onclick="goDashboard()">‹ 전체 현황으로</div>
       <h2>엑셀 데이터 일괄 업로드</h2>
       <div class="sub">엑셀 파일로 매장 데이터를 한 번에 등록하거나 수정합니다 (매장코드 기준 자동 업서트)</div>
+    </div>
+
+    <div class="dash-panel">
+      <div class="dash-panel-title">0. 현재 전체 데이터 내보내기</div>
+      <div style="font-size:12.5px; color:var(--text-2); line-height:1.6; margin-bottom:12px;">
+        지금 등록된 ${stores.length}개 매장의 전체 입력값을 엑셀 한 장으로 내려받습니다. 빈 템플릿이 아니라 <b>현재 값이 그대로 채워진 파일</b>이라, 열어서 훑어보고 필요한 셀만 고친 뒤 그대로 아래 "2. 파일 업로드"에 다시 올리면 됩니다.
+      </div>
+      <button class="btn-save" style="width:auto; padding:9px 16px;" onclick="downloadAllDataExcel()">현재 데이터 내보내기 (.xlsx)</button>
     </div>
 
     <div class="dash-panel">
