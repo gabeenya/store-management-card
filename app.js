@@ -200,6 +200,12 @@ const TERRITORY_SCOPE_LEVEL = {
 const METHOD_LEVEL = {
   '인근가맹점 5곳':'safe', '예외산정(의사결정o)':'warn', '예외산정(임의)':'danger', '미산정':'danger',
 };
+const TERRITORY_INFRINGEMENT_OPTIONS = ['미입력','이슈없음','영업지역 중복','영업지역 침해'];
+const TERRITORY_INFRINGEMENT_LEVEL = { '이슈없음':'safe', '영업지역 중복':'warn', '영업지역 침해':'danger' };
+function territoryInfringement(s){ return s.territory.infringement || '미입력'; }
+function revenueNote(s){ return (s.revenueMethod && s.revenueMethod.note) || ''; }
+const LEVEL_SEVERITY = { danger:3, warn:2, neutral:1, safe:0 };
+function worseLevel(a, b){ return LEVEL_SEVERITY[a]>=LEVEL_SEVERITY[b] ? a : b; }
 const DEFAULT_THRESHOLDS = { achieveSafe:100, achieveWarn:70, unpaidLimitManwon:10000, unpaidDays:30 };
 function loadThresholds(){
   try{
@@ -214,13 +220,18 @@ function saveThresholds(t){
 }
 function statusLevel(cat, s){
   switch(cat){
-    case 'territory':
-      return TERRITORY_SCOPE_LEVEL[s.territory.scopeType] || 'neutral';
-    case 'method':
-      return METHOD_LEVEL[s.revenueMethod.method] || 'neutral';
-    case 'achieve':
-      if(s.revenueAchievement.ratio===null || s.revenueAchievement.ratio===undefined) return 'neutral';
-      return s.revenueAchievement.ratio>=THRESHOLDS.achieveSafe ? 'safe' : s.revenueAchievement.ratio>=THRESHOLDS.achieveWarn ? 'warn' : 'danger';
+    case 'territory': {
+      const scopeLvl = TERRITORY_SCOPE_LEVEL[s.territory.scopeType] || 'neutral';
+      const infLvl = TERRITORY_INFRINGEMENT_LEVEL[territoryInfringement(s)] || 'neutral';
+      return worseLevel(scopeLvl, infLvl);
+    }
+    case 'estimate': {
+      const methodLvl = METHOD_LEVEL[s.revenueMethod.method] || 'neutral';
+      const ratio = s.revenueAchievement.ratio;
+      const achieveLvl = (ratio===null || ratio===undefined) ? 'neutral'
+        : ratio>=THRESHOLDS.achieveSafe ? 'safe' : ratio>=THRESHOLDS.achieveWarn ? 'warn' : 'danger';
+      return worseLevel(methodLvl, achieveLvl);
+    }
     case 'contract':
       if(s.contractDefect.status==='미입력') return 'neutral';
       if(s.contractDefect.status==='없음') return 'safe';
@@ -239,8 +250,7 @@ function statusLevel(cat, s){
 }
 function levelScore(l){ return l==='safe'?100:l==='warn'?60:l==='danger'?20:null; }
 function computeOVR(s){
-  const cats=['territory','method','achieve','contract','unpaid','hygiene'];
-  const scores = cats.map(c=>levelScore(statusLevel(c,s))).filter(v=>v!==null);
+  const scores = ISSUE_CATS.map(c=>levelScore(statusLevel(c,s))).filter(v=>v!==null);
   if(scores.length===0) return null;
   return Math.round(scores.reduce((a,b)=>a+b,0)/scores.length);
 }
@@ -257,16 +267,24 @@ function statusLabel(l){ return l==='safe'?'양호':l==='warn'?'주의':l==='dan
 function issueTagClass(l){ return l==='safe' ? 'safe-tag' : l; }
 
 /* =================== ISSUE AGGREGATION =================== */
-const ISSUE_CATS = ['territory','method','achieve','contract','unpaid','hygiene'];
+const ISSUE_CATS = ['territory','estimate','contract','unpaid','hygiene'];
 function categoryLabel(cat){
-  return {territory:'영업지역', method:'매출산정', achieve:'매출달성', contract:'계약하자', unpaid:'미입금', hygiene:'가맹사업법 이슈'}[cat];
+  return {territory:'영업지역', estimate:'예상매출액', contract:'계약하자', unpaid:'미입금', hygiene:'가맹사업법 이슈'}[cat];
 }
 function issueDetail(cat, s, level){
   const numCls = `risk-num ${level}`;
   switch(cat){
-    case 'territory': return s.territory.scopeType || '미입력';
-    case 'method': return s.revenueMethod.method || '미입력';
-    case 'achieve': return s.revenueAchievement.ratio===null ? '데이터 없음' : `달성률 <span class="${numCls}">${s.revenueAchievement.ratio}%</span>`;
+    case 'territory': {
+      const inf = territoryInfringement(s);
+      if(inf==='영업지역 중복' || inf==='영업지역 침해') return inf;
+      return s.territory.scopeType==='-' ? '미입력' : s.territory.scopeType;
+    }
+    case 'estimate': {
+      const parts = [];
+      if(s.revenueAchievement.ratio!==null) parts.push(`달성률 <span class="${numCls}">${s.revenueAchievement.ratio}%</span>`);
+      if(s.revenueMethod.method && s.revenueMethod.method!=='-') parts.push(s.revenueMethod.method);
+      return parts.length ? parts.join(' · ') : '데이터 없음';
+    }
     case 'contract': return s.contractDefect.status==='있음' ? s.contractDefect.types.join(', ') : s.contractDefect.status;
     case 'unpaid': return s.unpaidStatus.status==='있음' ? (s.unpaidStatus.note || '미입금 발생') : '';
     case 'hygiene': return s.hygiene.status==='있음' ? s.hygiene.areas.join(', ') : s.hygiene.status;
@@ -274,9 +292,8 @@ function issueDetail(cat, s, level){
 }
 function issueMetric(cat, s){
   switch(cat){
-    case 'territory': return { dateVal:s.territory.setDate, dateLabel:'설정일', amount:null };
-    case 'method': return { dateVal:s.revenueMethod.calcDate, dateLabel:'산정일', amount:s.revenueMethod.estimatedAmount };
-    case 'achieve': return { dateVal:s.revenueAchievement.periodEnd, dateLabel:'기간종료', amount:s.revenueAchievement.targetAmount };
+    case 'territory': return { dateVal:null, dateLabel:null, amount:null };
+    case 'estimate': return { dateVal:null, dateLabel:null, amount: (s.revenueMethod.estimatedAmount && s.revenueMethod.estimatedAmount!=='-') ? s.revenueMethod.estimatedAmount : null };
     case 'contract': return { dateVal:null, dateLabel:null, amount:null };
     case 'unpaid': return { dateVal: s.unpaidStatus.status==='있음' ? s.unpaidStatus.occurredDate : null, dateLabel:'발생일자', amount: s.unpaidStatus.status==='있음' ? fmtManwon(s.unpaidStatus.amount) : null };
     case 'hygiene': return { dateVal:null, dateLabel:null, amount:null };
@@ -742,8 +759,7 @@ function renderMain(){
   const lvl = overallLevel(score);
 
   const territoryLvl = statusLevel('territory', s);
-  const methodLvl = statusLevel('method', s);
-  const achieveLvl = statusLevel('achieve', s);
+  const estimateLvl = statusLevel('estimate', s);
   const contractLvl = statusLevel('contract', s);
   const unpaidLvl = statusLevel('unpaid', s);
   const hygieneLvl = statusLevel('hygiene', s);
@@ -780,8 +796,8 @@ function renderMain(){
         rows:[
           {k:'설정 범위', v: s.territory.scopeType==='-'?'미입력':s.territory.scopeType},
           {k:'설정 범위 상세', v: s.territory.scopeText || '-'},
-          {k:'설정일', v:s.territory.setDate},
-          {k:'비고', v: s.territory.noteType==='직접입력' ? s.territory.noteText : s.territory.noteType},
+          {k:'침해여부', v: territoryInfringement(s)},
+          {k:'비고', v: s.territory.note || '-'},
         ],
         extra:`<div class="edit-form" id="f1">
           <label>설정 범위</label>
@@ -794,28 +810,23 @@ function renderMain(){
             <option value="유통입점 (층)" ${s.territory.scopeType==='유통입점 (층)'?'selected':''}>유통입점 (층)</option>
           </select>
           <label>설정 범위 상세</label><input id="e1-scopeText" value="${s.territory.scopeText}">
-          <label>설정일</label><input id="e1-date" value="${s.territory.setDate}">
-          <label>비고</label>
-          <select id="e1-noteType" onchange="document.getElementById('e1-noteText-wrap').style.display=this.value==='직접입력'?'':'none'">
-            <option value="자사유통입점" ${s.territory.noteType==='자사유통입점'?'selected':''}>자사유통입점</option>
-            <option value="전대차" ${s.territory.noteType==='전대차'?'selected':''}>전대차</option>
-            <option value="영업지역 중복 있음" ${s.territory.noteType==='영업지역 중복 있음'?'selected':''}>영업지역 중복 있음</option>
-            <option value="영업지역 침해 있음" ${s.territory.noteType==='영업지역 침해 있음'?'selected':''}>영업지역 침해 있음</option>
-            <option value="직접입력" ${s.territory.noteType==='직접입력'?'selected':''}>직접입력</option>
+          <label>침해여부</label>
+          <select id="e1-infringement">
+            ${TERRITORY_INFRINGEMENT_OPTIONS.map(o=>`<option value="${o}" ${territoryInfringement(s)===o?'selected':''}>${o}</option>`).join('')}
           </select>
-          <div id="e1-noteText-wrap" style="${condStyle(s.territory.noteType,'직접입력')}">
-            <label>비고 상세</label><textarea id="e1-noteText">${s.territory.noteText}</textarea>
-          </div>
+          <label>비고</label><textarea id="e1-note">${s.territory.note||''}</textarea>
           <div class="actions"><button class="btn-cancel" onclick="toggleEdit('f1')">취소</button><button class="btn-save" onclick="saveTerritory()">저장</button></div>
         </div>`
       })}
 
       ${statCard({
-        num:'02', title:'예상매출액 산정방식', level:methodLvl, statusText: s.revenueMethod.method==='-'?'미입력':s.revenueMethod.method, formId:'f2',
+        num:'02', title:'예상매출액 관리', level:estimateLvl, statusText: s.revenueAchievement.ratio===null?(s.revenueMethod.method==='-'?'미입력':s.revenueMethod.method):s.revenueAchievement.ratio+'% 달성', formId:'f2',
         rows:[
           {k:'산정 방식', v: s.revenueMethod.method==='-'?'미입력':s.revenueMethod.method},
-          {k:'산정 금액', v:s.revenueMethod.estimatedAmount},
-          {k:'산정일', v:s.revenueMethod.calcDate},
+          {k:'목표매출(최소매출)', v:s.revenueMethod.estimatedAmount},
+          {k:'실제매출', v:s.revenueAchievement.actualAmount},
+          {k:'달성률', v: s.revenueAchievement.ratio===null?'-':`${s.revenueAchievement.ratio}%`, risk: s.revenueAchievement.ratio===null?null:estimateLvl},
+          {k:'비고', v: revenueNote(s) || '-'},
         ],
         extra:`<div class="edit-form" id="f2">
           <label>산정 방식</label>
@@ -826,31 +837,16 @@ function renderMain(){
             <option value="예외산정(임의)" ${s.revenueMethod.method==='예외산정(임의)'?'selected':''}>예외산정(임의)</option>
             <option value="미산정" ${s.revenueMethod.method==='미산정'?'selected':''}>미산정</option>
           </select>
-          <label>산정 금액</label><input id="e2-amount" value="${s.revenueMethod.estimatedAmount}">
-          <label>산정일</label><input id="e2-date" value="${s.revenueMethod.calcDate}">
-          <div class="actions"><button class="btn-cancel" onclick="toggleEdit('f2')">취소</button><button class="btn-save" onclick="saveMethod()">저장</button></div>
-        </div>`
-      })}
-
-      ${statCard({
-        num:'03', title:'예상매출액 달성 여부', level:achieveLvl, statusText: s.revenueAchievement.ratio===null?'미입력':s.revenueAchievement.ratio+'% 달성', formId:'f3',
-        rows:[
-          {k:'실 매출', v:s.revenueAchievement.actualAmount},
-          {k:'목표매출(최소매출)', v:s.revenueAchievement.targetAmount},
-          {k:'달성기간', v: s.revenueAchievement.periodStart==='-' ? '-' : `${s.revenueAchievement.periodStart} ~ ${s.revenueAchievement.periodEnd}`},
-        ],
-        extra: (s.revenueAchievement.ratio!==null ? trendBars(s.revenueAchievement.trend, achieveLvl) : '') + `<div class="edit-form" id="f3">
-          <label>실 매출</label><input id="e3-actual" value="${s.revenueAchievement.actualAmount}">
-          <label>목표매출(최소매출)</label><input id="e3-target" value="${s.revenueAchievement.targetAmount}">
+          <label>목표매출(최소매출)</label><input id="e2-amount" value="${s.revenueMethod.estimatedAmount}">
+          <label>실제매출</label><input id="e3-actual" value="${s.revenueAchievement.actualAmount}">
           <label>달성률 (%)</label><input id="e3-ratio" type="number" value="${s.revenueAchievement.ratio===null?'':s.revenueAchievement.ratio}">
-          <label>달성기간 시작일</label><input id="e3-start" type="date" value="${s.revenueAchievement.periodStart==='-'?'':s.revenueAchievement.periodStart}">
-          <label>달성기간 종료일 (최대 365일)</label><input id="e3-end" type="date" value="${s.revenueAchievement.periodEnd==='-'?'':s.revenueAchievement.periodEnd}">
-          <div class="actions"><button class="btn-cancel" onclick="toggleEdit('f3')">취소</button><button class="btn-save" onclick="saveAchievement()">저장</button></div>
+          <label>비고</label><textarea id="e2-note">${revenueNote(s)}</textarea>
+          <div class="actions"><button class="btn-cancel" onclick="toggleEdit('f2')">취소</button><button class="btn-save" onclick="saveEstimate()">저장</button></div>
         </div>`
       })}
 
       ${statCard({
-        num:'04', title:'계약체결단계 하자유무', level:contractLvl, statusText: s.contractDefect.status==='미입력'?'미입력':(s.contractDefect.status==='있음'?`하자 ${s.contractDefect.types.length}건`:'하자없음'), formId:'f4',
+        num:'03', title:'계약체결단계 하자유무', level:contractLvl, statusText: s.contractDefect.status==='미입력'?'미입력':(s.contractDefect.status==='있음'?`하자 ${s.contractDefect.types.length}건`:'하자없음'), formId:'f4',
         rows:[
           {k:'하자 유무', v:s.contractDefect.status},
           {k:'내용', v: s.contractDefect.status==='있음' ? s.contractDefect.types.join(', ') : '-'},
@@ -876,7 +872,7 @@ function renderMain(){
       })}
 
       ${statCard({
-        num:'05', title:'미입금 발생여부', level:unpaidLvl, statusText: s.unpaidStatus.status, formId:'f5',
+        num:'04', title:'미입금 발생여부', level:unpaidLvl, statusText: s.unpaidStatus.status, formId:'f5',
         rows:[
           {k:'미입금액', v:s.unpaidStatus.status==='있음'?fmtManwon(s.unpaidStatus.amount):'-', risk: s.unpaidStatus.status==='있음'?unpaidLvl:null},
           {k:'발생일자', v:s.unpaidStatus.status==='있음'?s.unpaidStatus.occurredDate:'-'},
@@ -899,7 +895,7 @@ function renderMain(){
       })}
 
       ${statCard({
-        num:'06', title:'기타 가맹사업법 이슈', level:hygieneLvl, statusText: s.hygiene.status==='미입력'?'미입력':(s.hygiene.status==='있음'?`이슈 ${s.hygiene.areas.length}건`:'이슈없음'), formId:'f6',
+        num:'05', title:'기타 가맹사업법 이슈', level:hygieneLvl, statusText: s.hygiene.status==='미입력'?'미입력':(s.hygiene.status==='있음'?`이슈 ${s.hygiene.areas.length}건`:'이슈없음'), formId:'f6',
         rows:[
           {k:'이슈 발생영역', v: s.hygiene.status==='있음' ? s.hygiene.areas.join(', ') : '-'},
           {k:'비고', v:s.hygiene.note || '-'},
@@ -926,7 +922,7 @@ function renderMain(){
     <div class="notes-panel">
       <div class="sc-top">
         <div>
-          <div class="sc-num">07</div>
+          <div class="sc-num">06</div>
           <div class="sc-title">특이사항</div>
         </div>
         <button class="edit-btn" onclick="toggleEdit('f7')" title="수정">
@@ -950,12 +946,11 @@ function today(){ return new Date().toISOString().slice(0,10); }
 
 async function saveTerritory(){
   const s=currentStore();
-  const noteType = document.getElementById('e1-noteType').value;
   s.territory = {
     scopeType: document.getElementById('e1-scopeType').value,
     scopeText: document.getElementById('e1-scopeText').value,
-    setDate:document.getElementById('e1-date').value,
-    noteType, noteText: noteType==='직접입력' ? document.getElementById('e1-noteText').value : '',
+    infringement: document.getElementById('e1-infringement').value,
+    note: document.getElementById('e1-note').value,
   };
   persistStore(s);
   renderRoster(); renderMain();
@@ -966,27 +961,18 @@ async function saveOperationStatus(value){
   persistStore(s);
   renderRoster(); renderMain();
 }
-async function saveMethod(){
-  const s=currentStore();
-  s.revenueMethod = {method:document.getElementById('e2-method').value, estimatedAmount:document.getElementById('e2-amount').value, calcDate:document.getElementById('e2-date').value};
-  persistStore(s);
-  renderRoster(); renderMain();
-}
-async function saveAchievement(){
+async function saveEstimate(){
   const s=currentStore();
   const raw = document.getElementById('e3-ratio').value;
   const ratio = raw===''?null:parseInt(raw);
-  const start = document.getElementById('e3-start').value;
-  const end = document.getElementById('e3-end').value;
-  if(start && end && daysBetween(start, end) > 365){
-    alert('달성기간은 최대 365일까지 설정할 수 있습니다.');
-    return;
-  }
-  const prevTrend = s.revenueAchievement.ratio===null ? [0,0,0,0,0] : s.revenueAchievement.trend.slice(1);
-  const trend = ratio===null ? s.revenueAchievement.trend : [...prevTrend, ratio];
+  s.revenueMethod = {
+    method: document.getElementById('e2-method').value,
+    estimatedAmount: document.getElementById('e2-amount').value,
+    note: document.getElementById('e2-note').value,
+  };
   s.revenueAchievement = {
-    actualAmount:document.getElementById('e3-actual').value, targetAmount:document.getElementById('e3-target').value, ratio, trend,
-    periodStart: start || '-', periodEnd: end || '-',
+    actualAmount: document.getElementById('e3-actual').value,
+    ratio,
   };
   persistStore(s);
   renderRoster(); renderMain();
@@ -1041,19 +1027,14 @@ const EXCEL_COLS = [
 
   {key:'영업지역_설정범위', group:'영업지역', kind:'select', options:['-','구획지정','반경지정','유통입점 (전체/미중복)','유통입점 (전체/중복)','유통입점 (층)'], example:'반경지정', note:'"-"는 미입력(데이터 없음)을 의미합니다.'},
   {key:'영업지역_설정범위상세', group:'영업지역', example:''},
-  {key:'영업지역_비고유형', group:'영업지역', kind:'select', options:['자사유통입점','전대차','영업지역 중복 있음','영업지역 침해 있음','직접입력'], example:'자사유통입점', note:'"직접입력" 선택 시 오른쪽 상세 칸에 내용을 적어주세요. 점수에는 영향 없음(참고용).'},
-  {key:'영업지역_비고상세', group:'영업지역', example:'', note:'비고유형이 "직접입력"일 때만 작성'},
-  {key:'영업지역_설정일', group:'영업지역', kind:'date', example:'2025-01-15'},
+  {key:'영업지역_침해여부', group:'영업지역', kind:'select', options:TERRITORY_INFRINGEMENT_OPTIONS, example:'이슈없음'},
+  {key:'영업지역_비고', group:'영업지역', example:''},
 
-  {key:'매출산정_방식', group:'매출산정', kind:'select', options:['-','인근가맹점 5곳','예외산정(의사결정o)','예외산정(임의)','미산정'], example:'인근가맹점 5곳', note:'"-"는 미입력(데이터 없음)을 의미합니다.'},
-  {key:'매출산정_금액', group:'매출산정', example:'월 5,000만'},
-  {key:'매출산정_산정일', group:'매출산정', kind:'date', example:'2025-01-10'},
-
-  {key:'매출달성_실매출', group:'매출달성', example:'5,200만'},
-  {key:'매출달성_목표매출', group:'매출달성', example:'5,000만', note:'최소매출 기준'},
-  {key:'매출달성_달성률', group:'매출달성', kind:'number', example:104, note:`% 단위 숫자만 입력 (예: 104). ${THRESHOLDS.achieveSafe}% 이상 안정, ${THRESHOLDS.achieveWarn}~${THRESHOLDS.achieveSafe-1}% 주의, ${THRESHOLDS.achieveWarn}% 미만 위험 (사이드바 '리스크 기준 설정'에서 조정 가능)`},
-  {key:'매출달성_시작일', group:'매출달성', kind:'date', example:'2025-01-01'},
-  {key:'매출달성_종료일', group:'매출달성', kind:'date', example:'2025-12-31', note:'시작일로부터 최대 365일 이내'},
+  {key:'예상매출_산정방식', group:'예상매출액', kind:'select', options:['-','인근가맹점 5곳','예외산정(의사결정o)','예외산정(임의)','미산정'], example:'인근가맹점 5곳', note:'"-"는 미입력(데이터 없음)을 의미합니다.'},
+  {key:'예상매출_목표매출(최소매출)', group:'예상매출액', example:'5,000만'},
+  {key:'예상매출_실제매출', group:'예상매출액', example:'5,200만'},
+  {key:'예상매출_달성률', group:'예상매출액', kind:'number', example:104, note:`% 단위 숫자만 입력 (예: 104). ${THRESHOLDS.achieveSafe}% 이상 안정, ${THRESHOLDS.achieveWarn}~${THRESHOLDS.achieveSafe-1}% 주의, ${THRESHOLDS.achieveWarn}% 미만 위험 (사이드바 '리스크 기준 설정'에서 조정 가능)`},
+  {key:'예상매출_비고', group:'예상매출액', example:''},
 
   {key:'계약하자_유무', group:'계약하자', kind:'select', options:['미입력','없음','있음'], example:'없음'},
   {key:'계약하자_유형', group:'계약하자', example:'', note:`계약하자_유무가 "있음"일 때, 다음 중 해당하는 유형을 콤마(,)로 구분해 복수 입력: ${CONTRACT_DEFECT_TYPES.join(' / ')}`},
@@ -1073,7 +1054,7 @@ const EXCEL_COLS = [
 ];
 const EXCEL_HEADERS = EXCEL_COLS.map(c=>c.key);
 const EXCEL_GROUP_COLORS = {
-  '기본정보':'FFE2E8F0', '영업지역':'FFDCEAFB', '매출산정':'FFE0F2E9', '매출달성':'FFE0F2E9',
+  '기본정보':'FFE2E8F0', '영업지역':'FFDCEAFB', '예상매출액':'FFE0F2E9',
   '계약하자':'FFFCE4E4', '미입금':'FFFCE4E4', '가맹사업법이슈':'FFFDEFD3', '기타':'FFE9E5F7',
 };
 
@@ -1172,17 +1153,13 @@ function storeToExcelRow(s){
     '기타_운영상태': operationStatus(s),
     '영업지역_설정범위': s.territory.scopeType,
     '영업지역_설정범위상세': s.territory.scopeText,
-    '영업지역_비고유형': s.territory.noteType,
-    '영업지역_비고상세': s.territory.noteText,
-    '영업지역_설정일': s.territory.setDate,
-    '매출산정_방식': s.revenueMethod.method,
-    '매출산정_금액': s.revenueMethod.estimatedAmount,
-    '매출산정_산정일': s.revenueMethod.calcDate,
-    '매출달성_실매출': s.revenueAchievement.actualAmount,
-    '매출달성_목표매출': s.revenueAchievement.targetAmount,
-    '매출달성_달성률': s.revenueAchievement.ratio===null ? '' : s.revenueAchievement.ratio,
-    '매출달성_시작일': s.revenueAchievement.periodStart,
-    '매출달성_종료일': s.revenueAchievement.periodEnd,
+    '영업지역_침해여부': territoryInfringement(s),
+    '영업지역_비고': s.territory.note || '',
+    '예상매출_산정방식': s.revenueMethod.method,
+    '예상매출_목표매출(최소매출)': s.revenueMethod.estimatedAmount,
+    '예상매출_실제매출': s.revenueAchievement.actualAmount,
+    '예상매출_달성률': s.revenueAchievement.ratio===null ? '' : s.revenueAchievement.ratio,
+    '예상매출_비고': revenueNote(s),
     '계약하자_유무': s.contractDefect.status,
     '계약하자_유형': s.contractDefect.types.join(','),
     '계약하자_상세': s.contractDefect.detailText,
@@ -1260,14 +1237,8 @@ function buildStoreFromExcelRow(row, code, name, brand, existing){
   const pick = (v, allowed, fallback) => allowed.includes(cs(v)) ? cs(v) : fallback;
   const id = existing ? existing.id : code.replace(/[^A-Za-z0-9]/g,'').toUpperCase();
 
-  const ratioRaw = cs(row['매출달성_달성률']);
+  const ratioRaw = cs(row['예상매출_달성률']);
   const ratio = ratioRaw==='' ? null : parseInt(ratioRaw,10);
-  let trend = existing ? existing.revenueAchievement.trend : [0,0,0,0,0,0];
-  if(ratio!==null){
-    trend = (existing && existing.revenueAchievement.ratio!==null)
-      ? [...existing.revenueAchievement.trend.slice(1), ratio]
-      : [ratio,ratio,ratio,ratio,ratio,ratio];
-  }
 
   return {
     id, name, brand, code,
@@ -1276,22 +1247,17 @@ function buildStoreFromExcelRow(row, code, name, brand, existing){
     territory: {
       scopeType: pick(row['영업지역_설정범위'], ['-','구획지정','반경지정','유통입점 (전체/미중복)','유통입점 (전체/중복)','유통입점 (층)'], '-'),
       scopeText: cs(row['영업지역_설정범위상세']),
-      noteType: cs(row['영업지역_비고유형']) || '-',
-      noteText: cs(row['영업지역_비고상세']),
-      setDate: cs(row['영업지역_설정일']) || '-',
+      infringement: pick(row['영업지역_침해여부'], TERRITORY_INFRINGEMENT_OPTIONS, existing ? territoryInfringement(existing) : '미입력'),
+      note: cs(row['영업지역_비고']) || (existing ? existing.territory.note : ''),
     },
     revenueMethod: {
-      method: pick(row['매출산정_방식'], ['-','인근가맹점 5곳','예외산정(의사결정o)','예외산정(임의)','미산정'], '-'),
-      calcDate: cs(row['매출산정_산정일']) || '-',
-      estimatedAmount: cs(row['매출산정_금액']) || '-',
+      method: pick(row['예상매출_산정방식'], ['-','인근가맹점 5곳','예외산정(의사결정o)','예외산정(임의)','미산정'], '-'),
+      estimatedAmount: cs(row['예상매출_목표매출(최소매출)']) || '-',
+      note: cs(row['예상매출_비고']) || (existing ? revenueNote(existing) : ''),
     },
     revenueAchievement: {
       ratio,
-      actualAmount: cs(row['매출달성_실매출']) || '-',
-      targetAmount: cs(row['매출달성_목표매출']) || '-',
-      trend,
-      periodStart: cs(row['매출달성_시작일']) || '-',
-      periodEnd: cs(row['매출달성_종료일']) || '-',
+      actualAmount: cs(row['예상매출_실제매출']) || '-',
     },
     contractDefect: {
       status: pick(row['계약하자_유무'], ['미입력','없음','있음'], '미입력'),
