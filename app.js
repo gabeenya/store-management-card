@@ -24,6 +24,84 @@ if (DB_CONFIGURED && window.supabase) {
   supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 }
 
+/* =================== ACCESS LOCK (Supabase Auth) =================== */
+// 실제 로그인(이메일/비밀번호)이 확인되기 전까지 첫 화면을 가려서
+// 데이터에 접근하지 못하게 합니다. DB 쪽 RLS 정책과 함께 적용해야
+// 로그인하지 않은 상태에서 API로 직접 조회하는 것도 막을 수 있습니다.
+const ACCESS_LOCK_ENABLED = false; // 정식 배포 전까지 비활성화. 준비되면 true로 변경.
+(function(){
+  const screenEl = document.getElementById('lockScreen');
+  if(!ACCESS_LOCK_ENABLED){
+    if(screenEl) screenEl.hidden = true;
+    loadFromSupabase();
+    return;
+  }
+  const cardEl = screenEl && screenEl.querySelector('.lock-card');
+  const formEl = document.getElementById('lockForm');
+  const emailEl = document.getElementById('lockEmail');
+  const passEl = document.getElementById('lockPassword');
+  const errorEl = document.getElementById('lockError');
+  const logoutBtn = document.getElementById('logoutBtn');
+  const submitBtn = formEl && formEl.querySelector('.lock-btn');
+  if(!screenEl || !formEl || !emailEl || !passEl) return;
+
+  if(!supabaseClient){
+    errorEl.textContent = 'DB가 연결되지 않아 로그인을 사용할 수 없습니다.';
+    return;
+  }
+
+  let dataLoaded = false;
+
+  function showApp(){
+    screenEl.classList.add('hidden');
+    setTimeout(() => { screenEl.hidden = true; }, 250);
+    if(logoutBtn) logoutBtn.hidden = false;
+    if(!dataLoaded){ dataLoaded = true; loadFromSupabase(); }
+  }
+  function showLogin(){
+    screenEl.hidden = false;
+    screenEl.classList.remove('hidden');
+    if(logoutBtn) logoutBtn.hidden = true;
+    dataLoaded = false;
+    passEl.value = '';
+    setTimeout(() => emailEl.focus(), 50);
+  }
+
+  supabaseClient.auth.getSession().then(({ data }) => {
+    if(data.session) showApp(); else showLogin();
+  });
+  supabaseClient.auth.onAuthStateChange((_event, session) => {
+    if(session) showApp(); else showLogin();
+  });
+
+  formEl.addEventListener('submit', async function(e){
+    e.preventDefault();
+    errorEl.textContent = '';
+    submitBtn.disabled = true;
+    submitBtn.textContent = '확인 중…';
+    const { error } = await supabaseClient.auth.signInWithPassword({
+      email: emailEl.value.trim(),
+      password: passEl.value,
+    });
+    submitBtn.disabled = false;
+    submitBtn.textContent = '로그인';
+    if(error){
+      errorEl.textContent = '이메일 또는 비밀번호가 올바르지 않습니다.';
+      passEl.value = '';
+      passEl.focus();
+      if(cardEl){
+        cardEl.classList.remove('shake');
+        void cardEl.offsetWidth; // 애니메이션 재실행을 위한 리플로우
+        cardEl.classList.add('shake');
+      }
+    }
+  });
+})();
+
+function logout(){
+  if(supabaseClient) supabaseClient.auth.signOut();
+}
+
 function rowToStore(r){
   return {
     id: r.id, name: r.name, brand: r.brand, code: r.code, address: r.address, manager: r.manager,
@@ -1098,4 +1176,4 @@ applyThemeIcon();
 renderBrandFilter();
 renderRoster();
 renderMain();
-loadFromSupabase();
+// loadFromSupabase()는 로그인 세션이 확인된 후 ACCESS LOCK 로직에서 호출됩니다.

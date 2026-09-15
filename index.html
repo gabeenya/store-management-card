@@ -20,6 +20,20 @@
 <script src="https://cdn.jsdelivr.net/npm/exceljs@4.4.0/dist/exceljs.min.js"></script>
 </head>
 <body>
+<div id="lockScreen" class="lock-screen">
+  <div class="lock-card">
+    <img src="assets/img/elandeats-fulllogo.png" alt="이랜드이츠" class="lock-logo">
+    <div class="lock-title">가맹점 운영 리스크 카드</div>
+    <div class="lock-sub">로그인 후 이용할 수 있습니다</div>
+    <form id="lockForm" autocomplete="off">
+      <input id="lockEmail" class="lock-input lock-input-text" type="email" autocomplete="username" placeholder="이메일" required>
+      <input id="lockPassword" class="lock-input lock-input-text" type="password" autocomplete="current-password" placeholder="비밀번호" required>
+      <button type="submit" class="lock-btn">로그인</button>
+    </form>
+    <div id="lockError" class="lock-error"></div>
+  </div>
+</div>
+<button id="logoutBtn" class="theme-toggle theme-toggle-2" onclick="logout()" title="로그아웃" hidden>🔓</button>
 <button id="themeToggle" class="theme-toggle" onclick="toggleTheme()" title="다크/라이트 모드 전환">🌙</button>
 <div class="shell">
   <aside class="roster">
