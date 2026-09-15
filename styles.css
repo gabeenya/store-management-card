@@ -183,6 +183,7 @@
   .r-info{flex:1; min-width:0;}
   .r-name{font-size:13px; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
   .r-brand{font-size:11px; color:var(--text-3); margin-top:1px;}
+  .r-op-badge{font-size:9.5px; font-weight:700; color:var(--neutral); background:var(--neutral-dim); padding:1px 5px; border-radius:5px; vertical-align:middle;}
   .r-ovr{
     font-size:12px; font-weight:700; width:28px; height:28px; border-radius:50%;
     display:flex; align-items:center; justify-content:center; flex-shrink:0;
@@ -210,6 +211,10 @@
     border:1px solid var(--hairline); color:var(--text-2); font-weight:500;
   }
   .tag.brand{color:var(--text-1); background:var(--surface-3);}
+  .op-status-select{cursor:pointer; font-family:inherit; font-weight:700;}
+  .op-status-select.safe{color:var(--safe); background:var(--safe-dim); border-color:transparent;}
+  .op-status-select.warn{color:var(--warn); background:var(--warn-dim); border-color:transparent;}
+  .op-status-select.neutral{color:var(--neutral); background:var(--neutral-dim); border-color:transparent;}
 
   .ovr-badge{
     width:104px; height:104px; border-radius:20px; position:relative; flex-shrink:0;
@@ -276,6 +281,9 @@
   .trend-bars .b.warn{background:var(--warn);}
   .trend-bars .b.danger{background:var(--danger);}
   .trend-bars .b.neutral{background:var(--neutral);}
+
+  .score-trend{width:140px; margin-top:10px;}
+  .score-trend-label{font-size:9.5px; color:var(--text-3); display:block; margin-top:4px; white-space:nowrap;}
 
   .edit-btn{
     background:none; border:none; color:var(--text-3); cursor:pointer; padding:2px;
@@ -365,6 +373,14 @@
   .issue-tag.danger{color:var(--danger); background:var(--danger-dim);}
   .issue-tag.safe-tag{color:var(--safe); background:var(--safe-dim);}
   .issue-tag.warn{color:var(--warn); background:var(--warn-dim);}
+  .issue-tag.neutral{color:var(--neutral); background:var(--neutral-dim);}
+  .issue-tag.clickable{cursor:pointer;}
+  .issue-tag.clickable:hover{filter:brightness(1.18);}
+
+  .category-filter-grid{display:flex; flex-direction:column; gap:10px;}
+  .cf-row{display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; padding:6px 0;}
+  .cf-label{font-size:12.5px; font-weight:600; color:var(--text-1); flex-shrink:0;}
+  .cf-badges{display:flex; gap:6px; flex-wrap:wrap;}
 
   .danger-row.expanded{display:block; padding:10px 4px;}
   .danger-row.expanded .dn-top{display:flex; justify-content:space-between; align-items:center; gap:10px;}

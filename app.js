@@ -28,7 +28,7 @@ if (DB_CONFIGURED && window.supabase) {
 // 실제 로그인(이메일/비밀번호)이 확인되기 전까지 첫 화면을 가려서
 // 데이터에 접근하지 못하게 합니다. DB 쪽 RLS 정책과 함께 적용해야
 // 로그인하지 않은 상태에서 API로 직접 조회하는 것도 막을 수 있습니다.
-const ACCESS_LOCK_ENABLED = false; // 정식 배포 전까지 비활성화. 준비되면 true로 변경.
+const ACCESS_LOCK_ENABLED = true; // 계정 준비 완료 후 활성화됨 (2026-09-15)
 (function(){
   const screenEl = document.getElementById('lockScreen');
   if(!ACCESS_LOCK_ENABLED){
@@ -86,7 +86,8 @@ const ACCESS_LOCK_ENABLED = false; // 정식 배포 전까지 비활성화. 준�
     submitBtn.disabled = false;
     submitBtn.textContent = '로그인';
     if(error){
-      errorEl.textContent = '이메일 또는 비밀번호가 올바르지 않습니다.';
+      console.error('로그인 실패 상세:', error.message);
+      errorEl.textContent = '이메일 또는 비밀번호가 올바르지 않습니다. (' + error.message + ')';
       passEl.value = '';
       passEl.focus();
       if(cardEl){
@@ -106,7 +107,8 @@ function rowToStore(r){
   return {
     id: r.id, name: r.name, brand: r.brand, code: r.code, address: r.address, manager: r.manager,
     territory: r.territory, revenueMethod: r.revenue_method, revenueAchievement: r.revenue_achievement,
-    contractDefect: r.contract_defect, unpaidStatus: r.unpaid_status, hygiene: r.hygiene, etc: r.etc
+    contractDefect: r.contract_defect, unpaidStatus: r.unpaid_status, hygiene: r.hygiene, etc: r.etc,
+    updatedAt: r.updated_at,
   };
 }
 function storeToRow(s){
@@ -117,6 +119,20 @@ function storeToRow(s){
     updated_at: new Date().toISOString()
   };
 }
+function operationStatus(s){ return (s.etc && s.etc.operationStatus) || '운영중'; }
+function activeStores(){ return stores.filter(s=>operationStatus(s)==='운영중'); }
+const OPERATION_STATUSES = ['운영중','휴업','계약종료','폐점'];
+const OPERATION_STATUS_LEVEL = { '운영중':'safe', '휴업':'warn', '계약종료':'neutral', '폐점':'neutral' };
+function pushScoreHistory(s){
+  const score = computeOVR(s);
+  if(score===null) return;
+  if(!s.etc.scoreHistory) s.etc.scoreHistory = [];
+  const d = today();
+  const last = s.etc.scoreHistory[s.etc.scoreHistory.length-1];
+  if(last && last.date===d) last.score = score;
+  else s.etc.scoreHistory.push({date:d, score});
+  if(s.etc.scoreHistory.length>12) s.etc.scoreHistory = s.etc.scoreHistory.slice(-12);
+}
 function setDbStatus(text, ok){
   const el = document.getElementById('dbStatus');
   if(!el) return;
@@ -125,6 +141,7 @@ function setDbStatus(text, ok){
 
 // 매장 항목 저장 시 Supabase에도 반영 (연동 안 된 경우 로컬 상태만 갱신됨)
 async function persistStore(s){
+  pushScoreHistory(s);
   if(!supabaseClient) return;
   const { error } = await supabaseClient.from('stores').update(storeToRow(s)).eq('id', s.id);
   if(error){ console.error('Supabase 저장 실패:', error.message); setDbStatus('저장 실패 — 콘솔 확인', false); }
@@ -153,8 +170,12 @@ const DANGER_PER_PAGE = 5;
 let gradeView = null;
 let gradeViewPage = 1;
 const GRADE_VIEW_PER_PAGE = 10;
+let categoryView = null;
+let categoryViewLevel = null;
+let categoryViewPage = 1;
 let showUpload = false;
-let uploadState = { fileName: null, parsed: null, applying: false, result: null };
+let uploadState = { fileName: null, parsed: null, applying: false, result: null, missingCodes: null };
+let showSettings = false;
 
 /* =================== HELPERS =================== */
 function daysBetween(a, b){ return Math.round((new Date(b) - new Date(a)) / 86400000); }
@@ -168,7 +189,18 @@ const TERRITORY_SCOPE_LEVEL = {
 const METHOD_LEVEL = {
   '인근가맹점 5곳':'safe', '예외산정(의사결정o)':'warn', '예외산정(임의)':'danger', '미산정':'danger',
 };
-const UNPAID_LIMIT_MANWON = 10000; // 1억원
+const DEFAULT_THRESHOLDS = { achieveSafe:100, achieveWarn:70, unpaidLimitManwon:10000, unpaidDays:30 };
+function loadThresholds(){
+  try{
+    const raw = localStorage.getItem('riskThresholds');
+    return raw ? {...DEFAULT_THRESHOLDS, ...JSON.parse(raw)} : {...DEFAULT_THRESHOLDS};
+  }catch(e){ return {...DEFAULT_THRESHOLDS}; }
+}
+let THRESHOLDS = loadThresholds();
+function saveThresholds(t){
+  THRESHOLDS = t;
+  localStorage.setItem('riskThresholds', JSON.stringify(t));
+}
 function statusLevel(cat, s){
   switch(cat){
     case 'territory':
@@ -177,7 +209,7 @@ function statusLevel(cat, s){
       return METHOD_LEVEL[s.revenueMethod.method] || 'neutral';
     case 'achieve':
       if(s.revenueAchievement.ratio===null || s.revenueAchievement.ratio===undefined) return 'neutral';
-      return s.revenueAchievement.ratio>=100 ? 'safe' : s.revenueAchievement.ratio>=70 ? 'warn' : 'danger';
+      return s.revenueAchievement.ratio>=THRESHOLDS.achieveSafe ? 'safe' : s.revenueAchievement.ratio>=THRESHOLDS.achieveWarn ? 'warn' : 'danger';
     case 'contract':
       if(s.contractDefect.status==='미입력') return 'neutral';
       if(s.contractDefect.status==='없음') return 'safe';
@@ -187,7 +219,7 @@ function statusLevel(cat, s){
       if(s.unpaidStatus.status==='없음') return 'safe';
       { const amt = Number(s.unpaidStatus.amount)||0;
         const days = daysBetween(s.unpaidStatus.occurredDate, today());
-        return (amt<=UNPAID_LIMIT_MANWON && days<=30) ? 'warn' : 'danger'; }
+        return (amt<=THRESHOLDS.unpaidLimitManwon && days<=THRESHOLDS.unpaidDays) ? 'warn' : 'danger'; }
     case 'hygiene':
       if(s.hygiene.status==='미입력') return 'neutral';
       if(s.hygiene.status==='없음') return 'safe';
@@ -211,6 +243,7 @@ function grade(score){
 }
 function overallLevel(score){ if(score===null) return 'neutral'; return score>73?'safe':score>40?'warn':'danger'; }
 function statusLabel(l){ return l==='safe'?'양호':l==='warn'?'주의':l==='danger'?'위험':'미입력'; }
+function issueTagClass(l){ return l==='safe' ? 'safe-tag' : l; }
 
 /* =================== ISSUE AGGREGATION =================== */
 const ISSUE_CATS = ['territory','method','achieve','contract','unpaid','hygiene'];
@@ -290,6 +323,13 @@ function buildHeatmap(list, brands){
     return { cat, cells };
   });
 }
+function categoryLevelCounts(list){
+  return ISSUE_CATS.map(cat=>{
+    const counts = {safe:0, warn:0, danger:0, neutral:0};
+    list.forEach(s=>{ counts[statusLevel(cat,s)]++; });
+    return { cat, counts };
+  });
+}
 
 /* =================== ROSTER =================== */
 function renderBrandFilter(){
@@ -316,7 +356,7 @@ function renderRoster(){
     return `<div class="roster-item ${isActive?'active':''}"${activeStyle} onclick="selectStore('${s.id}')">
       <div class="r-dot" style="background:${gr.ring[0]}; box-shadow:0 0 6px ${gr.ring[0]};"></div>
       <div class="r-info">
-        <div class="r-name">${s.name}</div>
+        <div class="r-name">${s.name}${operationStatus(s)!=='운영중' ? ` <span class="r-op-badge">${operationStatus(s)}</span>` : ''}</div>
         <div class="r-brand">${s.brand} · ${s.code}</div>
       </div>
       <div class="r-ovr num" style="color:${gr.ring[0]}; border:1px solid color-mix(in srgb, ${gr.ring[0]} 32%, transparent); background:color-mix(in srgb, ${gr.ring[0]} 13%, transparent);">${score===null?'–':score}</div>
@@ -324,15 +364,36 @@ function renderRoster(){
   }).join('') || `<div style="padding:20px; color:var(--text-3); font-size:12.5px; text-align:center;">검색 결과가 없습니다</div>`;
 }
 function selectStore(id){ currentId=id; showUpload=false; renderRoster(); renderMain(); }
-function goDashboard(){ currentId=null; gradeView=null; showUpload=false; issueFeedPage=1; dangerPage=1; renderRoster(); renderMain(); }
+function goDashboard(){ currentId=null; gradeView=null; categoryView=null; categoryViewLevel=null; showUpload=false; showSettings=false; issueFeedPage=1; dangerPage=1; renderRoster(); renderMain(); }
 function goIssuePage(p){ issueFeedPage=p; renderDashboard(); }
 function goDangerPage(p){ dangerPage=p; renderDashboard(); }
-function goGradeView(g){ gradeView=g; gradeViewPage=1; currentId=null; showUpload=false; renderRoster(); renderMain(); }
+function goGradeView(g){ gradeView=g; gradeViewPage=1; categoryView=null; categoryViewLevel=null; currentId=null; showUpload=false; showSettings=false; renderRoster(); renderMain(); }
 function goGradeViewPage(p){ gradeViewPage=p; renderMain(); }
+function goCategoryView(cat, level){ categoryView=cat; categoryViewLevel=level; categoryViewPage=1; gradeView=null; currentId=null; showUpload=false; showSettings=false; renderRoster(); renderMain(); }
+function goCategoryViewPage(p){ categoryViewPage=p; renderMain(); }
 function goUpload(){
-  showUpload=true; currentId=null; gradeView=null;
-  uploadState = { fileName: null, parsed: null, applying: false, result: null };
+  showUpload=true; showSettings=false; currentId=null; gradeView=null; categoryView=null; categoryViewLevel=null;
+  uploadState = { fileName: null, parsed: null, applying: false, result: null, missingCodes: null };
   renderRoster(); renderMain();
+}
+function goSettings(){
+  showSettings=true; showUpload=false; currentId=null; gradeView=null; categoryView=null; categoryViewLevel=null;
+  renderRoster(); renderMain();
+}
+function applyThresholdSettings(){
+  const t = {
+    achieveSafe: parseInt(document.getElementById('th-achieveSafe').value,10) || DEFAULT_THRESHOLDS.achieveSafe,
+    achieveWarn: parseInt(document.getElementById('th-achieveWarn').value,10) || DEFAULT_THRESHOLDS.achieveWarn,
+    unpaidLimitManwon: parseInt(document.getElementById('th-unpaidLimit').value,10) || DEFAULT_THRESHOLDS.unpaidLimitManwon,
+    unpaidDays: parseInt(document.getElementById('th-unpaidDays').value,10) || DEFAULT_THRESHOLDS.unpaidDays,
+  };
+  saveThresholds(t);
+  alert('기준이 저장됐습니다. (이 브라우저에만 저장되며, 다른 PC/브라우저에는 적용되지 않습니다)');
+  renderRoster(); renderMain();
+}
+function resetThresholdSettings(){
+  saveThresholds({...DEFAULT_THRESHOLDS});
+  renderSettingsPage();
 }
 document.getElementById('searchInput').addEventListener('input', renderRoster);
 
@@ -390,7 +451,9 @@ function renderPager(current, total, fnName){
 
 /* =================== DASHBOARD =================== */
 function renderDashboard(){
-  const graded = stores.map(s=>({s, score:computeOVR(s)}));
+  const active = activeStores();
+  const closedCount = stores.length - active.length;
+  const graded = active.map(s=>({s, score:computeOVR(s)}));
   const buckets = {A:0, B:0, C:0, D:0, F:0};
   graded.forEach(({score})=>{ const g=grade(score).g; if(buckets[g]!==undefined) buckets[g]++; });
   const dangerGraded = graded.filter(({score})=>{ const g=grade(score).g; return g==='D' || g==='F'; }).sort((a,b)=>(a.score??0)-(b.score??0));
@@ -399,7 +462,7 @@ function renderDashboard(){
   if(dangerPage < 1) dangerPage = 1;
   const dangerPageStart = (dangerPage-1) * DANGER_PER_PAGE;
   const dangerList = dangerGraded.slice(dangerPageStart, dangerPageStart + DANGER_PER_PAGE);
-  const brands = [...new Set(stores.map(s=>s.brand))];
+  const brands = [...new Set(active.map(s=>s.brand))];
   const brandStats = brands.map(b=>{
     const inBrand = graded.filter(({s})=>s.brand===b);
     const scored = inBrand.map(x=>x.score).filter(v=>v!==null);
@@ -407,7 +470,7 @@ function renderDashboard(){
     return {brand:b, count:inBrand.length, avg};
   }).sort((a,b)=>b.count-a.count);
 
-  const dangerIssueCount = collectIssues(stores).filter(i=>i.level==='danger').length;
+  const dangerIssueCount = collectIssues(active).filter(i=>i.level==='danger').length;
   // 전체 위험/주의 항목 피드는 위험(D등급) 매장의 이슈만 표시
   const feedIssuesAll = collectIssues(dangerGraded.map(x=>x.s));
   const totalIssuePages = Math.max(1, Math.ceil(feedIssuesAll.length / ISSUES_PER_PAGE));
@@ -415,13 +478,14 @@ function renderDashboard(){
   if(issueFeedPage < 1) issueFeedPage = 1;
   const pageStart = (issueFeedPage-1) * ISSUES_PER_PAGE;
   const feedIssues = feedIssuesAll.slice(pageStart, pageStart + ISSUES_PER_PAGE);
-  const heatmap = buildHeatmap(stores, brands);
+  const heatmap = buildHeatmap(active, brands);
+  const recentChanged = [...stores].filter(s=>s.updatedAt).sort((a,b)=>new Date(b.updatedAt)-new Date(a.updatedAt)).slice(0,8);
 
   document.getElementById('main').innerHTML = `
     <div class="dash-head">
       <div class="eyebrow" style="font-size:10.5px; letter-spacing:.14em; color:var(--text-3); text-transform:uppercase; font-weight:600;">외식BG · RO실 · 전체 현황</div>
       <h2>전체 매장 현황</h2>
-      <div class="sub">${stores.length}개 매장 · ${brands.length}개 브랜드 · 위험 항목 ${dangerIssueCount}건</div>
+      <div class="sub">${active.length}개 매장 운영중 · ${brands.length}개 브랜드 · 위험 항목 ${dangerIssueCount}건${closedCount ? ` · 폐점/계약종료 ${closedCount}개 제외` : ''}</div>
     </div>
 
     <div class="grade-pills">
@@ -495,6 +559,22 @@ function renderDashboard(){
     </div>
 
     <div class="dash-panel">
+      <div class="dash-panel-title">항목별 매장 보기</div>
+      <div class="category-filter-grid">
+        ${categoryLevelCounts(active).map(({cat,counts})=>`
+          <div class="cf-row">
+            <div class="cf-label">${categoryLabel(cat)}</div>
+            <div class="cf-badges">
+              <span class="issue-tag safe-tag clickable" onclick="goCategoryView('${cat}','safe')">양호 ${counts.safe}</span>
+              <span class="issue-tag warn clickable" onclick="goCategoryView('${cat}','warn')">주의 ${counts.warn}</span>
+              <span class="issue-tag danger clickable" onclick="goCategoryView('${cat}','danger')">위험 ${counts.danger}</span>
+              <span class="issue-tag neutral clickable" onclick="goCategoryView('${cat}','neutral')">미입력 ${counts.neutral}</span>
+            </div>
+          </div>`).join('')}
+      </div>
+    </div>
+
+    <div class="dash-panel">
       <div class="dash-panel-title">브랜드별 현황</div>
       <div class="brand-grid">
         ${brandStats.map(b=>{
@@ -507,11 +587,25 @@ function renderDashboard(){
         }).join('')}
       </div>
     </div>
+
+    <div class="dash-panel">
+      <div class="dash-panel-title">최근 변경된 매장</div>
+      ${recentChanged.length ? recentChanged.map(s=>{
+        const gr = grade(computeOVR(s));
+        return `<div class="danger-row" onclick="selectStore('${s.id}')" style="display:flex; align-items:center; justify-content:space-between; gap:10px; padding:8px 4px; cursor:pointer; border-top:1px solid var(--hairline);">
+          <div style="min-width:0;">
+            <span style="font-size:12.5px; font-weight:600;">${s.name}</span>
+            <span style="font-size:11px; color:var(--text-3); margin-left:6px;">${s.brand} · ${s.code}</span>
+          </div>
+          <div style="font-size:11px; color:var(--text-3); flex-shrink:0;">${(s.updatedAt||'').slice(0,10)}</div>
+        </div>`;
+      }).join('') : `<div class="empty-note">변경 이력이 없습니다.</div>`}
+    </div>
   `;
 }
 
 function renderGradeView(){
-  const graded = stores.map(s=>({s, score:computeOVR(s)})).filter(({score})=>grade(score).g===gradeView);
+  const graded = activeStores().map(s=>({s, score:computeOVR(s)})).filter(({score})=>grade(score).g===gradeView);
   graded.sort((a,b)=>(b.score??0)-(a.score??0));
   const totalPages = Math.max(1, Math.ceil(graded.length / GRADE_VIEW_PER_PAGE));
   if(gradeViewPage > totalPages) gradeViewPage = totalPages;
@@ -548,9 +642,89 @@ function renderGradeView(){
   `;
 }
 
+function renderCategoryView(){
+  const cat = categoryView, level = categoryViewLevel;
+  const matched = activeStores().map(s=>({s, score:computeOVR(s)})).filter(({s})=>statusLevel(cat,s)===level);
+  matched.sort((a,b)=>(a.score??-1)-(b.score??-1));
+  const totalPages = Math.max(1, Math.ceil(matched.length / GRADE_VIEW_PER_PAGE));
+  if(categoryViewPage > totalPages) categoryViewPage = totalPages;
+  if(categoryViewPage < 1) categoryViewPage = 1;
+  const pageStart = (categoryViewPage-1) * GRADE_VIEW_PER_PAGE;
+  const pageList = matched.slice(pageStart, pageStart + GRADE_VIEW_PER_PAGE);
+  const levelColor = `var(--${level})`;
+
+  document.getElementById('main').innerHTML = `
+    <div class="dash-head">
+      <div class="eyebrow" style="font-size:10.5px; letter-spacing:.14em; color:var(--text-3); text-transform:uppercase; font-weight:600; cursor:pointer;" onclick="goDashboard()">‹ 전체 현황으로</div>
+      <h2>${categoryLabel(cat)} · <span class="num" style="color:${levelColor};">${statusLabel(level)}</span> 매장</h2>
+      <div class="sub">${matched.length}개 매장</div>
+    </div>
+
+    <div class="dash-panel">
+      <div class="dash-panel-title">${categoryLabel(cat)} · ${statusLabel(level)} 매장 목록 <span class="cnt" style="color:${levelColor};">${matched.length}</span>개</div>
+      ${pageList.length ? pageList.map(({s,score})=>{
+        const gr = grade(score);
+        const detail = issueDetail(cat, s, level);
+        return `
+        <div class="danger-row expanded" onclick="selectStore('${s.id}')">
+          <div class="dn-top">
+            <div class="dn-title">
+              <div class="dn-name">${s.name}</div>
+              <div class="dn-brand">${s.brand} · ${s.code}</div>
+            </div>
+            <div class="dn-score" style="color:${gr.ring[0]};">${score===null?'–':score+'점'}</div>
+          </div>
+          <div class="dn-tags"><span class="issue-tag ${issueTagClass(level)}">${detail || statusLabel(level)}</span></div>
+        </div>`;
+      }).join('') : `<div class="empty-note">해당 조건의 매장이 없습니다.</div>`}
+      ${renderPager(categoryViewPage, totalPages, 'goCategoryViewPage')}
+    </div>
+  `;
+}
+
+function renderSettingsPage(){
+  document.getElementById('main').innerHTML = `
+    <div class="dash-head">
+      <div class="eyebrow" style="font-size:10.5px; letter-spacing:.14em; color:var(--text-3); text-transform:uppercase; font-weight:600; cursor:pointer;" onclick="goDashboard()">‹ 전체 현황으로</div>
+      <h2>리스크 기준 설정</h2>
+      <div class="sub">등급/색상을 나누는 기준값을 조정합니다. 이 브라우저(기기)에만 저장됩니다.</div>
+    </div>
+    <div class="dash-panel">
+      <div class="dash-panel-title">매출달성 기준</div>
+      <div class="edit-form open" style="max-width:360px;">
+        <label>양호(초록) 기준 — 이 값(%) 이상이면 안정</label>
+        <input id="th-achieveSafe" type="number" value="${THRESHOLDS.achieveSafe}">
+        <label>주의(노랑) 기준 — 이 값(%) 이상이면 주의, 미만이면 위험</label>
+        <input id="th-achieveWarn" type="number" value="${THRESHOLDS.achieveWarn}">
+      </div>
+    </div>
+    <div class="dash-panel">
+      <div class="dash-panel-title">미입금 위험 기준</div>
+      <div class="edit-form open" style="max-width:360px;">
+        <label>주의/위험 분기 금액 (만원) — 이 금액 이하면서 아래 경과일 이내면 주의, 초과하면 위험</label>
+        <input id="th-unpaidLimit" type="number" value="${THRESHOLDS.unpaidLimitManwon}">
+        <label>주의/위험 분기 경과일수 (일)</label>
+        <input id="th-unpaidDays" type="number" value="${THRESHOLDS.unpaidDays}">
+      </div>
+    </div>
+    <div class="dash-panel">
+      <div class="actions">
+        <button class="btn-cancel" onclick="resetThresholdSettings()">기본값으로 초기화</button>
+        <button class="btn-save" onclick="applyThresholdSettings()">저장</button>
+      </div>
+    </div>
+  `;
+}
+
 function renderMain(){
+  if(showSettings){ renderSettingsPage(); return; }
   if(showUpload){ renderUploadPage(); return; }
-  if(!currentId){ if(gradeView){ renderGradeView(); } else { renderDashboard(); } return; }
+  if(!currentId){
+    if(gradeView){ renderGradeView(); }
+    else if(categoryView){ renderCategoryView(); }
+    else { renderDashboard(); }
+    return;
+  }
   const s = stores.find(x=>x.id===currentId);
   const score = computeOVR(s);
   const gr = grade(score);
@@ -572,7 +746,15 @@ function renderMain(){
           <div class="tag brand">${s.brand}</div>
           <div class="tag">${s.address}</div>
           <div class="tag">담당 ${s.manager}</div>
+          <select class="tag op-status-select ${OPERATION_STATUS_LEVEL[operationStatus(s)]}" onchange="saveOperationStatus(this.value)" title="운영상태">
+            ${OPERATION_STATUSES.map(o=>`<option value="${o}" ${operationStatus(s)===o?'selected':''}>${o}</option>`).join('')}
+          </select>
         </div>
+        ${s.etc.scoreHistory && s.etc.scoreHistory.length>=2 ? `
+        <div class="score-trend">
+          ${trendBars(s.etc.scoreHistory.map(h=>h.score), lvl)}
+          <span class="score-trend-label">최근 추이 (${s.etc.scoreHistory[0].date} → ${s.etc.scoreHistory[s.etc.scoreHistory.length-1].date})</span>
+        </div>` : ''}
       </div>
       <div class="ovr-badge" style="--ring-1:${gr.ring[0]}; --ring-2:${gr.ring[1]};">
         <div class="grade num">${gr.g}</div>
@@ -767,6 +949,12 @@ async function saveTerritory(){
   persistStore(s);
   renderRoster(); renderMain();
 }
+async function saveOperationStatus(value){
+  const s=currentStore();
+  s.etc.operationStatus = value;
+  persistStore(s);
+  renderRoster(); renderMain();
+}
 async function saveMethod(){
   const s=currentStore();
   s.revenueMethod = {method:document.getElementById('e2-method').value, estimatedAmount:document.getElementById('e2-amount').value, calcDate:document.getElementById('e2-date').value};
@@ -838,6 +1026,7 @@ const EXCEL_COLS = [
   {key:'브랜드', group:'기본정보', required:true, example:'더카페', note:'기존 브랜드명과 동일한 표기로 입력해주세요.'},
   {key:'주소', group:'기본정보', example:'서울시 강남구 테헤란로 1'},
   {key:'담당자', group:'기본정보', example:'홍길동'},
+  {key:'기타_운영상태', group:'기본정보', kind:'select', options:OPERATION_STATUSES, example:'운영중', note:'폐점/계약종료 매장은 대시보드 위험 집계에서 자동 제외되고 매장 목록에는 참고용으로 남습니다.'},
 
   {key:'영업지역_설정범위', group:'영업지역', kind:'select', options:['-','구획지정','반경지정','유통입점 (전체/미중복)','유통입점 (전체/중복)','유통입점 (층)'], example:'반경지정', note:'"-"는 미입력(데이터 없음)을 의미합니다.'},
   {key:'영업지역_설정범위상세', group:'영업지역', example:''},
@@ -851,7 +1040,7 @@ const EXCEL_COLS = [
 
   {key:'매출달성_실매출', group:'매출달성', example:'5,200만'},
   {key:'매출달성_목표매출', group:'매출달성', example:'5,000만', note:'최소매출 기준'},
-  {key:'매출달성_달성률', group:'매출달성', kind:'number', example:104, note:'% 단위 숫자만 입력 (예: 104). 100% 이상 안정, 70~99% 주의, 70% 미만 위험'},
+  {key:'매출달성_달성률', group:'매출달성', kind:'number', example:104, note:`% 단위 숫자만 입력 (예: 104). ${THRESHOLDS.achieveSafe}% 이상 안정, ${THRESHOLDS.achieveWarn}~${THRESHOLDS.achieveSafe-1}% 주의, ${THRESHOLDS.achieveWarn}% 미만 위험 (사이드바 '리스크 기준 설정'에서 조정 가능)`},
   {key:'매출달성_시작일', group:'매출달성', kind:'date', example:'2025-01-01'},
   {key:'매출달성_종료일', group:'매출달성', kind:'date', example:'2025-12-31', note:'시작일로부터 최대 365일 이내'},
 
@@ -964,6 +1153,7 @@ function onExcelFileSelected(evt){
       uploadState.fileName = file.name;
       uploadState.parsed = validateExcelRows(rows);
       uploadState.result = null;
+      uploadState.missingCodes = computeMissingCodes(uploadState.parsed);
       renderMain();
     }catch(err){
       alert('엑셀 파일을 읽는 중 오류가 발생했습니다: ' + err.message);
@@ -973,6 +1163,10 @@ function onExcelFileSelected(evt){
   evt.target.value = '';
 }
 
+function computeMissingCodes(entries){
+  const uploadedCodes = new Set(entries.filter(e=>e.code).map(e=>e.code));
+  return stores.filter(s=>!uploadedCodes.has(s.code)).map(s=>({code:s.code, name:s.name}));
+}
 function validateExcelRows(rows){
   const cs = v => (v===undefined||v===null) ? '' : String(v).trim();
   const entries = rows
@@ -1052,6 +1246,8 @@ function buildStoreFromExcelRow(row, code, name, brand, existing){
       memo: cs(row['기타_메모']) || (existing ? existing.etc.memo : ''),
       author: cs(row['기타_작성자']) || (existing ? existing.etc.author : '-'),
       date: today(),
+      operationStatus: pick(row['기타_운영상태'], OPERATION_STATUSES, existing ? operationStatus(existing) : '운영중'),
+      scoreHistory: existing ? (existing.etc.scoreHistory || []) : [],
     },
   };
 }
@@ -1066,6 +1262,7 @@ async function applyExcelUpload(){
   for(const e of applicable){
     const existing = stores.find(s=>s.code===e.code);
     const storeObj = buildStoreFromExcelRow(e.row, e.code, e.name, e.brand, existing);
+    pushScoreHistory(storeObj);
     try{
       if(supabaseClient){
         if(existing){
@@ -1122,6 +1319,20 @@ function renderUploadPage(){
         <div class="upload-dropzone-text">${uploadState.fileName ? `선택된 파일: <b>${uploadState.fileName}</b> (다시 클릭해서 변경)` : '클릭해서 엑셀 파일 선택 (.xlsx, .xls, .csv)'}</div>
       </label>
     </div>
+
+    ${uploadState.missingCodes && uploadState.missingCodes.length ? `
+    <div class="dash-panel dash-panel--danger">
+      <div class="dash-panel-title">⚠ 이번 파일에 빠진 기존 매장 <span class="cnt">${uploadState.missingCodes.length}</span>개</div>
+      <div style="font-size:12.5px; color:var(--text-2); line-height:1.6; margin-bottom:10px;">
+        현재 매장 목록에는 있지만 이번 엑셀 파일에는 없는 매장코드입니다. 폐점 등 의도적인 제외가 아니라면, 원본 파일에서 실수로 빠지지 않았는지 반영 전에 확인하세요. (반영해도 이 매장들은 삭제되지 않고 그대로 유지됩니다)
+      </div>
+      <details>
+        <summary style="cursor:pointer; font-size:12px; color:var(--text-2);">목록 보기</summary>
+        <div style="margin-top:8px; font-size:11.5px; color:var(--text-3); line-height:1.8; max-height:200px; overflow-y:auto;">
+          ${uploadState.missingCodes.map(m=>`<div>· ${m.code} (${m.name})</div>`).join('')}
+        </div>
+      </details>
+    </div>` : ''}
 
     ${result ? `
     <div class="dash-panel ${result.failCount ? 'dash-panel--danger' : ''}">
