@@ -200,13 +200,15 @@ const TERRITORY_SCOPE_LEVEL = {
 const METHOD_LEVEL = {
   '인근가맹점 5곳':'safe', '예외산정(의사결정o)':'warn', '예외산정(임의)':'danger', '미산정':'danger',
 };
+const REVENUE_ACHIEVEMENT_OPTIONS = ['미입력','달성','미달성'];
+const REVENUE_ACHIEVEMENT_LEVEL = { '미입력':'neutral', '달성':'safe', '미달성':'danger' };
 const TERRITORY_INFRINGEMENT_OPTIONS = ['미입력','이슈없음','영업지역 중복','영업지역 침해'];
 const TERRITORY_INFRINGEMENT_LEVEL = { '이슈없음':'safe', '영업지역 중복':'warn', '영업지역 침해':'danger' };
 function territoryInfringement(s){ return s.territory.infringement || '미입력'; }
 function revenueNote(s){ return (s.revenueMethod && s.revenueMethod.note) || ''; }
 const LEVEL_SEVERITY = { danger:3, warn:2, neutral:1, safe:0 };
 function worseLevel(a, b){ return LEVEL_SEVERITY[a]>=LEVEL_SEVERITY[b] ? a : b; }
-const DEFAULT_THRESHOLDS = { achieveSafe:100, achieveWarn:70, unpaidLimitManwon:10000, unpaidDays:30 };
+const DEFAULT_THRESHOLDS = { unpaidLimitManwon:10000, unpaidDays:30 };
 function loadThresholds(){
   try{
     const raw = localStorage.getItem('riskThresholds');
@@ -227,9 +229,7 @@ function statusLevel(cat, s){
     }
     case 'estimate': {
       const methodLvl = METHOD_LEVEL[s.revenueMethod.method] || 'neutral';
-      const ratio = s.revenueAchievement.ratio;
-      const achieveLvl = (ratio===null || ratio===undefined) ? 'neutral'
-        : ratio>=THRESHOLDS.achieveSafe ? 'safe' : ratio>=THRESHOLDS.achieveWarn ? 'warn' : 'danger';
+      const achieveLvl = REVENUE_ACHIEVEMENT_LEVEL[s.revenueAchievement.status] || 'neutral';
       return worseLevel(methodLvl, achieveLvl);
     }
     case 'contract':
@@ -281,7 +281,7 @@ function issueDetail(cat, s, level){
     }
     case 'estimate': {
       const parts = [];
-      if(s.revenueAchievement.ratio!==null) parts.push(`달성률 <span class="${numCls}">${s.revenueAchievement.ratio}%</span>`);
+      if(s.revenueAchievement.status && s.revenueAchievement.status!=='미입력') parts.push(`<span class="${numCls}">${s.revenueAchievement.status}</span>`);
       if(s.revenueMethod.method && s.revenueMethod.method!=='-') parts.push(s.revenueMethod.method);
       return parts.length ? parts.join(' · ') : '데이터 없음';
     }
@@ -410,8 +410,6 @@ function goSettings(){
 }
 function applyThresholdSettings(){
   const t = {
-    achieveSafe: parseInt(document.getElementById('th-achieveSafe').value,10) || DEFAULT_THRESHOLDS.achieveSafe,
-    achieveWarn: parseInt(document.getElementById('th-achieveWarn').value,10) || DEFAULT_THRESHOLDS.achieveWarn,
     unpaidLimitManwon: parseInt(document.getElementById('th-unpaidLimit').value,10) || DEFAULT_THRESHOLDS.unpaidLimitManwon,
     unpaidDays: parseInt(document.getElementById('th-unpaidDays').value,10) || DEFAULT_THRESHOLDS.unpaidDays,
   };
@@ -718,15 +716,6 @@ function renderSettingsPage(){
       <div class="sub">등급/색상을 나누는 기준값을 조정합니다. 이 브라우저(기기)에만 저장됩니다.</div>
     </div>
     <div class="dash-panel">
-      <div class="dash-panel-title">매출달성 기준</div>
-      <div class="edit-form open" style="max-width:360px;">
-        <label>양호(초록) 기준 — 이 값(%) 이상이면 안정</label>
-        <input id="th-achieveSafe" type="number" value="${THRESHOLDS.achieveSafe}">
-        <label>주의(노랑) 기준 — 이 값(%) 이상이면 주의, 미만이면 위험</label>
-        <input id="th-achieveWarn" type="number" value="${THRESHOLDS.achieveWarn}">
-      </div>
-    </div>
-    <div class="dash-panel">
       <div class="dash-panel-title">미입금 위험 기준</div>
       <div class="edit-form open" style="max-width:360px;">
         <label>주의/위험 분기 금액 (만원) — 이 금액 이하면서 아래 경과일 이내면 주의, 초과하면 위험</label>
@@ -820,12 +809,12 @@ function renderMain(){
       })}
 
       ${statCard({
-        num:'02', title:'예상매출액 관리', level:estimateLvl, statusText: s.revenueAchievement.ratio===null?(s.revenueMethod.method==='-'?'미입력':s.revenueMethod.method):s.revenueAchievement.ratio+'% 달성', formId:'f2',
+        num:'02', title:'예상매출액 관리', level:estimateLvl, statusText: (!s.revenueAchievement.status || s.revenueAchievement.status==='미입력')?(s.revenueMethod.method==='-'?'미입력':s.revenueMethod.method):s.revenueAchievement.status, formId:'f2',
         rows:[
           {k:'산정 방식', v: s.revenueMethod.method==='-'?'미입력':s.revenueMethod.method},
           {k:'목표매출(최소매출)', v:s.revenueMethod.estimatedAmount},
           {k:'실제매출', v:s.revenueAchievement.actualAmount},
-          {k:'달성률', v: s.revenueAchievement.ratio===null?'-':`${s.revenueAchievement.ratio}%`, risk: s.revenueAchievement.ratio===null?null:estimateLvl},
+          {k:'예상매출액 달성 여부', v: s.revenueAchievement.status || '미입력', risk: (!s.revenueAchievement.status || s.revenueAchievement.status==='미입력')?null:estimateLvl},
           {k:'비고', v: revenueNote(s) || '-'},
         ],
         extra:`<div class="edit-form" id="f2">
@@ -839,7 +828,10 @@ function renderMain(){
           </select>
           <label>목표매출(최소매출)</label><input id="e2-amount" value="${s.revenueMethod.estimatedAmount}">
           <label>실제매출</label><input id="e3-actual" value="${s.revenueAchievement.actualAmount}">
-          <label>달성률 (%)</label><input id="e3-ratio" type="number" value="${s.revenueAchievement.ratio===null?'':s.revenueAchievement.ratio}">
+          <label>예상매출액 달성 여부</label>
+          <select id="e3-status">
+            ${REVENUE_ACHIEVEMENT_OPTIONS.map(o=>`<option value="${o}" ${s.revenueAchievement.status===o?'selected':''}>${o}</option>`).join('')}
+          </select>
           <label>비고</label><textarea id="e2-note">${revenueNote(s)}</textarea>
           <div class="actions"><button class="btn-cancel" onclick="toggleEdit('f2')">취소</button><button class="btn-save" onclick="saveEstimate()">저장</button></div>
         </div>`
@@ -963,8 +955,7 @@ async function saveOperationStatus(value){
 }
 async function saveEstimate(){
   const s=currentStore();
-  const raw = document.getElementById('e3-ratio').value;
-  const ratio = raw===''?null:parseInt(raw);
+  const status = document.getElementById('e3-status').value;
   s.revenueMethod = {
     method: document.getElementById('e2-method').value,
     estimatedAmount: document.getElementById('e2-amount').value,
@@ -972,7 +963,7 @@ async function saveEstimate(){
   };
   s.revenueAchievement = {
     actualAmount: document.getElementById('e3-actual').value,
-    ratio,
+    status,
   };
   persistStore(s);
   renderRoster(); renderMain();
@@ -1033,7 +1024,7 @@ const EXCEL_COLS = [
   {key:'예상매출_산정방식', group:'예상매출액', kind:'select', options:['-','인근가맹점 5곳','예외산정(의사결정o)','예외산정(임의)','미산정'], example:'인근가맹점 5곳', note:'"-"는 미입력(데이터 없음)을 의미합니다.'},
   {key:'예상매출_목표매출(최소매출)', group:'예상매출액', example:'5,000만'},
   {key:'예상매출_실제매출', group:'예상매출액', example:'5,200만'},
-  {key:'예상매출_달성률', group:'예상매출액', kind:'number', example:104, note:`% 단위 숫자만 입력 (예: 104). ${THRESHOLDS.achieveSafe}% 이상 안정, ${THRESHOLDS.achieveWarn}~${THRESHOLDS.achieveSafe-1}% 주의, ${THRESHOLDS.achieveWarn}% 미만 위험 (사이드바 '리스크 기준 설정'에서 조정 가능)`},
+  {key:'예상매출_달성여부', group:'예상매출액', kind:'select', options:REVENUE_ACHIEVEMENT_OPTIONS, example:'달성'},
   {key:'예상매출_비고', group:'예상매출액', example:''},
 
   {key:'계약하자_유무', group:'계약하자', kind:'select', options:['미입력','없음','있음'], example:'없음'},
@@ -1158,7 +1149,7 @@ function storeToExcelRow(s){
     '예상매출_산정방식': s.revenueMethod.method,
     '예상매출_목표매출(최소매출)': s.revenueMethod.estimatedAmount,
     '예상매출_실제매출': s.revenueAchievement.actualAmount,
-    '예상매출_달성률': s.revenueAchievement.ratio===null ? '' : s.revenueAchievement.ratio,
+    '예상매출_달성여부': s.revenueAchievement.status || '미입력',
     '예상매출_비고': revenueNote(s),
     '계약하자_유무': s.contractDefect.status,
     '계약하자_유형': s.contractDefect.types.join(','),
@@ -1237,8 +1228,7 @@ function buildStoreFromExcelRow(row, code, name, brand, existing){
   const pick = (v, allowed, fallback) => allowed.includes(cs(v)) ? cs(v) : fallback;
   const id = existing ? existing.id : code.replace(/[^A-Za-z0-9]/g,'').toUpperCase();
 
-  const ratioRaw = cs(row['예상매출_달성률']);
-  const ratio = ratioRaw==='' ? null : parseInt(ratioRaw,10);
+  const achievementStatus = pick(row['예상매출_달성여부'], REVENUE_ACHIEVEMENT_OPTIONS, existing ? (existing.revenueAchievement.status || '미입력') : '미입력');
 
   return {
     id, name, brand, code,
@@ -1256,7 +1246,7 @@ function buildStoreFromExcelRow(row, code, name, brand, existing){
       note: cs(row['예상매출_비고']) || (existing ? revenueNote(existing) : ''),
     },
     revenueAchievement: {
-      ratio,
+      status: achievementStatus,
       actualAmount: cs(row['예상매출_실제매출']) || '-',
     },
     contractDefect: {
