@@ -26,7 +26,7 @@ if (DB_CONFIGURED && window.supabase) {
       persistSession: true,
       autoRefreshToken: true,
       detectSessionInUrl: false,
-      storage: window.localStorage,
+      storage: window.sessionStorage, // 탭/창을 닫으면 세션이 사라져 다시 로그인해야 함
       storageKey: 'store-card-auth',
     },
   });
@@ -60,13 +60,44 @@ const ACCESS_LOCK_ENABLED = true; // 계정 준비 완료 후 활성화됨 (2026
 
   let dataLoaded = false;
 
+  const SESSION_MAX_MS = 3 * 60 * 60 * 1000; // 접속 후 3시간이 지나면 자동 로그아웃
+  const SESSION_WARNING_BEFORE_MS = 10 * 60 * 1000; // 만료 10분 전(=2시간50분 시점)에 연장 여부를 묻는 알림
+  const LOGIN_TIME_KEY = 'store-card-login-time';
+  let autoLogoutTimer = null;
+  let autoLogoutWarningTimer = null;
+
+  function promptExtendSession(){
+    const extend = confirm('로그인 세션이 10분 후 만료됩니다. 로그인을 연장하시겠습니까?');
+    if(extend){
+      sessionStorage.setItem(LOGIN_TIME_KEY, String(Date.now()));
+      scheduleAutoLogout();
+    }
+  }
+
+  function scheduleAutoLogout(){
+    clearTimeout(autoLogoutTimer);
+    clearTimeout(autoLogoutWarningTimer);
+    const loginTime = parseInt(sessionStorage.getItem(LOGIN_TIME_KEY), 10);
+    if(!loginTime) return;
+    const remain = SESSION_MAX_MS - (Date.now() - loginTime);
+    if(remain <= 0){ supabaseClient.auth.signOut(); return; }
+    autoLogoutTimer = setTimeout(() => supabaseClient.auth.signOut(), remain);
+    const remainUntilWarning = remain - SESSION_WARNING_BEFORE_MS;
+    autoLogoutWarningTimer = setTimeout(promptExtendSession, Math.max(remainUntilWarning, 0));
+  }
+
   function showApp(){
+    if(!sessionStorage.getItem(LOGIN_TIME_KEY)) sessionStorage.setItem(LOGIN_TIME_KEY, String(Date.now()));
+    scheduleAutoLogout();
     screenEl.classList.add('hidden');
     setTimeout(() => { screenEl.hidden = true; }, 250);
     if(logoutBtn) logoutBtn.hidden = false;
     if(!dataLoaded){ dataLoaded = true; loadFromSupabase(); }
   }
   function showLogin(){
+    sessionStorage.removeItem(LOGIN_TIME_KEY);
+    clearTimeout(autoLogoutTimer);
+    clearTimeout(autoLogoutWarningTimer);
     screenEl.hidden = false;
     screenEl.classList.remove('hidden');
     if(logoutBtn) logoutBtn.hidden = true;
